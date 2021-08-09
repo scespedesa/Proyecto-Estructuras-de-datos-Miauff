@@ -1,0 +1,11 @@
+Persona natural% idUsuario=camila% contraseña=cami% nombre=Camila Jacome% descripcion=me gustan los perros pastores% telefono=2345% nombre:pastora,tipo: conejo, raza: pastor aleman, edad: 4, foto: trgrtbvf, nombre:chirito,tipo: conejo, raza: beige, edad: 3, foto: rrtefdwfrg
+Administrador % idUsuario=funda% contraseña=fun% nombre=Fundacion salvamos vidas% descripcion=Somos una fundacion dedicada a proteger animales
+Persona natural% idUsuario=rgeg% contraseña=lolo% nombre=londo% descripcion=rgrsbwreb trgse% telefono=2345% nombre:paco,tipo: conejo, raza: pakines, edad: 2, foto: gvbtrgf
+Administrador % idUsuario=petsocity% contraseña=we% nombre=ppeee% descripcion=adoptamos animales
+Persona natural% idUsuario=ju% contraseña=ju% nombre=ewg% descripcion=grehd% telefono=34567% nombre:rege,tipo: gato, raza: reg, edad: 2345, foto: dsgr, nombre:reg,tipo: pez, raza: gyhjk, edad: 6, foto: reh
+Administrador % idUsuario=juan% contraseña=pu% nombre=re% descripcion=g
+Administrador % idUsuario=lucho% contraseña=lu% nombre=reg% descripcion=rehrt
+Administrador % idUsuario=lucren% contraseña=we% nombre=huellitas% descripcion=rege
+Administrador % idUsuario=maldi% contraseña=ma% nombre=koko% descripcion=ertht thrwe
+Persona natural% idUsuario=pepe2% contraseña=mojito% nombre=pepeganga% descripcion=me gustan las aves% telefono=234567% nombre:lorenzo,tipo: conejo, raza: pitbull, edad: 3, foto: frvdvfv fgdg, nombre:tredgv,tipo: pez, raza: dsfwgew, edad: 2, foto: egewg, nombre:kiki,tipo: pez, raza: pez, edad: 3, foto: reg, nombre:firulias,tipo: gato, raza: ref, edad: 3, foto: fre, nombre:que,tipo: conejo, raza: re, edad: 2, foto: fr, null, null, null
+Administrador % idUsuario=pepe% contraseña=mojito% nombre=pepeganga% descripcion=me gustan las aves
