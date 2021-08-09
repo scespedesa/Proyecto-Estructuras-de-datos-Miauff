@@ -140,14 +140,18 @@ public class RegistroPersonas extends JFrame {
 	btnsiguiente.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			String [] botones = { "Si", " No", "Cancelar" };
+			String [] botones = { "Si", " No", "Terminar perfil" };
 			int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
 			System.out.println(variable);
-	
-			String name = JOptionPane.showInputDialog("¿Desea añadir mascotas a su perfil?");
+			if(variable==0) {
+				ventana2();
+			}else if(variable==1) {
+				
+			}else {
+				dispose();
+			}
 			
-			ventana2();
-			dispose();
+			
 		}
 	});
 	btnsiguiente.setBounds(256, 558, 89, 23);
