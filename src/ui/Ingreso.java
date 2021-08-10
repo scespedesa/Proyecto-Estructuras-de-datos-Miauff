@@ -185,9 +185,10 @@ public void crearMenu(){
 	JMenuItem menuItem_2 = new JMenuItem("Ir a Registro");
 	menuItem_2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent a) {
+			dispose();
 			RegistroPersonas persona = new RegistroPersonas();
 			persona.setVisible(true);
-			dispose();
+			
 		}
 	});
 	menuItem_2.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));

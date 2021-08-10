@@ -148,7 +148,13 @@ public class RegistroPersonas extends JFrame {
 			}else if(variable==1) {
 				
 			}else {
-				dispose();
+				setVisible(false);
+				RegistroUsuario usu = new RegistroUsuario();
+				usu.setVisible(true);
+				
+				
+				//Natural nuevoUsu = Natural(nombre.getText(),);
+				
 			}
 			
 			
@@ -175,12 +181,6 @@ public void crearFondo() {
 	ImageIcon fondo1= scaleImage("/imagenes/registro.png",fondoImage.getWidth(), fondoImage.getHeight());
 	fondoImage.setIcon(fondo1);	
 	panel.add(fondoImage);
-	
-
-
-	
-
-	
 
 }
 public void creacionCombo(int x, int y ,int ancho , int alto, JComboBox caja, String[] lista) {
