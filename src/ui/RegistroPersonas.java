@@ -44,7 +44,7 @@ public class RegistroPersonas extends JFrame {
 	this.alturaPantalla= dimension.height;
 	this.anchoPantalla = dimension.width;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setBounds(anchoPantalla/3, 10 , anchoPantalla/3, alturaPantalla - alturaPantalla/10);
+	setBounds(anchoPantalla/3, 2 , anchoPantalla/3, alturaPantalla - alturaPantalla/20);
 	contentPane = new JPanel();
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	contentPane.setLayout(new BorderLayout(0, 0));
@@ -131,7 +131,7 @@ public class RegistroPersonas extends JFrame {
 	textArea.setBorder(new LineBorder(new Color(119, 136, 153)));
 	textArea.setCaretColor(Color.BLACK);
 	textArea.setSelectionColor(new Color(0, 120, 215));
-	textArea.setBounds(92, 445, 253, 105);
+	textArea.setBounds(92, 445, 253, 90);
 	textArea.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
 	textArea.setLineWrap(true); 
 	panel.add(textArea);
@@ -160,7 +160,7 @@ public class RegistroPersonas extends JFrame {
 			
 		}
 	});
-	btnsiguiente.setBounds(256, 558, 89, 23);
+	btnsiguiente.setBounds(256, 541, 89, 23);
 	btnsiguiente.setForeground(Color.BLACK);
 	btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnsiguiente.setBackground(new Color(253, 245, 230));
@@ -177,8 +177,8 @@ public void ventana2() {
 
 public void crearFondo() {
 	fondoImage = new JLabel();
-	fondoImage.setBounds(0, 0, 439, 653);
-	ImageIcon fondo1= scaleImage("/imagenes/registro.png",fondoImage.getWidth(), fondoImage.getHeight());
+	fondoImage.setBounds(0, 0, 439, 691);
+	ImageIcon fondo1= scaleImage("/imagenes/registro (2).png",fondoImage.getWidth(), fondoImage.getHeight());
 	fondoImage.setIcon(fondo1);	
 	panel.add(fondoImage);
 

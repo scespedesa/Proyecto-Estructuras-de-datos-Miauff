@@ -51,15 +51,16 @@ public class RegistroUsuario extends JFrame {
 		panel.setBounds(0, 0,450, 706);
 		contentPane.add(panel);
 		panel.setLayout(null);
-	ventana();
+		ventana();
 	}
 	
 
 	public void ventana() {
 		crearMenu();
+		
 		JLabel registro = new JLabel("Registro");
 		registro.setHorizontalAlignment(SwingConstants.CENTER);
-		registro.setBounds(134, 115, 165, 43);
+		registro.setBounds(135, 121, 165, 43);
 		registro.setForeground(SystemColor.desktop);
 		registro.setFont(new Font("Monospaced", Font.PLAIN, 32));
 		panel.add(registro);
@@ -70,38 +71,38 @@ public class RegistroUsuario extends JFrame {
 		
 		JLabel lblfoto = new JLabel("Una foto de perfil ->");
 		creacionEtiquetas(92, 215, 229, 23,lblfoto);
-		lblfoto.setBounds(112, 240, 128, 23);
+		lblfoto.setBounds(92, 240, 231, 23);
 		panel.add(lblfoto);
 
 		JLabel lblfo = new JLabel("Foto");
 		//ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfo.getWidth(),lblfo.getHeight());
 		//lblfo.setIcon(ima);
-		lblfo.setBounds(250, 225, 67, 52);
+		lblfo.setBounds(187, 277, 67, 52);
 		panel.add(lblfo);
 		
+		JLabel lblusu = new JLabel("Usuario");
+		lblusu.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		lblusu.setBounds(92, 335, 253, 25);
+		panel.add(lblusu);
 		
-		JLabel lblsexo = new JLabel("Sexo");
-		creacionEtiquetas(92, 275, 229, 21,lblsexo);
-		String [] eleccion = new String[] {"Mujer", "Hombre", "No binario"} ;
+		JTextField usuario = new JTextField();
+		usuario.setForeground(Color.BLACK);
+		usuario.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
+		usuario.setBorder(new LineBorder(new Color(119, 136, 153)));
+		usuario.setBounds(92, 364, 253, 25);
+		panel.add(usuario);
 		
-		JLabel lblTelefono = new JLabel("Telefono");
-		creacionEtiquetas(92,325, 229, 21,lblTelefono);
-	
-		
-		JTextField direccion = new JTextField();
-		direccion.setForeground(Color.BLACK);
-		direccion.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
-		direccion.setBorder(new LineBorder(new Color(119, 136, 153)));
-		direccion.setBounds(92, 411, 253, 25);
-		panel.add(direccion);
-		
+		JLabel lblcontra = new JLabel("Contraseña");
+		lblcontra.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		lblcontra.setBounds(92, 415, 253, 25);
+		panel.add(lblcontra);
 			
 		passwordField = new JPasswordField();
-		passwordField.setBounds(94, 490, 251, 25);
+		passwordField.setBounds(94, 443, 251, 25);
 		panel.add(passwordField);
 		
 			
-		JButton btnsiguiente = new JButton("Siguiente");
+		JButton btnsiguiente = new JButton("Registrar");
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -109,23 +110,19 @@ public class RegistroUsuario extends JFrame {
 				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
 				System.out.println(variable);
 				if(variable==0) {
-					ventana2();
 				}else if(variable==1) {
 					
 				}else {
 					setVisible(false);
 					RegistroUsuario usu = new RegistroUsuario();
-					usu.setVisible(true);
-					
-					
-					//Natural nuevoUsu = Natural(nombre.getText(),);
-					
+					usu.setVisible(true);	
+					//Natural nuevoUsu = Natural(nombre.getText());		
 				}
 				
 				
 			}
 		});
-		btnsiguiente.setBounds(256, 558, 89, 23);
+		btnsiguiente.setBounds(253, 495, 89, 23);
 		btnsiguiente.setForeground(Color.BLACK);
 		btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 		btnsiguiente.setBackground(new Color(253, 245, 230));
@@ -133,23 +130,15 @@ public class RegistroUsuario extends JFrame {
 		panel.add(btnsiguiente);	
 		crearFondo();
 	}
-	public void ventana2() {
-		crearMenu();
-		
-		crearFondo();
-		
-	}
-
 	public void crearFondo() {
 		fondoImage = new JLabel();
 		fondoImage.setBounds(0, 0, 439, 653);
-		ImageIcon fondo1= scaleImage("/imagenes/registro.png",fondoImage.getWidth(), fondoImage.getHeight());
+		ImageIcon fondo1= scaleImage("/imagenes/registro (2).png",fondoImage.getWidth(), fondoImage.getHeight());
 		fondoImage.setIcon(fondo1);	
-		panel.add(fondoImage);
-	
-		
+		panel.add(fondoImage);	
 	}
 	public void creacionCombo(int x, int y ,int ancho , int alto, JComboBox caja, String[] lista) {
+		
 	}
 	public void creacionEtiquetas(int x, int y ,int ancho , int alto, JLabel label) {
 		label.setBounds(92, 189, ancho, alto);
