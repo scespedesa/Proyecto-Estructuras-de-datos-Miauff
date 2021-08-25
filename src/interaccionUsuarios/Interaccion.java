@@ -5,7 +5,7 @@ public abstract class Interaccion {
 	
     protected String autor;
     protected Double numeroDeLikes;
-    protected PilaListaEnlazada<String> contenido = new PilaListaEnlazada<String>();
+    protected PilaListaEnlazada<String> contenido = new PilaListaEnlazada<String>(null);
     protected Double vecesCompartida ;
     protected Boolean reportado;
     
@@ -35,9 +35,7 @@ public abstract class Interaccion {
 		this.numeroDeLikes = numeroDeLikes;
 	}
 
-	public PilaListaEnlazada<String> getContenido() {
-		return contenido;
-	}
+
 
 	public void setContenido(PilaListaEnlazada<String> contenido) {
 		this.contenido = contenido;

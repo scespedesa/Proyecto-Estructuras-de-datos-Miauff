@@ -6,6 +6,5 @@ public interface SingleLinkedList <E> {
     E topFront();
     boolean isEmpty();
     void printList();
-	void popIndex(int num);
-
+	void pushFront(E key, E value);
 }

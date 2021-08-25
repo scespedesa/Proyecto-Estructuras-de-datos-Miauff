@@ -2,8 +2,11 @@ package logicaNegocio;
 
 import java.util.Scanner;
 
+import dataStructures.HashTable;
+import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import ui.Ingreso;
+import ui.RegistroUsuario;
 
 public class IniciarPrograma {
 	
@@ -18,8 +21,14 @@ public class IniciarPrograma {
 		//con.consolaInicial();
 		//Lector l = new Lector("usuarios.txt");
 		//l.LecturaLineas();	
-		Ingreso i = new Ingreso () ;
-		i.setVisible(true);
+		//Ingreso i = new Ingreso () ;
+		//i.setVisible(true);
+		//HashTable yu = new HashTable();
+		//SimpleHashTable ju = new SimpleHashTable();
+		RegistroUsuario usu = new RegistroUsuario();
+		usu.setVisible(true);	
+		
+		
 		
 		}
 	

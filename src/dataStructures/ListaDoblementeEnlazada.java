@@ -8,7 +8,7 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     }
     @Override
     public void pushFront(E Object){
-        Nodo <E> nodo1 = new Nodo<>(Object,null,null);
+        Nodo <E> nodo1 = new Nodo<>(Object ,null,null);
         if(this.head==null){
             head=tail=nodo1;
         }else{
@@ -36,7 +36,7 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     }
     
     public void pushBack(E Object){
-        Nodo <E> nodo1 = new Nodo<>(Object,null,null);
+        Nodo <E> nodo1 = new Nodo<>(Object, null,null);
         if(this.tail==null){
             head=tail=nodo1;
         }else{
@@ -107,4 +107,5 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
         }
         System.out.print("]");
     }
+	
 }

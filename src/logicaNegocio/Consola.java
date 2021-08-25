@@ -9,6 +9,7 @@ import datosUsuarios.Natural;
 import dataStructures.*;
 import logicaNegocio.*;
 public class Consola {
+
 	public static Scanner sc = new Scanner(System.in);
 	public static EscribirArchivo ea;
 	public static Lector l ;
@@ -62,7 +63,7 @@ public class Consola {
 		}
 	}
 	public static ListaSimplementeEnlazada<String> lista() {
-		ListaSimplementeEnlazada<String> natura = new ListaSimplementeEnlazada<String>();
+		ListaSimplementeEnlazada<String> natura = new ListaSimplementeEnlazada<String>(null);
 		natura.pushFront("Mascotas");
 		natura.pushFront("Telefono");
 		natura.pushFront("Descripcion");
@@ -217,7 +218,7 @@ public class Consola {
 				System.out.println(imprimeme.replace("%", ""));
 		editarPerfil();
 		}else if(opcion==2) {
-			m.getEs().getMascotas().printList();
+			
 			editarPerfil();
 		}else if(opcion ==3){
 			Natural n = m.getEs();
@@ -246,7 +247,7 @@ public class Consola {
 				}
 				if(opt==1) {
 					System.out.println("¿Que mascota quiere eliminar?");
-					n.getMascotas().printList(); 
+					
 					int size= n.getMascotas().size;
 					int opci = pedirnumero();
 					if(size==1) {
@@ -657,7 +658,7 @@ public static Mascotas consolaEditarInfo(String tipo,int posicion){
 
 	public static void imprimirPorPila() {
 		//ulti
-		PilaListaEnlazada<String> pila = new PilaListaEnlazada<String>();
+		PilaListaEnlazada<String> pila = new PilaListaEnlazada<String>(null);
 		ArrayList<Mascotas> arrayDatos= new ArrayList<Mascotas>();
 		LectorMascotas lm= new LectorMascotas("mascotas.txt");
 		lm.LecturaLineas();

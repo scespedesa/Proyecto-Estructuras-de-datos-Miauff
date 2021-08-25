@@ -2,11 +2,12 @@ package dataStructures;
 
 public class PilaListaEnlazada<E> extends ListaSimplementeEnlazada<E> implements Stack<E>{
     
-    public PilaListaEnlazada(){
+
     
-    }
-    
-    @Override
+    public PilaListaEnlazada(Nodo<E> head) {
+		super(head);
+	}
+	@Override
     public void Push(E Object){
         this.pushFront(Object);
     }

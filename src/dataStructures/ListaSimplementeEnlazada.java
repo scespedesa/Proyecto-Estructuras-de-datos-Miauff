@@ -3,16 +3,16 @@ package dataStructures;
 public class ListaSimplementeEnlazada <E> implements SingleLinkedList<E>{
     Nodo <E> head;
     
-    public ListaSimplementeEnlazada(){
+    public ListaSimplementeEnlazada(Nodo <E> head){
+    	this.head=head;
     
     }
-    @Override
-    public void pushFront(E Object){
-        Nodo <E> nodo1 = new Nodo<>(Object,null,null);
+	@Override
+    public void pushFront(E key, E value){
+        Nodo <E> nodo1 = new Nodo<>(key,value,null,null);
         if(this.head==null){
             head=nodo1;
         }else{
-            
             nodo1.next=head;
             this.head = nodo1;
         }
@@ -51,11 +51,23 @@ public class ListaSimplementeEnlazada <E> implements SingleLinkedList<E>{
         }
     }
 	@Override
-	public void popIndex(int num) {
-		// TODO Auto-generated method stub
-		
+	public void pushFront(E Object) {
+		  Nodo <E> nodo1 = new Nodo<>(Object,null,null);
+	        if(this.head==null){
+	            head=nodo1;
+	        }else{
+	            nodo1.next=head;
+	            this.head = nodo1;
+	        }
 	}
-	
+	public int getSize(){
+        int count = 0;
+        while (head!=null){
+            head = head.next;
+            count++;
+        }
+        return count;
+    }     
     
 }
 

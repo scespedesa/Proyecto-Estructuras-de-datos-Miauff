@@ -8,6 +8,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -67,7 +70,21 @@ public class Ingreso extends JFrame {
 	panel.setBounds(0, 0,450, 706);
 	contentPane.add(panel);
 	panel.setLayout(null);
-
+	Connection con;
+	/*
+	try {
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	}
+	try {
+		con= DriverManager.getConnection("jdbc:mysql://localhost/sistemamiauff","root","");
+		///Statement stmt=
+	} catch (SQLException e) {
+		e.printStackTrace();
+		JOptionPane.showMessageDialog(null,"no se puede conectar a la base de datos");
+	}
+	*/
 	ventana();
 
 }public void ventana() {

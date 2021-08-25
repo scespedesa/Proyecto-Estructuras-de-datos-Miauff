@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -14,6 +15,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+import logicaNegocio.BusquedaArchivos;
+import dataStructures.HashTable;
 import rojeru_san.componentes.RSDateChooser;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +32,7 @@ public class RegistroUsuario extends JFrame {
 	private JLabel fondoImage;
 	private Image menu;
 	private JPasswordField passwordField;
+	private String urlFoto;
 
 	public RegistroUsuario() {
 		
@@ -66,18 +70,26 @@ public class RegistroUsuario extends JFrame {
 		panel.add(registro);
 
 		JLabel lbldesea = new JLabel("Si lo desea adjunte");
-		creacionEtiquetas(92, 222, 253, 25,lbldesea);
+		creacionEtiquetas(92, 200, 253, 25,lbldesea);
 		lbldesea.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblfoto = new JLabel("Una foto de perfil ->");
-		creacionEtiquetas(92, 215, 229, 23,lblfoto);
-		lblfoto.setBounds(92, 240, 231, 23);
+		creacionEtiquetas(92, 240, 231, 23,lblfoto);
+		lblfoto.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		panel.add(lblfoto);
 
 		JLabel lblfo = new JLabel("Foto");
-		//ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfo.getWidth(),lblfo.getHeight());
-		//lblfo.setIcon(ima);
-		lblfo.setBounds(187, 277, 67, 52);
+		lblfo.setBounds(190, 277, 57, 47);
+		ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfo.getWidth(),lblfo.getHeight());
+		lblfo.setIcon(ima);
+		lblfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblfo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BusquedaArchivos b = new BusquedaArchivos() ;
+				urlFoto = b.busqueda(e,panel);
+			}
+		});
 		panel.add(lblfo);
 		
 		JLabel lblusu = new JLabel("Usuario");
@@ -109,6 +121,12 @@ public class RegistroUsuario extends JFrame {
 				String [] botones = { "Si", " No", "Terminar perfil" };
 				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
 				System.out.println(variable);
+				// verificar si el usuario ya se encuentra en la base de datos
+				HashTable usui = new HashTable();
+				System.out.println(usui.get("paquito") + " paquito ");
+				if(usui.get(usuario.getSelectedText())!=null) {
+					
+				}
 				if(variable==0) {
 				}else if(variable==1) {
 					
@@ -141,8 +159,8 @@ public class RegistroUsuario extends JFrame {
 		
 	}
 	public void creacionEtiquetas(int x, int y ,int ancho , int alto, JLabel label) {
-		label.setBounds(92, 189, ancho, alto);
-		label.setFont(new Font("Monospaced", Font.BOLD, 13));
+		label.setBounds(x,y, ancho, alto);
+		label.setFont(new Font("Monospaced", Font.BOLD, 15));
 		panel.add(label);
 	}
 	public void creacionCampoTexto(int tamañoLetra,int x,int y,int ancho,int largo, JTextField field) {

@@ -96,7 +96,7 @@ public class RegistroPersonas extends JFrame {
 	nombre.setBorder(new LineBorder(new Color(119, 136, 153)));
 	creacionCampoTexto(13,92, 222, 253, 25, nombre);
 	
-	JLabel lblsexo = new JLabel("Sexo");
+	JLabel lblsexo = new JLabel("Genero");
 	creacionEtiquetas(92, 275, 229, 21,lblsexo);
 	
 	JComboBox sexo = new JComboBox();
@@ -139,25 +139,10 @@ public class RegistroPersonas extends JFrame {
 	JButton btnsiguiente = new JButton("Siguiente");
 	btnsiguiente.addMouseListener(new MouseAdapter() {
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			String [] botones = { "Si", " No", "Terminar perfil" };
-			int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
-			System.out.println(variable);
-			if(variable==0) {
-				ventana2();
-			}else if(variable==1) {
-				
-			}else {
-				setVisible(false);
-				RegistroUsuario usu = new RegistroUsuario();
-				usu.setVisible(true);
-				
-				
-				//Natural nuevoUsu = Natural(nombre.getText(),);
-				
-			}
-			
-			
+		public void mouseClicked(MouseEvent e) {		
+			setVisible(false);
+			RegistroUsuario usu = new RegistroUsuario();
+			usu.setVisible(true);	
 		}
 	});
 	btnsiguiente.setBounds(256, 541, 89, 23);
