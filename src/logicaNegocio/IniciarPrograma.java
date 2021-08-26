@@ -23,10 +23,10 @@ public class IniciarPrograma {
 		//l.LecturaLineas();	
 		//Ingreso i = new Ingreso () ;
 		//i.setVisible(true);
-		//HashTable yu = new HashTable();
+		HashTable yu = new HashTable(9);
 		//SimpleHashTable ju = new SimpleHashTable();
-		RegistroUsuario usu = new RegistroUsuario();
-		usu.setVisible(true);	
+		//RegistroUsuario usu = new RegistroUsuario();
+		//usu.setVisible(true);	
 		
 		
 		
