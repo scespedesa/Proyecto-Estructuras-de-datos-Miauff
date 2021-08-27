@@ -1,19 +1,41 @@
 package datosMascotas;
 
-public class Mascotas {
-	private String tipo;
-	private String raza;
-	private int edad;
-	private String foto;
-	private String nombre;
-	public Mascotas(String nombre,String tipo,String raza,int edad, String foto){
+public abstract class Mascotas {
+	protected String idAnimal;
+	protected String tipo;
+	protected String raza;
+	protected int edad;
+	protected String foto;
+	protected String nombre;
+	protected String descripcionFisica;
+
+	public Mascotas(String idAnimal, String tipo, String raza, int edad, String foto, String nombre,
+			String descripcionFisica) {
+		this.idAnimal = idAnimal;
+		this.tipo = tipo;
+		this.raza = raza;
+		this.edad = edad;
+		this.foto = foto;
 		this.nombre = nombre;
-		this.tipo=tipo;
-		this.raza=raza;
-		this.edad=edad;
-		this.foto=foto;
-		
+		this.descripcionFisica = descripcionFisica;
 	}
+	
+	public String getIdAnimal() {
+		return idAnimal;
+	}
+
+	public void setIdAnimal(String idAnimal) {
+		this.idAnimal = idAnimal;
+	}
+
+	public String getDescripcionFisica() {
+		return descripcionFisica;
+	}
+
+	public void setDescripcionFisica(String descripcionFisica) {
+		this.descripcionFisica = descripcionFisica;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}

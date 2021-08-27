@@ -21,10 +21,9 @@ public class IniciarPrograma {
 		//con.consolaInicial();
 		//Lector l = new Lector("usuarios.txt");
 		//l.LecturaLineas();	
-		//Ingreso i = new Ingreso () ;
-		//i.setVisible(true);
-		HashTable yu = new HashTable(9);
-		//SimpleHashTable ju = new SimpleHashTable();
+		Ingreso i = new Ingreso () ;
+		i.setVisible(true);
+		//HashTable yu = new HashTable(9);
 		//RegistroUsuario usu = new RegistroUsuario();
 		//usu.setVisible(true);	
 		

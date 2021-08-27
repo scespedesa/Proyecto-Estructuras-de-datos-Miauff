@@ -7,16 +7,15 @@ import logicaNegocio.LectorMascotas;
 import logicaNegocio.Manipular;
 
 public class Administrador<T>  extends Usuario{
+	private String urlPagina ;
 	
 	
-    public Administrador(String idUsuario, String contraseña, String nombre, String descripcion) {
-		super(idUsuario, contraseña, nombre, descripcion);
-	}  
-	
-	public Administrador(){
-		super();
-	}
 
+	public Administrador(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
+			String telefono, String descripcion, String urlFoto, String rol, String urlPagina) {
+		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
+		this.urlPagina = urlPagina;
+	}
 	public void editarMascota(int posicion,Mascotas datos){
 				
 		LectorMascotas lm= new LectorMascotas("mascotas.txt");
@@ -41,7 +40,14 @@ public class Administrador<T>  extends Usuario{
 		Manipular m= new Manipular(lm.getDatosMascotas());
 		m.grabarNuevoDato("mascostas.txt", datos);
 	}
+	
 
+	public String getUrlPagina() {
+		return urlPagina;
+	}
+	public void setUrlPagina(String urlPagina) {
+		this.urlPagina = urlPagina;
+	}
 	@Override
 	public String toString() {
 		return "Administrador % idUsuario=" + idUsuario  + "% contraseña=" + contraseña+ "% nombre=" + nombre + "% descripcion=" + descripcion ;
