@@ -122,6 +122,13 @@ public class MyArrayList<O>  {
 		}
 		size -- ;       
 	}
+	public void popIndexHash(int num){  
+		if(isEmpty()){   
+			throw new RuntimeException("Array vacío");
+		}       
+		this.array[num]=null;
+		size -- ;       
+	}
 	public O getObject(int index) {
 		if(index>capacity) {
 			throw new IndexOutOfBoundsException("El indice excede el tamaño ");

@@ -1,5 +1,6 @@
 package dataStructures;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class HashTable {
@@ -17,8 +18,8 @@ public class HashTable {
 	int b; 
 	
 	public HashTable(int tamaño){
-		this.m=40;
-		this.hashTable = new MyArrayList(40);
+		this.m=15;
+		this.hashTable = new MyArrayList(15);
 		creacionArrayPrimos();
 		primo = prime();
 		int resta = (int) (primo-1);
@@ -81,29 +82,104 @@ public class HashTable {
 			}
 		}
 	}
-	public boolean find(String key){
-		double tamaño = hashTable.getCapacity();
-		int expo= (int) Math.pow(10, tamaño);
-		int p =(int)(expo + 9);
-		//int location = polyHash(key,p,53); 
-		System.out.println("locacion de : " + key + "= " );
-		Nodo runner= hashTable.getObject(7); 
-		while (runner!=null){                
-			if (runner.key.equals(key)) {
+	public boolean find(String key, String value){
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo exe = hashTable.getObject(location);
+		if(exe==null) {
+			return false;
+		}else if(exe.key==key && exe.value==value) {
+			return true;
+		}
+		while (exe.next != null){
+			exe = exe.next;
+			if(exe.getKey().equals(key) && exe.value==value) {
 				return true;
-			}	
-			runner = runner.next;                            
-		}       
+			}
+		}
 		return false;
 	}
-	public void remove(String key, String value) {
-		double tamaño = hashTable.getCapacity();
-		int expo= (int) Math.pow(1, tamaño);
-		int p =(int)(expo + 9);
-		//int location = Math.abs(polyHash(key,p);
+	
+	public Nodo<String> findNode(String key, String value){
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo<String> exe = hashTable.getObject(location);
+		if(exe==null) {
+			return null;
+		}
+		else if(exe.key==key && exe.value==value) {
+			return exe;
+		}
+		else if(exe!=null) {
+			while (exe.next != null){
+			exe = exe.next;
+			if(exe.getKey().equals(key) && exe.value==value) {
+				return exe;
+			}
+			}
+		}
+		return null;
+	}
+	
+	public boolean findLlave(String key){
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo exe = hashTable.getObject(location);
+		if(exe==null) {
+			return false;
+		}else if(exe.key==key) {
+			return true;
+		}
+		while (exe.next != null){
+			exe = exe.next;
+			if(exe.getKey().equals(key)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean remove(String key, String value) {
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo exe = hashTable.getObject(location);
+		Nodo prev;
+		if (exe.key==null && exe.value==null){
+            return false;
+        }
+		if(exe.key==key && exe.value==value) {
+			if (exe.next==null) {
+				hashTable.popIndexHash(location);
+				System.out.println("se elimino el primero y unico");
+			}else {
+				exe= exe.next;
+				hashTable.pushIndex(exe, location);
+				System.out.println("se elimino el primero");
+			}
+			return true;
+		}
+		while (exe.next != null){
+			prev= exe;
+			if(exe.next.getKey().equals(key) && exe.next.value==value) {
+				prev.next = exe.next.next ;
+				System.out.println(" se elimino como nodo de la mitad");
+				return true;
+			}
+			exe = exe.next;
+		}
+		return false;
+	}public boolean changeClave(String key, String value, String newValue) {
+		Nodo<String> nod = findNode(key,value);
+		if (nod!=null) {
+			nod.setValue(newValue);
+			return true;
+		}
+		return false;
+		
 	}
 	public void put(String key, String value) {
 		n+=1;
+		hashTable.setSize(n);
 		long poly = polyHash(key);
 		int location = integerHash(poly);
 		Nodo<String> newNode= new Nodo(key,value,null,null);      
@@ -166,7 +242,11 @@ public class HashTable {
         System.out.println(get("mariajuliana198883") + " clave de mariajuliana198883");
         System.out.println(chain + "mas colisones");
         System.out.println(primo + " el primo que se escogio y objetos" + n + "ell " +  loadFactor);
-      
+        System.out.println(remove("adri","poisson"));
+        System.out.println(get("adri"));
+        System.out.println(changeClave("gu", "oum","newclavesita"));
+        System.out.println(get("gu"));
+        System.out.println(hashTable.toString());
     }public int integerHash(long num){
     	int in = (int) (((a*num)+b)%primo)%m ;
     	in= Math.abs(in);

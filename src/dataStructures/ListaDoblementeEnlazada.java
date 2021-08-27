@@ -6,6 +6,7 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     public ListaDoblementeEnlazada(){
     
     }
+    
     @Override
     public void pushFront(E Object){
         Nodo <E> nodo1 = new Nodo<>(Object ,null,null);
