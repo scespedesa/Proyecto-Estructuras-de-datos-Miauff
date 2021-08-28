@@ -128,6 +128,8 @@ public class RegistroUsuario extends JFrame {
 					
 				
 				if(variable==0) {
+					RegistroMascotasNatural na = new RegistroMascotasNatural();
+					na.setVisible(true);
 				}else if(variable==1) {
 					
 				}else {

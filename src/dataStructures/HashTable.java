@@ -182,7 +182,7 @@ public class HashTable {
 		hashTable.setSize(n);
 		long poly = polyHash(key);
 		int location = integerHash(poly);
-		Nodo<String> newNode= new Nodo(key,value,null,null);      
+		Nodo<String> newNode= new Nodo(key,value,null,null);    
 		if (hashTable.getObject(location) == null){
 			hashTable.pushIndex(newNode, location);
 			System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
