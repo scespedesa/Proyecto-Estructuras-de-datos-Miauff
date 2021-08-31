@@ -56,7 +56,7 @@ public class RegistroMascotasNatural extends JFrame{
 	private String urlFoto;
 	private JTextField nombre;
 	private JTextField edad;
-	private MyArrayList mascotas;
+	private MyArrayList<Mascotas> mascotas = new MyArrayList<Mascotas>();
 	
 
 	public RegistroMascotasNatural() {

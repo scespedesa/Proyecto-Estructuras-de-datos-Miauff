@@ -200,11 +200,10 @@ public class RegistroPersonas extends JFrame {
 		}
 	});
 	panel1.add(lblfo);
-	
+	na = new RegistroMascotasNatural();
 	JButton btnAadirMascotas = new JButton("A\u00F1adir mascotas");
 	btnAadirMascotas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			na = new RegistroMascotasNatural();
 			na.setVisible(true);
 		}
 	});
