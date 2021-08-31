@@ -122,12 +122,14 @@ public class RegistroUsuario extends JFrame {
 				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
 				System.out.println(variable);
 				// verificar si el usuario ya se encuentra en la base de datos
-				HashTable usui = new HashTable();
-				System.out.println(usui.get("paquito") + " paquito ");
-				if(usui.get(usuario.getSelectedText())!=null) {
+				HashTable usui = new HashTable(9);
+				usui.put("prueba", "micontraseña");
+				//if(usui.get(usuario.getSelectedText())!=null) {
 					
-				}
+				
 				if(variable==0) {
+					RegistroMascotasNatural na = new RegistroMascotasNatural();
+					na.setVisible(true);
 				}else if(variable==1) {
 					
 				}else {

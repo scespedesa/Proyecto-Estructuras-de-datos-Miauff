@@ -3,10 +3,13 @@ package dataStructures;
 class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     Nodo <E> head;
     Nodo <E> tail;
-    public ListaDoblementeEnlazada(){
-    
-    }
-    @Override
+
+    public ListaDoblementeEnlazada(Nodo<E> head, Nodo<E> tail) {
+		this.head = head;
+		this.tail = tail;
+	}
+
+	@Override
     public void pushFront(E Object){
         Nodo <E> nodo1 = new Nodo<>(Object ,null,null);
         if(this.head==null){
@@ -37,6 +40,15 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     
     public void pushBack(E Object){
         Nodo <E> nodo1 = new Nodo<>(Object, null,null);
+        if(this.tail==null){
+            head=tail=nodo1;
+        }else{
+            nodo1.prev=tail;
+            tail.next=nodo1;
+            
+        }
+    }
+    public void pushBack(Nodo <E> nodo1) {
         if(this.tail==null){
             head=tail=nodo1;
         }else{

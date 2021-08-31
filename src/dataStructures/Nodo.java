@@ -27,7 +27,13 @@ public class Nodo<E> {
         return key;
     }
 
-    public Nodo<E> getNext() {
+    public E getValue() {
+		return value;
+	}
+	public void setValue(E value) {
+		this.value = value;
+	}
+	public Nodo<E> getNext() {
         return next;
     }
 

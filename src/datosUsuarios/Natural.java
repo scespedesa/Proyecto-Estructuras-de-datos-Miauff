@@ -10,25 +10,18 @@ import dataStructures.MyArrayList;
 import datosMascotas.Mascotas;
 
 public class Natural extends Usuario{
-
-  
-    private String telefono;
-    private MyArrayList<Mascotas> mascotas = new MyArrayList<Mascotas>();
-    private boolean quiereAdopcion ; 
-	private int numeroDeAnimales;
 	
+	private int numeroDeAnimales;
+	private String genero;
    
-	public Natural(String idUsuario,String contraseña, String nombre, String descripcion,String telefono,MyArrayList<Mascotas> mascotas,boolean quiereAdopcion,int numeroDeAnimales) {
-		
-		super(idUsuario,contraseña,  nombre, descripcion);
-        this.telefono=telefono;
-        this.mascotas= mascotas;
-        this.quiereAdopcion= quiereAdopcion;
-		this.numeroDeAnimales=numeroDeAnimales;
+	
+	public Natural(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
+			String telefono, String descripcion, String urlFoto, String rol, int numeroDeAnimales, String genero) {
+		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
+		this.numeroDeAnimales = numeroDeAnimales;
+		this.genero=genero;
 	}
 
-	 
-	
 	public void adoptarMascota(int numeroPosicion){
 		
 		
@@ -57,24 +50,7 @@ public String getTelefono() {
 	}
 
 
-	public MyArrayList<Mascotas> getMascotas() {
-		return mascotas;
-	}
 
-
-	public void setMascotas(MyArrayList<Mascotas> mascotas) {
-		this.mascotas =  mascotas;
-	}
-
-
-	public boolean isQuiereAdopcion() {
-		return quiereAdopcion;
-	}
-
-
-	public void setQuiereAdopcion(boolean quiereAdopcion) {
-		this.quiereAdopcion = quiereAdopcion;
-	}
 
 
 	public int getNumeroDeAnimales() {
@@ -87,17 +63,19 @@ public String getTelefono() {
 	}
 
 
+public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
 @Override
 	public String toString() {
 		
-		return "Persona natural% idUsuario=" + idUsuario  + "% contraseña="+ contraseña+ "% nombre=" + nombre + "% descripcion=" + descripcion +  "% telefono=" + telefono + "% "+ mascotas.toString() ;
+		return "Persona natural% idUsuario=" + idUsuario  + "% contraseña="+ contraseña+ "% nombre=" + nombre + "% descripcion=" + descripcion +  "% telefono=" + telefono + "% " ;
 	}
 
-
-
-public void setMascotas1(Object eliminarMascotaporindex) {
-	// TODO Auto-generated method stub
-	
-}
 
 }

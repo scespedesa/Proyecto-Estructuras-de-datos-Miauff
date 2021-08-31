@@ -7,6 +7,7 @@ public class ListaSimplementeEnlazada <E> implements SingleLinkedList<E>{
     	this.head=head;
     
     }
+    
 	@Override
     public void pushFront(E key, E value){
         Nodo <E> nodo1 = new Nodo<>(key,value,null,null);

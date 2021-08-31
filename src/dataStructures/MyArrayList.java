@@ -24,25 +24,27 @@ public class MyArrayList<O>  {
 		return size == 0;
 	}
 	//redimensiona el arreglo
-	public void resize(O Object, boolean t) {
+	public void resize(O Object) {
 		O[] newArray = (O[]) new Object[2*capacity];
-		if(t) {
 			newArray[0]= Object ;
 			for(int i = 0 ; i<capacity ; i++ ) {
 				newArray[i+1]= array[i];
-			}	
-		}else {
-			for(int i = 0 ; i<capacity ; i++ ) {
-				newArray[i]= array[i];
+		this.array = newArray;
+		capacity= capacity * 2 ;
 			}
+	}public void resize() {
+		O[] newArray = (O[]) new Object[2*capacity];
+		for(int i = 0 ; i<capacity ; i++ ) {
+			newArray[i]= array[i];
 		}
 		this.array = newArray;
 		capacity= capacity * 2 ;
 	}
+	
 	//agrega un elemento al inicio del arreglo - complejidad O(n) - por ser arreglo
 	public void pushFront(O Object) {
 		if(capacity==size) {
-			resize(Object,true);
+			resize(Object);
 		}else {
 			for(int i = size-1 ; i>=0; i--) {
 				array[i+1]=array[i];
@@ -54,7 +56,7 @@ public class MyArrayList<O>  {
 	//agrega un elemento al final del arreglo - complejidad O(1) - por ser arreglo
 	public void pushBack(O Object){
 		if (capacity == size){
-			resize(Object,false);
+			resize();
 		}
 		array[size] = Object;
 		size ++ ;
@@ -118,6 +120,13 @@ public class MyArrayList<O>  {
 				array[posicion]=array[posicion+1];
 			}
 		}
+		size -- ;       
+	}
+	public void popIndexHash(int num){  
+		if(isEmpty()){   
+			throw new RuntimeException("Array vacío");
+		}       
+		this.array[num]=null;
 		size -- ;       
 	}
 	public O getObject(int index) {
