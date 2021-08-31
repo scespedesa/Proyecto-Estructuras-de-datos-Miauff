@@ -18,8 +18,8 @@ public class HashTable {
 	int b; 
 	
 	public HashTable(int tamaño){
-		this.m=15;
-		this.hashTable = new MyArrayList(15);
+		this.m=tamaño;
+		this.hashTable = new MyArrayList(m);
 		creacionArrayPrimos();
 		primo = prime();
 		int resta = (int) (primo-1);
@@ -27,7 +27,6 @@ public class HashTable {
 		x= primos.getObject(yu);
 		a = getRandomNumberInRange(2,resta);
 		b =  getRandomNumberInRange(0,resta); 
-		test();
 	}
 	private void creacionArrayPrimos() {
 		primos.pushBack(31);

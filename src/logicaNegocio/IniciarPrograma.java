@@ -26,6 +26,8 @@ public class IniciarPrograma {
 		//HashTable yu = new HashTable(9);
 		//RegistroUsuario usu = new RegistroUsuario();
 		//usu.setVisible(true);	
+		Conexion cn = new Conexion();
+		cn.Conectar();
 		
 		
 		

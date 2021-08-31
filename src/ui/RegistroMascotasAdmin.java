@@ -87,7 +87,7 @@ public class RegistroMascotasAdmin extends JFrame{
 		crearMenu();		
 
 		JTextField nombre = new JTextField();
-		nombre.setBounds(76, 140, 277, 25);
+		nombre.setBounds(76, 136, 277, 25);
 		panel.add(nombre);
 		
 		JTextField edad = new JTextField();
@@ -95,12 +95,12 @@ public class RegistroMascotasAdmin extends JFrame{
 		panel.add(edad);
 		
 		JLabel lbln = new JLabel("Nombre");
-		lbln.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
+		lbln.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 11));
 		lbln.setBounds(180, 123, 68, 14);
 		panel.add(lbln);
 		JLabel lblTipo = new JLabel("Tipo");
-		lblTipo.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblTipo.setBounds(188, 172, 58, 14);
+		lblTipo.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 11));
+		lblTipo.setBounds(180, 164, 58, 14);
 		panel.add(lblTipo);
 		
 
@@ -145,8 +145,8 @@ public class RegistroMascotasAdmin extends JFrame{
 		
 		JLabel lblfotoanimalito = new JLabel("");
 		lblfotoanimalito.setBounds(299, 459, 54, 52);
-		ImageIcon foto= scaleImage("/imagenes/fotomasc.png",lblfotoanimalito.getWidth(), lblfotoanimalito.getHeight());
-		lblfotoanimalito.setIcon(foto);	
+		//ImageIcon foto= scaleImage("/imagenes/fotomasc.png",lblfotoanimalito.getWidth(), lblfotoanimalito.getHeight());
+		//lblfotoanimalito.setIcon(foto);	
 		lblfotoanimalito.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblfotoanimalito.addMouseListener(new MouseAdapter() {
 			@Override
@@ -166,8 +166,8 @@ public class RegistroMascotasAdmin extends JFrame{
 		panel.add(lblInserteUnaFoto);
 		JLabel lblbotonconfirmacion = new JLabel();
 		lblbotonconfirmacion.setBounds(198, 531, 54, 54);
-		ImageIcon huella= scaleImage("/imagenes/garritaboton.png",lblbotonconfirmacion.getWidth(), lblbotonconfirmacion.getHeight());
-		lblbotonconfirmacion.setIcon(huella);	
+		//ImageIcon huella= scaleImage("/imagenes/garritaboton.png",lblbotonconfirmacion.getWidth(), lblbotonconfirmacion.getHeight());
+		//lblbotonconfirmacion.setIcon(huella);	
 		lblbotonconfirmacion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblbotonconfirmacion.addMouseListener(new MouseAdapter() {
 			@Override

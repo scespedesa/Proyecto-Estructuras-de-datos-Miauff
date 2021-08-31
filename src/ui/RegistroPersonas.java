@@ -19,6 +19,7 @@ import dataStructures.HashTable;
 import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import logicaNegocio.BusquedaArchivos;
+import logicaNegocio.Conexion;
 import rojeru_san.componentes.RSDateChooser;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +29,8 @@ import javax.swing.border.MatteBorder;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
+
 
 public class RegistroPersonas extends JFrame {
 	private JPanel contentPane;
@@ -47,6 +50,7 @@ public class RegistroPersonas extends JFrame {
 	private RegistroMascotasNatural na;
 	
 	public RegistroPersonas() {
+
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
 	Dimension dimension= pantalla.getScreenSize();
 	this.alturaPantalla= dimension.height;
@@ -250,13 +254,34 @@ public class RegistroPersonas extends JFrame {
 			if(na.getMascotas()==null) {
 				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
 						telefono, descripcion,urlFoto, null);
-						System.out.println(aficionado.toString());
+	
 			}else {
 				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
 						telefono, descripcion,urlFoto, na.getMascotas());
 				System.out.println(aficionado.toString());
 			}
-			
+			//// Insercion de los Datos
+			Conexion conec = new Conexion();
+			Connection con = conec.Conectar();
+			try {
+	//// Preparamos la insercion de un registro
+	            PreparedStatement insertar = con.prepareStatement("insert into USUARIOS (USER, NAME, BIRTHDATE, GENDER, ADDRESS, PHONE, DESCRIPTION, PHOTO, PASSWORD, ADMIN) values ( ? , ?,?,?,?,?,?,?,?,?)");
+	            insertar.setString(1, usuario);
+	            insertar.setString(2, nombre);
+	            insertar.setString(3, nacimiento);
+	            insertar.setString(4, genero);
+	            insertar.setString(5, direccion);
+	            insertar.setString(6, telefono);
+	            insertar.setString(7, descripcion);
+	            insertar.setString(8, urlFoto);
+	            insertar.setString(9, contraseña);
+	            insertar.setInt(10, 0);
+	            int retorn = insertar.executeUpdate();
+	            System.out.println(retorn + " insertado");
+	        } catch (SQLException ex) {
+	            System.out.println("Imposible realizar insercion ... FAIL");
+	        }
+					System.out.println(aficionado.toString());
 			//PerfilNatural afi = new PerfilNatural(aficionado, "propio");
 			//afi.setVisible(true);
 			

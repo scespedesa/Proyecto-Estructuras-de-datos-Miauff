@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -14,6 +15,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+import logicaNegocio.BusquedaArchivos;
 import rojeru_san.componentes.RSDateChooser;
 
 import java.text.SimpleDateFormat;
@@ -22,7 +24,7 @@ import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class RegistroPrueba extends JFrame {
+public class RegistroAdmin extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel ;
 	private Image fondo;
@@ -39,7 +41,8 @@ public class RegistroPrueba extends JFrame {
 	private String nacimiento;
 	private JTextField textField_1;
 	private JLabel lbldesea;
-	public RegistroPrueba() {
+	private String urlPagina;
+	public RegistroAdmin() {
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
 	Dimension dimension= pantalla.getScreenSize();
 	this.alturaPantalla= dimension.height;
@@ -65,11 +68,13 @@ public class RegistroPrueba extends JFrame {
 }public void ventana() {
 	crearMenu();
 	JLabel registro = new JLabel("Registro");
+	registro.setFont(new Font("Monospac821 BT", Font.PLAIN, 16));
 	registro.setHorizontalAlignment(SwingConstants.CENTER);
-	registro.setBounds(133, 117, 165, 43);
+	registro.setBounds(133, 117, 165, 25);
 	panel.add(registro);
 
 	JLabel lblnombre = new JLabel("Nombre de la organizacion");
+	lblnombre.setFont(new Font("Monospaced", Font.PLAIN, 11));
 	lblnombre.setBounds(92, 151, 229, 21);
 	
 	panel.add(lblnombre);
@@ -98,6 +103,7 @@ public class RegistroPrueba extends JFrame {
 	panel.add(lugarResidencia);
 	
 	JLabel lblFechaDeLa = new JLabel("Fecha de la creacion");
+	lblFechaDeLa.setFont(new Font("Monospaced", Font.PLAIN, 11));
 	lblFechaDeLa.setBounds(92, 200, 229, 21);
 	panel.add(lblFechaDeLa);
 	textField_1 = new JTextField();
@@ -109,6 +115,7 @@ public class RegistroPrueba extends JFrame {
 
 	
 	JLabel lblresidencia = new JLabel("Direcci\u00F3n");
+	lblresidencia.setFont(new Font("Monospaced", Font.PLAIN, 11));
 	lblresidencia.setBounds(92, 252, 229, 23);
 	panel.add(lblresidencia);
 	
@@ -117,10 +124,12 @@ public class RegistroPrueba extends JFrame {
 	creacionCampoTexto(15,92, 222, 253, 25, nombre);
 	
 	JLabel lblsexo = new JLabel("Numero de contacto");
-	lblsexo.setBounds(92,305, 110, 21);
+	lblsexo.setFont(new Font("Monospaced", Font.PLAIN, 11));
+	lblsexo.setBounds(92,305, 165, 21);
 	panel.add(lblsexo);
 	
 	JLabel lbldescripcion = new JLabel("Descripcion");
+	lbldescripcion.setFont(new Font("Monospaced", Font.PLAIN, 11));
 	lbldescripcion.setBounds(92, 359, 229, 21);
 	panel.add(lbldescripcion);
 	
@@ -141,29 +150,54 @@ public class RegistroPrueba extends JFrame {
 			dispose();
 		}
 	});
-	btnsiguiente.setBounds(279, 587, 89, 23);
+	btnsiguiente.setBounds(256, 564, 89, 23);
 	btnsiguiente.setForeground(Color.BLACK);
 	btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnsiguiente.setBackground(new Color(253, 245, 230));
 	btnsiguiente.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
 	panel.add(btnsiguiente);
-	lbldesea = new JLabel("Si lo desea:");
-	lbldesea.setBounds(187, 493, 89, 21);
+	lbldesea = new JLabel("Si lo desea adjunte:");
+	lbldesea.setFont(new Font("Monospaced", Font.PLAIN, 11));
+	lbldesea.setBounds(152, 486, 146, 21);
 	panel.add(lbldesea);
 	JLabel lblfoto = new JLabel("foto");
-	lblfoto.setBounds(101, 525, 61, 43);
+	lblfoto.setBounds(114, 522, 52, 43);
+	ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfoto.getWidth(),lblfoto.getHeight());
+	lblfoto.setIcon(ima);
+	lblfoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	lblfoto.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			BusquedaArchivos b = new BusquedaArchivos() ;
+			urlFoto = b.busqueda(e,panel);
+		}
+	});
 	panel.add(lblfoto);
+	
 	JLabel lblPaginaweb = new JLabel("paginaweb");
-	lblPaginaweb.setBounds(284, 525, 61, 43);
+	lblPaginaweb.setBounds(237, 522, 61, 43);
+	ImageIcon imag = scaleImage("/imagenes/pag.jpg",lblPaginaweb.getWidth(),lblPaginaweb.getHeight());
+	lblPaginaweb.setIcon(imag);
+	lblPaginaweb.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	lblPaginaweb.addMouseListener(new MouseAdapter() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			BusquedaArchivos b = new BusquedaArchivos() ;
+			urlPagina = b.busqueda(e,panel);
+		}
+	});
 	
 	panel.add(lblPaginaweb);	
 	
-	JLabel lblAdjunteUnaFoto = new JLabel("Adjunte una foto");
-	lblAdjunteUnaFoto.setBounds(92, 513, 89, 21);
+	JLabel lblAdjunteUnaFoto = new JLabel("Foto");
+	lblAdjunteUnaFoto.setFont(new Font("Monospaced", Font.PLAIN, 11));
+	lblAdjunteUnaFoto.setBounds(92, 506, 104, 21);
 	panel.add(lblAdjunteUnaFoto);
 	
-	JLabel lblUrlDeSu = new JLabel("Url de su pagina web");
-	lblUrlDeSu.setBounds(256, 516, 89, 21);
+	JLabel lblUrlDeSu = new JLabel("Pagina web");
+	lblUrlDeSu.setFont(new Font("Monospaced", Font.PLAIN, 11));
+	lblUrlDeSu.setBounds(230, 506, 115, 21);
 	panel.add(lblUrlDeSu);
 	crearFondo();
 }

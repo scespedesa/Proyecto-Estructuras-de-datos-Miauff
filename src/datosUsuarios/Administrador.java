@@ -7,10 +7,9 @@ import logicaNegocio.LectorMascotas;
 import logicaNegocio.Manipular;
 
 public class Administrador<T>  extends Usuario{
-	private String urlPagina ;
+	private String urlPagina;
+	//private MyArrayList<>
 	
-	
-
 	public Administrador(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
 			String telefono, String descripcion, String urlFoto, String rol, String urlPagina) {
 		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);

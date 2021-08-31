@@ -8,10 +8,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +22,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import com.mysql.cj.xdevapi.Statement;
+
+import dataStructures.HashTable;
+import logicaNegocio.Conexion;
 import logicaNegocio.Manipular;
+import java.sql.*;
 
 import javax.swing.UIManager;
 import javax.swing.JButton;
@@ -129,6 +130,24 @@ public class Ingreso extends JFrame {
 	JButton btningresar = new JButton("Ingresar");
 	btningresar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			Conexion conec = new Conexion();
+			Connection conexion = conec.Conectar();
+			//realizar consulta
+	        try {
+	// Preparamos la consulta
+	            java.sql.Statement s = conexion.createStatement();
+	            ResultSet rs = s.executeQuery("select USER , PASSWORD from USUARIOS");
+	// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
+	            HashTable usuario = new HashTable(1);
+	            while (rs.next()) {
+	                System.out.println(
+	                        "usuario: " + rs.getString(1)
+	                        + "\tcontraseña: " + rs.getString(2)
+	                );
+	            }
+	        } catch (SQLException ex) {
+	            System.out.println(ex);
+	        }
 			String contra = new String( passwordField.getPassword());
 			Manipular av = new Manipular(usuario.getText(),contra);
 			String tipo = av.esta();
@@ -187,7 +206,7 @@ public void crearMenu(){
 	menu = new ImageIcon(RegistroPersonas.class.getResource("/imagenes/menu.png")).getImage().getScaledInstance(26, 26, Image.SCALE_DEFAULT);
 	menu_1.setIcon(new ImageIcon(menu));
 	menuBar.add(menu_1);
-	JMenuItem menuItem_2 = new JMenuItem("Ir a Registro");
+	JMenuItem menuItem_2 = new JMenuItem("Ir a Registro Aficionado");
 	menuItem_2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent a) {
 			dispose();
@@ -204,6 +223,18 @@ public void crearMenu(){
 			dispose();
 		}
 	});
+	
+	JMenuItem menuItem_2_1 = new JMenuItem("Ir a Registro Organizacion");
+	menuItem_2_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent a) {
+			dispose();
+			RegistroAdmin persona = new RegistroAdmin();
+			persona.setVisible(true);
+			
+		}
+	});
+	menuItem_2_1.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
+	menu_1.add(menuItem_2_1);
 	menuItem_3.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
 	menu_1.add(menuItem_3);
 }
