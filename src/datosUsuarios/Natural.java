@@ -11,12 +11,12 @@ import datosMascotas.Mascotas;
 
 public class Natural extends Usuario{
 	
-	private MyArrayList mascotas;
+	private MyArrayList<Mascotas> mascotas = new MyArrayList<Mascotas>();
 	private String genero;
    
 	
 	public Natural(String idUsuario, String contraseña, String rol, String nombre, String genero, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, MyArrayList mascotas ) {
+			String telefono, String descripcion, String urlFoto, MyArrayList<Mascotas> mascotas ) {
 		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
 		this.mascotas = mascotas;
 		this.genero=genero;

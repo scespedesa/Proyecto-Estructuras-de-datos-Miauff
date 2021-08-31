@@ -141,7 +141,7 @@ public class RegistroPrueba extends JFrame {
 			dispose();
 		}
 	});
-	btnsiguiente.setBounds(272, 563, 89, 23);
+	btnsiguiente.setBounds(279, 587, 89, 23);
 	btnsiguiente.setForeground(Color.BLACK);
 	btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnsiguiente.setBackground(new Color(253, 245, 230));
@@ -150,10 +150,21 @@ public class RegistroPrueba extends JFrame {
 	lbldesea = new JLabel("Si lo desea:");
 	lbldesea.setBounds(187, 493, 89, 21);
 	panel.add(lbldesea);
-	JLabel lblfoto = new JLabel("New label");
-	lblfoto.setBounds(92, 525, 70, 49);
+	JLabel lblfoto = new JLabel("foto");
+	lblfoto.setBounds(101, 525, 61, 43);
 	panel.add(lblfoto);
+	JLabel lblPaginaweb = new JLabel("paginaweb");
+	lblPaginaweb.setBounds(284, 525, 61, 43);
 	
+	panel.add(lblPaginaweb);	
+	
+	JLabel lblAdjunteUnaFoto = new JLabel("Adjunte una foto");
+	lblAdjunteUnaFoto.setBounds(92, 513, 89, 21);
+	panel.add(lblAdjunteUnaFoto);
+	
+	JLabel lblUrlDeSu = new JLabel("Url de su pagina web");
+	lblUrlDeSu.setBounds(256, 516, 89, 21);
+	panel.add(lblUrlDeSu);
 	crearFondo();
 }
 public void ventana2() {
@@ -169,6 +180,8 @@ public void crearFondo() {
 	ImageIcon fondo1= scaleImage("/imagenes/registro.png",fondoImage.getWidth(), fondoImage.getHeight());
 	fondoImage.setIcon(fondo1);	
 	panel.add(fondoImage);
+	
+
 }
 public void creacionCombo(int x, int y ,int ancho , int alto, JComboBox caja, String[] lista) {
 	caja.setBackground(Color.WHITE);

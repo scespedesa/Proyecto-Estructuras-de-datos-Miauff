@@ -17,10 +17,6 @@ public abstract class Usuario {
 	protected String descripcion;
 	protected String urlFoto;
 	protected String rol;
-	
-	
-	
-
 
 	public Usuario(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
 			String telefono, String descripcion, String urlFoto, String rol) {
@@ -34,6 +30,7 @@ public abstract class Usuario {
 		this.urlFoto = urlFoto;
 		this.rol = rol;
 	}
+
 public String getNacimiento() {
 		return nacimiento;
 	}

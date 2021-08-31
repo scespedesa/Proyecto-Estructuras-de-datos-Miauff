@@ -247,12 +247,13 @@ public class RegistroPersonas extends JFrame {
 						//usui.put("prueba", "micontraseña");
 			String usuario = usuario1.getText();
 			String contraseña = new String(passwordField.getPassword());
+			Natural aficionado;
 			if(na.getMascotas()==null) {
-				Natural aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
 						telefono, descripcion,urlFoto, null);
-				System.out.println(aficionado.toString());
+						System.out.println(aficionado.toString());
 			}else {
-				Natural aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
 						telefono, descripcion,urlFoto, na.getMascotas());
 				System.out.println(aficionado.toString());
 			}

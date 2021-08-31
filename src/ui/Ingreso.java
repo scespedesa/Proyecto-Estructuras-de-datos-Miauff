@@ -71,20 +71,7 @@ public class Ingreso extends JFrame {
 	contentPane.add(panel);
 	panel.setLayout(null);
 	Connection con;
-	/*
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-	} catch (ClassNotFoundException e) {
-		e.printStackTrace();
-	}
-	try {
-		con= DriverManager.getConnection("jdbc:mysql://localhost/sistemamiauff","root","");
-		///Statement stmt=
-	} catch (SQLException e) {
-		e.printStackTrace();
-		JOptionPane.showMessageDialog(null,"no se puede conectar a la base de datos");
-	}
-	*/
+	
 	ventana();
 
 }public void ventana() {
@@ -182,7 +169,8 @@ public class Ingreso extends JFrame {
 	ImageIcon fondo1= scaleImage("/imagenes/fondi (2).png",fondoImage.getWidth(), fondoImage.getHeight());
 	fondoImage.setIcon(fondo1);
 	panel.add(fondoImage);
-}public void creacionEtiquetas(int tamañoLetra,int x,int y,int ancho,int largo, JLabel label) {
+}
+	public void creacionEtiquetas(int tamañoLetra,int x,int y,int ancho,int largo, JLabel label) {
 	label.setForeground(Color.BLACK);
 	label.setFont(new Font("Segoe UI Semibold", Font.PLAIN, tamañoLetra));
 	label.setSize(ancho,largo);
