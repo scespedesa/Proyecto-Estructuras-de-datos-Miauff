@@ -8,6 +8,8 @@ class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
 		this.head = head;
 		this.tail = tail;
 	}
+    public ListaDoblementeEnlazada() {
+	}
 
 	@Override
     public void pushFront(E Object){

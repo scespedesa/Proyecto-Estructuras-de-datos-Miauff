@@ -11,14 +11,14 @@ import datosMascotas.Mascotas;
 
 public class Natural extends Usuario{
 	
-	private int numeroDeAnimales;
+	private MyArrayList mascotas;
 	private String genero;
    
 	
-	public Natural(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, String rol, int numeroDeAnimales, String genero) {
+	public Natural(String idUsuario, String contraseña, String rol, String nombre, String genero, String nacimiento, String direccion,
+			String telefono, String descripcion, String urlFoto, MyArrayList mascotas ) {
 		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
-		this.numeroDeAnimales = numeroDeAnimales;
+		this.mascotas = mascotas;
 		this.genero=genero;
 	}
 
@@ -50,19 +50,6 @@ public String getTelefono() {
 	}
 
 
-
-
-
-	public int getNumeroDeAnimales() {
-		return numeroDeAnimales;
-	}
-
-
-	public void setNumeroDeAnimales(int numeroDeAnimales) {
-		this.numeroDeAnimales = numeroDeAnimales;
-	}
-
-
 public String getGenero() {
 		return genero;
 	}
@@ -71,11 +58,13 @@ public String getGenero() {
 		this.genero = genero;
 	}
 
-@Override
+	@Override
 	public String toString() {
-		
-		return "Persona natural% idUsuario=" + idUsuario  + "% contraseña="+ contraseña+ "% nombre=" + nombre + "% descripcion=" + descripcion +  "% telefono=" + telefono + "% " ;
+		return "Natural [idUsuario=" + idUsuario + ", contraseña="+ contraseña +  ", nombre=" + nombre + ", genero=" + genero + ", nacimiento=" + nacimiento + ", direccion=" + direccion
+				+ ", telefono=" + telefono + ", descripcion=" + descripcion + ", urlFoto=" + urlFoto + ", rol=" + rol + ", mascotas=" +mascotas
+				+ "]";
 	}
+
 
 
 }

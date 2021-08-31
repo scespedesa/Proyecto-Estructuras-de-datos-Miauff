@@ -9,7 +9,7 @@ public class MascotasAdopcion extends Mascotas {
 	public MascotasAdopcion(String idAnimal, String tipo, String raza, int edad, String foto, String nombre,
 			String descripcionFisica, String estado, String idFundacion, String fechaIngreso,
 			String descripcionCondicion, String urlInfo) {
-		super(idAnimal, tipo, raza, edad, foto, nombre, descripcionFisica);
+		super(idAnimal, nombre,tipo, raza, edad, foto,  descripcionFisica);
 		this.estado = estado;
 		this.idFundacion = idFundacion;
 		this.fechaIngreso = fechaIngreso;

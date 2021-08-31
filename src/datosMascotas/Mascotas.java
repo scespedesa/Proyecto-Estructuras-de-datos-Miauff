@@ -1,6 +1,6 @@
 package datosMascotas;
 
-public abstract class Mascotas {
+public class Mascotas {
 	protected String idAnimal;
 	protected String tipo;
 	protected String raza;
@@ -9,7 +9,7 @@ public abstract class Mascotas {
 	protected String nombre;
 	protected String descripcionFisica;
 
-	public Mascotas(String idAnimal, String tipo, String raza, int edad, String foto, String nombre,
+	public Mascotas(String idAnimal,String nombre, String tipo, String raza, int edad, String foto, 
 			String descripcionFisica) {
 		this.idAnimal = idAnimal;
 		this.tipo = tipo;
@@ -65,9 +65,12 @@ public abstract class Mascotas {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 	@Override
 	public String toString() {
-		return "nombre:"+ nombre + ",tipo: "+ tipo + ", raza: " + raza + ", edad: " + edad + ", foto: " + foto ;
+		return "Mascotas [idAnimal=" + idAnimal + ", nombre=" + nombre +", tipo=" + tipo + ", raza=" + raza + ", edad=" + edad + ", foto="
+				+ foto +  ", descripcionFisica=" + descripcionFisica + "]";
 	}
+
 	
 }

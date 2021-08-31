@@ -64,7 +64,9 @@ public class MyArrayList<O>  {
 	//agrega un elemento en la posicion del index solicitado - complejidad O(n) - por ser arreglo
 	public void pushIndex(O Object, int index) {
 		array[index]=Object;
-
+	}
+	public void agregarIndex(O Object, int index) {
+		array[index-1]=Object;	
 	}
 	//devuelve el elemento en la primera posicion - complejidad O(1) - por ser arreglo
 	public O topFront(){    
@@ -135,6 +137,13 @@ public class MyArrayList<O>  {
 		}
 		return array[index];
 	}
+	public O get(int index) {
+		if(index>capacity) {
+			throw new IndexOutOfBoundsException("El indice excede el tamaño ");
+		}
+		return array[index-1];
+	}
+	
 
 	public O[] getArray() {
 		return array;

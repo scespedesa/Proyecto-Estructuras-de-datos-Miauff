@@ -32,7 +32,10 @@ public class RegistroUsuario extends JFrame {
 	private JLabel fondoImage;
 	private Image menu;
 	private JPasswordField passwordField;
-	private String urlFoto;
+	public String urlFoto;
+	public String usuario;
+	public String contraseña;
+
 
 	public RegistroUsuario() {
 		
@@ -70,16 +73,16 @@ public class RegistroUsuario extends JFrame {
 		panel.add(registro);
 
 		JLabel lbldesea = new JLabel("Si lo desea adjunte");
-		creacionEtiquetas(92, 200, 253, 25,lbldesea);
+		creacionEtiquetas(92, 180, 253, 25,lbldesea);
 		lbldesea.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblfoto = new JLabel("Una foto de perfil ->");
-		creacionEtiquetas(92, 240, 231, 23,lblfoto);
+		creacionEtiquetas(92, 220, 231, 23,lblfoto);
 		lblfoto.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		panel.add(lblfoto);
 
 		JLabel lblfo = new JLabel("Foto");
-		lblfo.setBounds(190, 277, 57, 47);
+		lblfo.setBounds(190, 250, 57, 47);
 		ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfo.getWidth(),lblfo.getHeight());
 		lblfo.setIcon(ima);
 		lblfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -92,17 +95,31 @@ public class RegistroUsuario extends JFrame {
 		});
 		panel.add(lblfo);
 		
+		JButton btnAadirMascotas = new JButton("A\u00F1adir mascotas");
+		btnAadirMascotas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroMascotasNatural na = new RegistroMascotasNatural();
+				na.setVisible(true);
+				na.getMascotas();
+			}
+		});
+		btnAadirMascotas.setForeground(Color.BLACK);
+		btnAadirMascotas.setFont(new Font("Monospaced", Font.PLAIN, 14));
+		btnAadirMascotas.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
+		btnAadirMascotas.setBackground(new Color(253, 245, 230));
+		btnAadirMascotas.setBounds(157, 308, 123, 23);
+		panel.add(btnAadirMascotas);
 		JLabel lblusu = new JLabel("Usuario");
 		lblusu.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		lblusu.setBounds(92, 335, 253, 25);
 		panel.add(lblusu);
 		
-		JTextField usuario = new JTextField();
-		usuario.setForeground(Color.BLACK);
-		usuario.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
-		usuario.setBorder(new LineBorder(new Color(119, 136, 153)));
-		usuario.setBounds(92, 364, 253, 25);
-		panel.add(usuario);
+		JTextField usuario1 = new JTextField();
+		usuario1.setForeground(Color.BLACK);
+		usuario1.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
+		usuario1.setBorder(new LineBorder(new Color(119, 136, 153)));
+		usuario1.setBounds(92, 364, 253, 25);
+		panel.add(usuario1);
 		
 		JLabel lblcontra = new JLabel("Contraseña");
 		lblcontra.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -118,25 +135,13 @@ public class RegistroUsuario extends JFrame {
 		btnsiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String [] botones = { "Si", " No", "Terminar perfil" };
-				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
-				System.out.println(variable);
 				// verificar si el usuario ya se encuentra en la base de datos
-				HashTable usui = new HashTable(9);
-				usui.put("prueba", "micontraseña");
-				//if(usui.get(usuario.getSelectedText())!=null) {
-					
-				
-				if(variable==0) {
-					RegistroMascotasNatural na = new RegistroMascotasNatural();
-					na.setVisible(true);
-				}else if(variable==1) {
-					
-				}else {
-					setVisible(false);
-					RegistroUsuario usu = new RegistroUsuario();
-					usu.setVisible(true);	
-					//Natural nuevoUsu = Natural(nombre.getText());		
+				//HashTable usui = new HashTable(9);
+				//usui.put("prueba", "micontraseña");
+				usuario = usuario1.getText();
+				contraseña =new String(passwordField.getPassword());
+				if(usuario!=null && contraseña!=null) {
+					dispose();
 				}
 				
 				
@@ -156,6 +161,8 @@ public class RegistroUsuario extends JFrame {
 		ImageIcon fondo1= scaleImage("/imagenes/registro (2).png",fondoImage.getWidth(), fondoImage.getHeight());
 		fondoImage.setIcon(fondo1);	
 		panel.add(fondoImage);	
+		
+		
 	}
 	public void creacionCombo(int x, int y ,int ancho , int alto, JComboBox caja, String[] lista) {
 		
@@ -207,4 +214,33 @@ public class RegistroUsuario extends JFrame {
 		return new ImageIcon(imgScale);
 
 	}
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
 }

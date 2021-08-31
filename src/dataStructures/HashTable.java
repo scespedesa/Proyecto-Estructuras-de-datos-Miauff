@@ -120,6 +120,26 @@ public class HashTable {
 		}
 		return null;
 	}
+	public Nodo<String> findNode(String key){
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo<String> exe = hashTable.getObject(location);
+		if(exe==null) {
+			return null;
+		}
+		else if(exe.key==key ) {
+			return exe;
+		}
+		else if(exe!=null) {
+			while (exe.next != null){
+			exe = exe.next;
+			if(exe.getKey().equals(key) ) {
+				return exe;
+			}
+			}
+		}
+		return null;
+	}
 	
 	public boolean findLlave(String key){
 		long poly = polyHash(key);
@@ -168,7 +188,38 @@ public class HashTable {
 			exe = exe.next;
 		}
 		return false;
-	}public boolean changeClave(String key, String value, String newValue) {
+	}
+	public boolean remove(String key) {
+		long poly = polyHash(key);
+		int location = integerHash(poly);
+		Nodo exe = hashTable.getObject(location);
+		Nodo prev;
+		if (exe.key==null ){
+            return false;
+        }
+		if(exe.key==key) {
+			if (exe.next==null) {
+				hashTable.popIndexHash(location);
+				System.out.println("se elimino el primero y unico");
+			}else {
+				exe= exe.next;
+				hashTable.pushIndex(exe, location);
+				System.out.println("se elimino el primero");
+			}
+			return true;
+		}
+		while (exe.next != null){
+			prev= exe;
+			if(exe.next.getKey().equals(key) ) {
+				prev.next = exe.next.next ;
+				System.out.println(" se elimino como nodo de la mitad");
+				return true;
+			}
+			exe = exe.next;
+		}
+		return false;
+	}
+	public boolean changeClave(String key, String value, String newValue) {
 		Nodo<String> nod = findNode(key,value);
 		if (nod!=null) {
 			nod.setValue(newValue);
@@ -178,11 +229,14 @@ public class HashTable {
 		
 	}
 	public void put(String key, String value) {
-		n+=1;
+		if(!findLlave(key)) {
+			n+=1;
 		hashTable.setSize(n);
 		long poly = polyHash(key);
 		int location = integerHash(poly);
-		Nodo<String> newNode= new Nodo(key,value,null,null);    
+		Nodo<String> newNode= new Nodo(key,value,null,null); 
+		
+			
 		if (hashTable.getObject(location) == null){
 			hashTable.pushIndex(newNode, location);
 			System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
@@ -206,6 +260,7 @@ public class HashTable {
 			System.out.println(hashTable.toString());
 			System.out.println("   estabamos con  " + key);
 			rehash();
+			}
 		}
 	}
 	public Object get(String key){

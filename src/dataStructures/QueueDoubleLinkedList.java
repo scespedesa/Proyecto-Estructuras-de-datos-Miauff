@@ -5,7 +5,7 @@ public class QueueDoubleLinkedList<E> implements Queue<E> {
     private ListaDoblementeEnlazada<E> lista;
 
     public QueueDoubleLinkedList() {
-        this.lista = new ListaDoblementeEnlazada<>();
+        this.lista = new ListaDoblementeEnlazada<E>();
     }
 
     

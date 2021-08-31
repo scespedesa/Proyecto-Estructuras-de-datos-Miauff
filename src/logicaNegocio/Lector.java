@@ -18,21 +18,25 @@ public class Lector<E> {
 	private ArrayList <Natural> datosPersonaNatural ;
 	private ArrayList<Administrador> datosAdministrador;
 	private ArrayList<Usuario> datos ;
+	private String[] listadoPerros;
 
 
 	public Lector(String nombreArchivo) { 
 		this.nombreArchivo= nombreArchivo;
 		datosPersonaNatural = new ArrayList<Natural>();
 		datosAdministrador = new ArrayList<Administrador>();
+		listadoPerros = new String[283];
 		datos = new ArrayList<Usuario>();
 	}
 	public void LecturaLineas() {
-		File inFile= new File("usuarios.txt");
+		File inFile= new File(nombreArchivo);
 		try {
 			Scanner sc = new Scanner(inFile);
+			int i =0;
 			while(sc.hasNext()) {
 				String linea = sc.nextLine();
-				procesarLinea(linea);
+				listadoPerros[i] = linea;
+				i+=1;	
 			}
 		}catch (FileNotFoundException e) {
 			System.err.println("No se encontro el archivo: " + nombreArchivo);
@@ -49,8 +53,9 @@ public class Lector<E> {
 		int edadMascota= Integer.parseInt(edadMascota1);
 		String fotoMascota = subAnimales(in.next().trim());	
 		in.close();
-		return new Mascotas(nombreMascota,tipoMascota,razaMascota, edadMascota,fotoMascota);
+		return new Mascotas("id",nombreMascota,tipoMascota,razaMascota, edadMascota,fotoMascota,"descripcion");
 	}
+
 	private void procesarLinea(String line) {
 		Scanner sc = new Scanner (line);
 		sc.useDelimiter("%");
@@ -73,12 +78,14 @@ public class Lector<E> {
 				Mascotas masco = procesarAnimales(lineaAnimal);
 				ma.pushFront(masco);	
 			}
-			it1 = new Natural(idUsuario,contrasenia, nombre, descripcion, telefono, ma, false,3);
+
+			it1 = new Natural(idUsuario,contrasenia,"natural", nombre, "genero","fecha nacimiento","343 calle",telefono, descripcion,"urlFoto", ma);
 			datosPersonaNatural.add(it1);
  			datos.add(it1);
 			break;
 		case"Administrador":
-			it= new Administrador( idUsuario,contrasenia, nombre, descripcion);
+			it= new Administrador( idUsuario,contrasenia, nombre, "nacimiento","direccion",
+					"4544",  descripcion, "urlFoto", "admin","urlPagina");
 			datosAdministrador.add(it);
 			datos.add(it);
 			break;
@@ -118,6 +125,13 @@ public class Lector<E> {
 	public void setNombreArchivo(String nombreArchivo){
 		this.nombreArchivo = nombreArchivo;
 	}
+	public String[] getListadoPerros() {
+		return listadoPerros;
+	}
+	public void setListadoPerros(String[] listadoPerros) {
+		this.listadoPerros = listadoPerros;
+	}
+
 
 
 }

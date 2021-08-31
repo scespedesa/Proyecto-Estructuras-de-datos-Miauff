@@ -43,7 +43,7 @@ public class LectorMascotas {
 		switch("") {
 		case"":
 			int edad1= Integer.parseInt(edad);
-			 it1 = new Mascotas(nombre,tipo,raza, edad1, foto);
+			 //it1 = new Mascotas(nombre,tipo,raza, edad1, foto);
 			datosMascotas.add(it1);
 			break;
 
