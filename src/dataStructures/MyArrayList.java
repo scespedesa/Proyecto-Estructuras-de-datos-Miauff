@@ -133,13 +133,13 @@ public class MyArrayList<O>  {
 	}
 	public O getObject(int index) {
 		if(index>capacity) {
-			throw new IndexOutOfBoundsException("El indice excede el tamaño ");
+			throw new IndexOutOfBoundsException("El indice excede el tamanio ");
 		}
 		return array[index];
 	}
 	public O get(int index) {
 		if(index>capacity) {
-			throw new IndexOutOfBoundsException("El indice excede el tamaño ");
+			throw new IndexOutOfBoundsException("El indice excede el tamanio ");
 		}
 		return array[index-1];
 	}

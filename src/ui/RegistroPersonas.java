@@ -231,7 +231,7 @@ public class RegistroPersonas extends JFrame {
 	usuario1.setBounds(92, 364, 253, 25);
 	panel1.add(usuario1);
 	
-	JLabel lblcontra = new JLabel("Contraseña");
+	JLabel lblcontra = new JLabel("Contrasenia");
 	lblcontra.setFont(new Font("Monospaced", Font.PLAIN, 14));
 	lblcontra.setBounds(92, 415, 253, 25);
 	panel1.add(lblcontra);
@@ -249,19 +249,19 @@ public class RegistroPersonas extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// verificar si el usuario ya se encuentra en la base de datos
 						//HashTable usui = new HashTable(9);
-						//usui.put("prueba", "micontraseña");
+						//usui.put("prueba", "micontrasenia");
 			String usuario = usuario1.getText();
-			String contraseña = new String(passwordField.getPassword());
+			String contrasenia = new String(passwordField.getPassword());
 			VerificacionClave o = new VerificacionClave();
-			boolean ver = o.esDebil(contraseña);
+			boolean ver = o.esDebil(contrasenia);
 			
 			if (!ver) {
 				if(na.getMascotas()==null) {
-					aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+					aficionado = new Natural(usuario,contrasenia, "Natural", nombre, genero, nacimiento, direccion,
 							telefono, descripcion,urlFoto, null);
 
 				}else {
-					aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+					aficionado = new Natural(usuario,contrasenia, "Natural", nombre, genero, nacimiento, direccion,
 							telefono, descripcion,urlFoto, na.getMascotas());
 					System.out.println(aficionado.toString());
 				}
@@ -281,7 +281,7 @@ public class RegistroPersonas extends JFrame {
 		            insertar.setString(6, telefono);
 		            insertar.setString(7, descripcion);
 		            insertar.setString(8, urlFoto);
-		            insertar.setString(9, contraseña);
+		            insertar.setString(9, contrasenia);
 		            insertar.setInt(10, 0);
 		            int retorn = insertar.executeUpdate();
 		            System.out.println(retorn + " insertado");
@@ -291,7 +291,7 @@ public class RegistroPersonas extends JFrame {
 				
 				
 			}else {
-				JOptionPane.showMessageDialog(null,"Contraseña invalida"+ "\n"+ "Debe tener como minimo 8 caracteres con :" +"\n"+" Mayusculas , minusculas , numeros y simbolos", "Error contraseña invalida", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Contrasenia invalida"+ "\n"+ "Debe tener como minimo 8 caracteres con :" +"\n"+" Mayusculas , minusculas , numeros y simbolos", "Error contrasenia invalida", JOptionPane.INFORMATION_MESSAGE);
 			}	
 	
 			dispose();
@@ -332,9 +332,9 @@ public void creacionEtiquetas(int x, int y ,int ancho , int alto, JLabel label) 
 	label.setFont(new Font("Monospaced", Font.BOLD, 13));
 	panel.add(label);
 }
-public void creacionCampoTexto(int tamañoLetra,int x,int y,int ancho,int largo, JTextField field) {
+public void creacionCampoTexto(int tamanioLetra,int x,int y,int ancho,int largo, JTextField field) {
 	field.setBounds(92,185,ancho,largo);
-	field.setFont(new Font("Monospac821 BT", Font.PLAIN, tamañoLetra));
+	field.setFont(new Font("Monospac821 BT", Font.PLAIN, tamanioLetra));
 	field.setForeground(SystemColor.desktop);
 	panel.add(field);
 }

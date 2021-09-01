@@ -17,8 +17,8 @@ public class HashTable {
 	int a;
 	int b; 
 	
-	public HashTable(int tamaño){
-		this.m=tamaño;
+	public HashTable(int tamanio){
+		this.m=tamanio;
 		this.hashTable = new MyArrayList(m);
 		creacionArrayPrimos();
 		primo = prime();
@@ -287,7 +287,7 @@ public class HashTable {
         put("mariajuliana198883", "mepepe");
         put("nestor", "guille");
         put("adri", "poisson");
-        put("niñp", "juguete");
+        put("ninip", "juguete");
         System.out.println(get("sammy")+ "clave sammy");
         System.out.println(get("maria") + "clave maria");
        System.out.println(get("nestor")+ "clave nestor");

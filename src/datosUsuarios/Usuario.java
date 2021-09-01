@@ -9,7 +9,7 @@ import datosMascotas.Mascotas;
 public abstract class Usuario {
 	
 	protected String idUsuario;
-	protected String contraseña; 
+	protected String contrasenia; 
 	protected String nombre;
 	protected String nacimiento;
 	protected String direccion;
@@ -18,10 +18,10 @@ public abstract class Usuario {
 	protected String urlFoto;
 	protected String rol;
 
-	public Usuario(String idUsuario, String contraseña, String nombre, String nacimiento, String direccion,
+	public Usuario(String idUsuario, String contrasenia, String nombre, String nacimiento, String direccion,
 			String telefono, String descripcion, String urlFoto, String rol) {
 		this.idUsuario = idUsuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 		this.nombre = nombre;
 		this.nacimiento = nacimiento;
 		this.direccion = direccion;
@@ -90,13 +90,13 @@ public String getNacimiento() {
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 

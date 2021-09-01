@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -37,6 +38,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.InputMethodListener;
@@ -56,10 +59,35 @@ public class PerfilNatural  extends JFrame {
 	private MouseAdapter vi;
 	private Natural persona;
 	private boolean mouseListenerIsActive;
+	private int alturaPantalla;
+	private int anchoPantalla;
 
 	public PerfilNatural(Natural persona, String tipo) {
 		
 		this.persona = persona ;
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+		Dimension dimension= pantalla.getScreenSize();
+		this.alturaPantalla= dimension.height;
+		this.anchoPantalla = dimension.width;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(anchoPantalla/3, 10 , 450, 706);
+		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.activeCaption);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		panel = new JPanel();
+		panel.setBackground(UIManager.getColor("window"));
+		panel.setBounds(0, 35, 572, 160);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblfondo = new JLabel("New label");	
+		lblfondo.setBounds(0, 36, 434, 667);
+		ImageIcon ji = scaleImage("/imagenes/fondi (1).png", lblfondo.getWidth(),lblfondo.getHeight()) ;
+		lblfondo.setIcon(ji);
+		panel.add(lblfondo);
+		
 		/*
 		if(tipo!="propio") {
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -256,7 +284,7 @@ public class PerfilNatural  extends JFrame {
 					mejorarPerfil(lblnombre, "nombre");	
 					mejorarPerfil(lblprofesion, "profesion");
 					mejorarPerfil(lblresidencia, "lugar de residencia");
-					mejorarPerfil(lblcumpleaños, "fecha de nacimiento");
+					mejorarPerfil(lblcumpleanios, "fecha de nacimiento");
 					mejorarPerfil(lblestudios, "estudios");
 					mejorarPerfil(lblfoto, "foto");
 					mejorarPerfil(lblperfil, "perfil");
@@ -281,7 +309,7 @@ public class PerfilNatural  extends JFrame {
 					visualizarPerfil(lblprofesion);
 					visualizarPerfil(lblperfil);
 					visualizarPerfil(lblresidencia);
-					visualizarPerfil(lblcumpleaños);
+					visualizarPerfil(lblcumpleanios);
 					visualizarPerfil(lblestudios);
 					visualizarPerfil(lblfoto);
 					visualizarPerfil(lblwa);
@@ -441,6 +469,13 @@ public class PerfilNatural  extends JFrame {
 	}public void visualizarPerfil(JLabel j) {
 		j.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		mouseListenerIsActive = false;
+	}
+	public ImageIcon scaleImage(String url, int ancho , int altura) {
+		ImageIcon icon = new ImageIcon(RegistroPersonas.class.getResource(url));
+		Image img = icon.getImage();
+		Image imgScale = img.getScaledInstance(ancho, altura, Image.SCALE_SMOOTH);
+		return new ImageIcon(imgScale);
+
 	}
 
 	

@@ -15,9 +15,9 @@ public class Natural extends Usuario{
 	private String genero;
    
 	
-	public Natural(String idUsuario, String contraseña, String rol, String nombre, String genero, String nacimiento, String direccion,
+	public Natural(String idUsuario, String contrasenia, String rol, String nombre, String genero, String nacimiento, String direccion,
 			String telefono, String descripcion, String urlFoto, MyArrayList<Mascotas> mascotas ) {
-		super(idUsuario, contraseña, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
+		super(idUsuario, contrasenia, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
 		this.mascotas = mascotas;
 		this.genero=genero;
 	}
@@ -42,7 +42,7 @@ public String getGenero() {
 
 	@Override
 	public String toString() {
-		return "Natural [idUsuario=" + idUsuario + ", contraseña="+ contraseña +  ", nombre=" + nombre + ", genero=" + genero + ", nacimiento=" + nacimiento + ", direccion=" + direccion
+		return "Natural [idUsuario=" + idUsuario + ", contrasenia="+ contrasenia +  ", nombre=" + nombre + ", genero=" + genero + ", nacimiento=" + nacimiento + ", direccion=" + direccion
 				+ ", telefono=" + telefono + ", descripcion=" + descripcion + ", urlFoto=" + urlFoto + ", rol=" + rol + ", mascotas=" +mascotas
 				+ "]";
 	}

@@ -55,7 +55,7 @@ public class Ingreso extends JFrame {
 	this.alturaPantalla= dimension.height;
 	this.anchoPantalla = dimension.width;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setBounds(anchoPantalla/3, 10 , anchoPantalla/3, alturaPantalla - alturaPantalla/10);
+	setBounds(anchoPantalla/3, 10 , 450, 706);
 	contentPane = new JPanel();
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	contentPane.setLayout(new BorderLayout(0, 0));
@@ -114,7 +114,7 @@ public class Ingreso extends JFrame {
 	lblcandado.setIcon(candado);
 	panel.add(lblcandado);
 	
-	JLabel lblContrasenia = new JLabel("Contraseña");
+	JLabel lblContrasenia = new JLabel("Contrasenia");
 	lblContrasenia.setForeground(SystemColor.windowBorder);
 	lblContrasenia.setFont(new Font("Monospac821 BT", Font.PLAIN, 18));
 	lblContrasenia.setBounds(167, 354, 160, 36);
@@ -141,7 +141,7 @@ public class Ingreso extends JFrame {
 	            while (rs.next()) {
 	                System.out.println(
 	                        "usuario: " + rs.getString(1)
-	                        + "\tcontraseña: " + rs.getString(2)
+	                        + "\tcontrasenia: " + rs.getString(2)
 	                );
 	            }
 	        } catch (SQLException ex) {
@@ -156,7 +156,7 @@ public class Ingreso extends JFrame {
 					
 				}
 			}else {
-				JOptionPane.showMessageDialog(null,"Verifique el usuario y contraseña escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
 			
@@ -179,16 +179,15 @@ public class Ingreso extends JFrame {
 	lblNewLabel.setBounds(68, 160, 300, 387);
 	panel.add(lblNewLabel);
 	
-	
 	fondoImage = new JLabel();
 	fondoImage.setBounds(0, 0, 439, 653);
 	ImageIcon fondo1= scaleImage("/imagenes/fondi (2).png",fondoImage.getWidth(), fondoImage.getHeight());
 	fondoImage.setIcon(fondo1);
 	panel.add(fondoImage);
 }
-	public void creacionEtiquetas(int tamañoLetra,int x,int y,int ancho,int largo, JLabel label) {
+	public void creacionEtiquetas(int tamanioLetra,int x,int y,int ancho,int largo, JLabel label) {
 	label.setForeground(Color.BLACK);
-	label.setFont(new Font("Segoe UI Semibold", Font.PLAIN, tamañoLetra));
+	label.setFont(new Font("Segoe UI Semibold", Font.PLAIN, tamanioLetra));
 	label.setSize(ancho,largo);
 	label.setLocation(161, 148);
 }

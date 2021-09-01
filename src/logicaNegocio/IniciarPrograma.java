@@ -6,10 +6,9 @@ import dataStructures.HashTable;
 import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import ui.Ingreso;
+import ui.PerfilAdministrador;
 
 public class IniciarPrograma {
-	
-
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -27,7 +26,8 @@ public class IniciarPrograma {
 		//usu.setVisible(true);	
 		Conexion cn = new Conexion();
 		cn.Conectar();
-		
+		PerfilAdministrador as = new PerfilAdministrador();
+		as.setVisible(true);
 		
 		
 		}

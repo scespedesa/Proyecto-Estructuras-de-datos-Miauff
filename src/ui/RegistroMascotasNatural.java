@@ -84,8 +84,6 @@ public class RegistroMascotasNatural extends JFrame{
 	}
 
 	public void ventana() {
-		crearMenu();		
-
 		JTextField nombre = new JTextField();
 		nombre.setBounds(76, 140, 277, 25);
 		panel.add(nombre);
@@ -173,7 +171,7 @@ public class RegistroMascotasNatural extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				String [] botones = { "Si", " No" };
 				ImageIcon img = scaleImage("/imagenes/pawprint.png", 30 ,30) ;
-				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
+				int variable = JOptionPane.showOptionDialog (null, " ¿Desea aniadir mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());
@@ -195,34 +193,6 @@ public class RegistroMascotasNatural extends JFrame{
 	}
 	
 
-	public void crearMenu(){
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 35, 35);
-		panel.add(menuBar);
-
-		JMenu menu_1 = new JMenu("");
-		menu_1.setBounds(0, 0, 35, 35);
-		menu = new ImageIcon(RegistroPersonas.class.getResource("/imagenes/menu.png")).getImage().getScaledInstance(26, 26, Image.SCALE_DEFAULT);
-		menu_1.setIcon(new ImageIcon(menu));
-		menuBar.add(menu_1);
-		JMenuItem menuItem_2 = new JMenuItem("Ir a Ingreso");
-		menuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent a) {
-				Ingreso persona = new Ingreso();
-				persona.setVisible(true);
-			}
-		});
-		menuItem_2.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-		menu_1.add(menuItem_2);
-		JMenuItem menuItem_3 = new JMenuItem("Salir");
-		menuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		menuItem_3.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-		menu_1.add(menuItem_3);
-	}
 	public void crearFondo() {
 		fondoImage = new JLabel();
 		fondoImage.setBounds(0, 0, 439, 678);

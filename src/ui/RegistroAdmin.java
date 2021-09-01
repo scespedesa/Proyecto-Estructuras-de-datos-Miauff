@@ -10,10 +10,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import java.time.ZoneId;
 
 import logicaNegocio.BusquedaArchivos;
 import rojeru_san.componentes.RSDateChooser;
@@ -42,6 +45,7 @@ public class RegistroAdmin extends JFrame {
 	private JTextField textField_1;
 	private JLabel lbldesea;
 	private String urlPagina;
+	private RegistroMascotasNatural na;
 	public RegistroAdmin() {
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
 	Dimension dimension= pantalla.getScreenSize();
@@ -123,9 +127,10 @@ public class RegistroAdmin extends JFrame {
 	nombre.setBorder(new LineBorder(new Color(119, 136, 153)));
 	creacionCampoTexto(15,92, 222, 253, 25, nombre);
 	
+	
 	JLabel lblsexo = new JLabel("Numero de contacto");
 	lblsexo.setFont(new Font("Monospaced", Font.PLAIN, 11));
-	lblsexo.setBounds(92,305, 165, 21);
+	lblsexo.setBounds(92,302, 165, 21);
 	panel.add(lblsexo);
 	
 	JLabel lbldescripcion = new JLabel("Descripcion");
@@ -146,15 +151,27 @@ public class RegistroAdmin extends JFrame {
 	btnsiguiente.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			ventana2();
-			dispose();
+			
 		}
 	});
-	btnsiguiente.setBounds(256, 564, 89, 23);
+	btnsiguiente.setBounds(256, 564, 85, 20);
 	btnsiguiente.setForeground(Color.BLACK);
 	btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnsiguiente.setBackground(new Color(253, 245, 230));
-	btnsiguiente.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
+	btnsiguiente.setFont(new Font("Monospac821 BT", Font.PLAIN, 12));
+	na = new RegistroMascotasNatural();
+	JButton btnAadirMascotas = new JButton("A\u00F1adir mascotas");
+	btnAadirMascotas.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			na.setVisible(true);
+		}
+	});
+	btnAadirMascotas.setForeground(Color.BLACK);
+	btnAadirMascotas.setFont(new Font("Monospaced", Font.PLAIN, 14));
+	btnAadirMascotas.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
+	btnAadirMascotas.setBackground(new Color(253, 245, 230));
+	btnAadirMascotas.setBounds(104, 563, 123, 23);
+	panel.add(btnAadirMascotas);
 	panel.add(btnsiguiente);
 	lbldesea = new JLabel("Si lo desea adjunte:");
 	lbldesea.setFont(new Font("Monospaced", Font.PLAIN, 11));
@@ -201,12 +218,7 @@ public class RegistroAdmin extends JFrame {
 	panel.add(lblUrlDeSu);
 	crearFondo();
 }
-public void ventana2() {
-	crearMenu();
-	
-	crearFondo();
-	
-}
+
 
 public void crearFondo() {
 	fondoImage = new JLabel();
@@ -227,16 +239,16 @@ public void creacionCombo(int x, int y ,int ancho , int alto, JComboBox caja, St
 	panel.add(caja);
 	AutoCompleteDecorator.decorate(caja);
 }
-public void creacionEtiquetas(int tamañoLetra,int x,int y,int ancho,int largo, JLabel label) {
+public void creacionEtiquetas(int tamanioLetra,int x,int y,int ancho,int largo, JLabel label) {
 	label.setBounds(92, 359, ancho, largo);
 	label.setForeground(SystemColor.desktop);
-	label.setFont(new Font("Monospac821 BT", Font.PLAIN, tamañoLetra));
+	label.setFont(new Font("Monospac821 BT", Font.PLAIN, tamanioLetra));
 	panel.add(label);
 
 }
-public void creacionCampoTexto(int tamañoLetra,int x,int y,int ancho,int largo, JTextField field) {
+public void creacionCampoTexto(int tamanioLetra,int x,int y,int ancho,int largo, JTextField field) {
 	field.setBounds(92,171,253,23);
-	field.setFont(new Font("Monospac821 BT", Font.PLAIN, tamañoLetra));
+	field.setFont(new Font("Monospac821 BT", Font.PLAIN, tamanioLetra));
 	field.setForeground(SystemColor.desktop);
 	panel.add(field);
 }

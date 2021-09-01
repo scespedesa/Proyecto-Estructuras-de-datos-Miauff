@@ -19,6 +19,9 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
@@ -86,8 +89,7 @@ public class RegistroMascotasAdmin extends JFrame{
 		ventana();
 	}
 
-	public void ventana() {
-		crearMenu();		
+	public void ventana() {		
 
 		JTextField nombre = new JTextField();
 		nombre.setBounds(76, 136, 277, 23);
@@ -177,12 +179,14 @@ public class RegistroMascotasAdmin extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				String [] botones = { "Si", " No", "Finalizar registro" };
 				ImageIcon img = scaleImage("/imagenes/pawprint.png", 30 ,30) ;
-				int variable = JOptionPane.showOptionDialog (null, " ¿Desea añadir mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
+				int variable = JOptionPane.showOptionDialog (null, " ¿Desea aniadir mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());
 				Mascotas mascota = new Mascotas("1234ID",nombre.getText(),tipo1,raza1,edad1,urlFoto,descripcionfisica.getText());
 				mascotas.pushFront(mascota);
+				String now = Instant.now().atZone(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ISO_LOCAL_DATE);
+				System.out.println(now);
 				if(variable==0) {
 					RegistroMascotasNatural na = new RegistroMascotasNatural();
 					na.setVisible(true);
@@ -190,8 +194,6 @@ public class RegistroMascotasAdmin extends JFrame{
 					
 				}else {
 					setVisible(false);
-						
-					//Natural nuevoUsu = Natural(nombre.getText());		
 				}
 			}
 		});
@@ -199,50 +201,6 @@ public class RegistroMascotasAdmin extends JFrame{
 		crearFondo();
 	}
 	
-
-	public void crearMenu(){
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 35, 35);
-		panel.add(menuBar);
-
-		JMenu menu_1 = new JMenu("");
-		menu_1.setBounds(0, 0, 35, 35);
-		menu = new ImageIcon(RegistroPersonas.class.getResource("/imagenes/menu.png")).getImage().getScaledInstance(26, 26, Image.SCALE_DEFAULT);
-		menu_1.setIcon(new ImageIcon(menu));
-		menuBar.add(menu_1);
-		JMenuItem menuItem_2 = new JMenuItem("Ir a Ingreso");
-		menuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent a) {
-				Ingreso persona = new Ingreso();
-				persona.setVisible(true);
-			}
-		});
-		menuItem_2.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-		menu_1.add(menuItem_2);
-		JMenuItem menuItem_3 = new JMenuItem("Salir");
-		menuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		menuItem_3.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-		menu_1.add(menuItem_3);	
-		
-		JLabel lblDescripcionCondicion = new JLabel("Descripcion condicion");
-		lblDescripcionCondicion.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblDescripcionCondicion.setBounds(136, 377, 165, 14);
-		panel.add(lblDescripcionCondicion);
-		JTextArea descripcionfisica_1 = new JTextArea();
-		descripcionfisica_1.setSelectionColor(SystemColor.textHighlight);
-		descripcionfisica_1.setLineWrap(true);
-		descripcionfisica_1.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
-		descripcionfisica_1.setCaretColor(Color.BLACK);
-		descripcionfisica_1.setBorder(new LineBorder(new Color(119, 136, 153)));
-		descripcionfisica_1.setBounds(76, 391, 277, 64);
-		panel.add(descripcionfisica_1);
-		
-		
-	}
 	public void crearFondo() {
 		fondoImage = new JLabel();
 		fondoImage.setBounds(0, 0, 439, 678);
