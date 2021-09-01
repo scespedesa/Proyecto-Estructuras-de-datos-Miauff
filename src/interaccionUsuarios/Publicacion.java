@@ -1,4 +1,5 @@
 package interaccionUsuarios;
+import dataStructures.Nodo;
 
 import dataStructures.PilaListaEnlazada;
 
@@ -6,19 +7,19 @@ import javax.swing.Icon;
 
 public class Publicacion extends Interaccion{
     private String publicacionID;
-    private String etiquetas;
-    private String ubicacion;
     private Icon Imagen;
-	
-    public Publicacion(String autor, Double numeroDeLikes, PilaListaEnlazada<String> contenido, Double vecesCompartida,
-			Boolean reportado, String publicacionID, String etiquetas, String ubicacion, Icon Imagen) {
-		super(autor, numeroDeLikes, contenido, vecesCompartida, reportado);
+    private String titulo;
+    private String descripcion;
     
+    public Publicacion(String autor, String titulo, String descripcion , String publicacionID, Icon Imagen) {
+    	super(autor, null);   
+        this.descripcion= descripcion;
+        this.titulo=titulo;
 		this.publicacionID=publicacionID;
-		this.etiquetas=etiquetas;
-		this.ubicacion=ubicacion;
 		this.Imagen=Imagen;
-		
+		Nodo<String> subcontent = new Nodo(titulo,descripcion,null,null);
+		PilaListaEnlazada<String> content = new PilaListaEnlazada(subcontent);
+		this.setContenido(content);
 	}
     public void crearPublicacion(){
 
@@ -35,18 +36,7 @@ public class Publicacion extends Interaccion{
 	public void setPublicacionID(String publicacionID) {
 		this.publicacionID = publicacionID;
 	}
-	public String getEtiquetas() {
-		return etiquetas;
-	}
-	public void setEtiquetas(String etiquetas) {
-		this.etiquetas = etiquetas;
-	}
-	public String getUbicacion() {
-		return ubicacion;
-	}
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
-	}
+
 	public Icon getImagen() {
 		return Imagen;
 	}

@@ -1,9 +1,6 @@
 package dataStructures;
 
 public class PilaListaEnlazada<E> extends ListaSimplementeEnlazada<E> implements Stack<E>{
-    
-
-    
     public PilaListaEnlazada(Nodo<E> head) {
 		super(head);
 	}

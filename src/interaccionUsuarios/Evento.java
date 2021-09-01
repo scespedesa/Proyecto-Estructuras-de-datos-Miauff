@@ -7,9 +7,8 @@ public class Evento extends Interaccion{
     private Double numeroDeAsistentes;
     private String tipoDeEvento;
 
-	public Evento(String autor, Double numeroDeLikes, PilaListaEnlazada<String> contenido, Double vecesCompartida,
-			Boolean reportado, char[] fecha, Double numeroDeAsistentes, String tipoDeEvento) {
-		super(autor, numeroDeLikes, contenido, vecesCompartida, reportado);
+	public Evento(String autor,PilaListaEnlazada<String> contenido, char[] fecha, Double numeroDeAsistentes, String tipoDeEvento) {
+		super(autor,contenido);
 		this.fecha=fecha;
         this.numeroDeAsistentes=numeroDeAsistentes;
         this.tipoDeEvento=tipoDeEvento;
