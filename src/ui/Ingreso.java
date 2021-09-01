@@ -25,6 +25,10 @@ import javax.swing.border.MatteBorder;
 import com.mysql.cj.xdevapi.Statement;
 
 import dataStructures.HashTable;
+import dataStructures.MyArrayList;
+import datosMascotas.Mascotas;
+import datosMascotas.MascotasAdopcion;
+import datosUsuarios.Natural;
 import logicaNegocio.Conexion;
 import java.sql.*;
 
@@ -128,36 +132,57 @@ public class Ingreso extends JFrame {
 	
 	JButton btningresar = new JButton("Ingresar");
 	btningresar.addActionListener(new ActionListener() {
+
 		public void actionPerformed(ActionEvent e) {
 			Conexion conec = new Conexion();
 			Connection conexion = conec.Conectar();
+			Connection conexion2 = conec.Conectar();
+			Connection conexion3 = conec.Conectar();
 			//realizar consulta
+			 
 	        try {
 	// Preparamos la consulta
 	            java.sql.Statement s = conexion.createStatement();
 	            ResultSet rs = s.executeQuery("select USER , PASSWORD from USUARIOS");
 	// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-	            HashTable usuario = new HashTable(1);
+	           HashTable usu = new HashTable(10);
 	            while (rs.next()) {
-	                System.out.println(
-	                        "usuario: " + rs.getString(1)
-	                        + "\tcontrasenia: " + rs.getString(2)
-	                );
+	            	String key = rs.getString(1);
+	            	String value = rs.getString(2);
+	            	usu.put(key,value);
 	            }
+	            String contrasenia = new String(passwordField.getPassword());
+	            if(usu.find(usuario.getText(),contrasenia)) {
+	            	System.out.println("paso por aqui cate que no lo vi");
+	            	java.sql.Statement sa = conexion2.createStatement();
+	            	java.sql.Statement sar = conexion3.createStatement();
+		            ResultSet r = sar.executeQuery("select * from USUARIOS WHERE  USER='"+ usuario.getText() + "'" );
+		            ResultSet re = sa.executeQuery("select * from ANIMALES WHERE  USER='"+ usuario.getText() +"'" );
+		            MyArrayList<Mascotas> masco = new MyArrayList<Mascotas>(1);
+		            if(r.getInt(10)==0) {
+		            	 while (re.next()) {
+		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5), re.getInt(9),
+		            		re.getString(10));
+		            		masco.pushBack(ma);
+		            		}
+		            	 
+		            	 Natural aficionado = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
+				            		r.getString(7),r.getString(8),r.getString(9), r.getInt(10),masco);
+		            	 System.out.println(aficionado.toString());
+		            }else {
+		            	 while (re.next()) {
+				            	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6)
+				            			,re.getString(8),re.getInt(9), re.getString(10),re.getString(11));
+				            	masco.pushBack(madop);
+				            }
+		            }  
+		            
+	            }else {
+					JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
+				}
 	        } catch (SQLException ex) {
 	            System.out.println(ex);
 	        }
-			
-			String tipo =null;
-			if(tipo!=null) {
-				if(tipo.equals("natural")) {
-					
-				}else {
-					
-				}
-			}else {
-				JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
-			}
 			
 			
 		}

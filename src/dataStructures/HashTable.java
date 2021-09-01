@@ -17,6 +17,13 @@ public class HashTable {
 	int a;
 	int b; 
 	
+	public MyArrayList<Nodo> getHashTable() {
+		return hashTable;
+	}
+	public void setHashTable(MyArrayList<Nodo> hashTable) {
+		this.hashTable = hashTable;
+	}
+
 	public HashTable(int tamanio){
 		this.m=tamanio;
 		this.hashTable = new MyArrayList(m);
@@ -84,15 +91,15 @@ public class HashTable {
 	public boolean find(String key, String value){
 		long poly = polyHash(key);
 		int location = integerHash(poly);
-		Nodo exe = hashTable.getObject(location);
+		Nodo<String> exe = hashTable.getObject(location);
 		if(exe==null) {
 			return false;
-		}else if(exe.key==key && exe.value==value) {
+		}else if(exe.getKey().equals(key) && exe.getValue().equals(value)) {
 			return true;
 		}
 		while (exe.next != null){
 			exe = exe.next;
-			if(exe.getKey().equals(key) && exe.value==value) {
+			if(exe.getKey().equals(key) && exe.getValue().equals(value)) {
 				return true;
 			}
 		}
@@ -106,15 +113,15 @@ public class HashTable {
 		if(exe==null) {
 			return null;
 		}
-		else if(exe.key==key && exe.value==value) {
-			return exe;
+		else{
+			if(exe.getKey().equals(key) && exe.getValue().equals(value)) {
+				return exe;
 		}
-		else if(exe!=null) {
 			while (exe.next != null){
 			exe = exe.next;
-			if(exe.getKey().equals(key) && exe.value==value) {
+			if(exe.getKey().equals(key) && exe.getValue().equals(value)) {
 				return exe;
-			}
+				}
 			}
 		}
 		return null;
@@ -126,7 +133,7 @@ public class HashTable {
 		if(exe==null) {
 			return null;
 		}
-		else if(exe.key==key ) {
+		else if(exe.getKey().equals(key)  ) {
 			return exe;
 		}
 		else if(exe!=null) {
@@ -163,10 +170,10 @@ public class HashTable {
 		int location = integerHash(poly);
 		Nodo exe = hashTable.getObject(location);
 		Nodo prev;
-		if (exe.key==null && exe.value==null){
+		if (exe==null){
             return false;
         }
-		if(exe.key==key && exe.value==value) {
+		if(exe.getKey().equals(key) && exe.getValue().equals(value)) {
 			if (exe.next==null) {
 				hashTable.popIndexHash(location);
 				System.out.println("se elimino el primero y unico");
@@ -193,10 +200,10 @@ public class HashTable {
 		int location = integerHash(poly);
 		Nodo exe = hashTable.getObject(location);
 		Nodo prev;
-		if (exe.key==null ){
+		if (exe==null ){
             return false;
         }
-		if(exe.key==key) {
+		if(exe.getKey().equals(key)) {
 			if (exe.next==null) {
 				hashTable.popIndexHash(location);
 				System.out.println("se elimino el primero y unico");
@@ -228,39 +235,36 @@ public class HashTable {
 		
 	}
 	public void put(String key, String value) {
-		if(!findLlave(key)) {
 			n+=1;
-		hashTable.setSize(n);
-		long poly = polyHash(key);
-		int location = integerHash(poly);
-		Nodo<String> newNode= new Nodo(key,value,null,null); 
+			hashTable.setSize(n);
+			long poly = polyHash(key);
+			int location = integerHash(poly);
+			Nodo<String> newNode= new Nodo(key,value,null,null); 		
+			if (hashTable.getObject(location) == null){
+				hashTable.pushIndex(newNode, location);
+				System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
+			}
+			else {
+				Nodo<String> runner= hashTable.getObject(location);
+				int cont = 1 ;
+				while (runner.next != null){
+					runner = runner.next;
+					cont +=1;
+				}
+				cont+=1;
+				if(cont>chain) {
+					chain=cont;
+				}
+				System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
+				runner.setNext(newNode);
+			} 
+			loadFactor= n/m ;
+			if(loadFactor>0.75) {
+				System.out.println(hashTable.toString());
+				System.out.println("   estabamos con  " + key);
+				rehash();
+			}
 		
-			
-		if (hashTable.getObject(location) == null){
-			hashTable.pushIndex(newNode, location);
-			System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
-		}
-		else {
-			Nodo<String> runner= hashTable.getObject(location);
-			int cont = 1 ;
-			while (runner.next != null){
-				runner = runner.next;
-				cont +=1;
-			}
-			cont+=1;
-			if(cont>chain) {
-				chain=cont;
-			}
-			System.out.println( "se puso a : " + key + "en la posicion : " + location + "del arreglo tam: " + hashTable.getCapacity());
-			runner.setNext(newNode);
-		} 
-		loadFactor= n/m ;
-		if(loadFactor>0.75) {
-			System.out.println(hashTable.toString());
-			System.out.println("   estabamos con  " + key);
-			rehash();
-			}
-		}
 	}
 	public Object get(String key){
 		long poly = polyHash(key);
@@ -273,34 +277,7 @@ public class HashTable {
 			runner = runner.next;                            
 		}       
 		return null;
-	}
-	public void test(){
-        System.out.println(" ");
-        
-        put("sammy", "Kassoum");
-        put("maria", "secreto");
-        put("say", "Ksoum");
-        put("ma", "cecreto");
-        put("gu", "oum");
-        put("poi", "so");
-        put("geeksforgeeks", "Katttssoum");
-        put("mariajuliana198883", "mepepe");
-        put("nestor", "guille");
-        put("adri", "poisson");
-        put("ninip", "juguete");
-        System.out.println(get("sammy")+ "clave sammy");
-        System.out.println(get("maria") + "clave maria");
-       System.out.println(get("nestor")+ "clave nestor");
-        System.out.println(get("adri") + "clave de adri");
-        System.out.println(get("paquito") + "este es paquito");
-        System.out.println(get("mariajuliana198883") + " clave de mariajuliana198883");
-        System.out.println(chain + "mas colisones");
-        System.out.println(primo + " el primo que se escogio y objetos" + n + "ell " +  loadFactor);
-        System.out.println(remove("adri","poisson"));
-        System.out.println(get("adri"));
-        System.out.println(changeClave("gu", "oum","newclavesita"));
-        System.out.println(get("gu"));
-        System.out.println(hashTable.toString());
+	
     }public int integerHash(long num){
     	int in = (int) (((a*num)+b)%primo)%m ;
     	in= Math.abs(in);

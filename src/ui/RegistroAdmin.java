@@ -16,9 +16,17 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+import dataStructures.MyArrayList;
+import datosMascotas.Mascotas;
+import datosUsuarios.Administrador;
+import datosUsuarios.Natural;
+
 import java.time.ZoneId;
 
 import logicaNegocio.BusquedaArchivos;
+import logicaNegocio.Conexion;
+import logicaNegocio.VerificacionClave;
 import rojeru_san.componentes.RSDateChooser;
 
 import java.text.SimpleDateFormat;
@@ -26,6 +34,9 @@ import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class RegistroAdmin extends JFrame {
 	private JPanel contentPane;
@@ -35,17 +46,15 @@ public class RegistroAdmin extends JFrame {
 	private int alturaPantalla;
 	private int anchoPantalla;
 	private String urlFoto;
-	private String urlHoja;
-	private String urlVideo;
 	private String campo3 = "";
 	private JLabel fondoImage;
 	private JTextField textField;
 	private JTextField lugarResidencia;
 	private String nacimiento;
-	private JTextField textField_1;
+	private JTextField telefono;
 	private JLabel lbldesea;
 	private String urlPagina;
-	private RegistroMascotasNatural na;
+	private RegistroMascotasAdmin na;
 	public RegistroAdmin() {
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
 	Dimension dimension= pantalla.getScreenSize();
@@ -99,23 +108,24 @@ public class RegistroAdmin extends JFrame {
 	});
 	btnAceptar.setBounds(293, 243, 52, 19);
 	panel.add(btnAceptar);
-	JTextField lugarResidencia = new JTextField();
-	lugarResidencia.setForeground(Color.BLACK);
-	lugarResidencia.setFont(new Font("Monospac821 BT", Font.PLAIN, 15));
-	lugarResidencia.setBorder(new LineBorder(new Color(119, 136, 153)));
-	lugarResidencia.setBounds(92, 273, 253, 23);
-	panel.add(lugarResidencia);
+	JTextField direccion = new JTextField();
+	direccion.setForeground(Color.BLACK);
+	direccion.setFont(new Font("Monospac821 BT", Font.PLAIN, 15));
+	direccion.setBorder(new LineBorder(new Color(119, 136, 153)));
+	direccion.setBounds(92, 273, 253, 23);
+	panel.add(direccion);
 	
 	JLabel lblFechaDeLa = new JLabel("Fecha de la creacion");
 	lblFechaDeLa.setFont(new Font("Monospaced", Font.PLAIN, 11));
 	lblFechaDeLa.setBounds(92, 200, 229, 21);
 	panel.add(lblFechaDeLa);
-	textField_1 = new JTextField();
-	textField_1.setForeground(Color.BLACK);
-	textField_1.setFont(new Font("Monospac821 BT", Font.PLAIN, 15));
-	textField_1.setBorder(new LineBorder(new Color(119, 136, 153)));
-	textField_1.setBounds(92, 323, 253, 25);
-	panel.add(textField_1);
+	
+	JTextField telefono = new JTextField();
+	telefono.setForeground(Color.BLACK);
+	telefono.setFont(new Font("Monospac821 BT", Font.PLAIN, 15));
+	telefono.setBorder(new LineBorder(new Color(119, 136, 153)));
+	telefono.setBounds(92, 323, 253, 25);
+	panel.add(telefono);
 
 	
 	JLabel lblresidencia = new JLabel("Direcci\u00F3n");
@@ -138,19 +148,46 @@ public class RegistroAdmin extends JFrame {
 	lbldescripcion.setBounds(92, 359, 229, 21);
 	panel.add(lbldescripcion);
 	
-	JTextArea textArea = new JTextArea();
-	textArea.setBorder(new LineBorder(new Color(119, 136, 153)));
-	textArea.setCaretColor(Color.BLACK);
-	textArea.setSelectionColor(new Color(0, 120, 215));
-	textArea.setBounds(92, 379, 253, 108);
-	textArea.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-	textArea.setLineWrap(true); 
-	panel.add(textArea);
-		
-	JButton btnsiguiente = new JButton("Siguiente");
+	JTextArea descripcion = new JTextArea();
+	descripcion.setBorder(new LineBorder(new Color(119, 136, 153)));
+	descripcion.setCaretColor(Color.BLACK);
+	descripcion.setSelectionColor(new Color(0, 120, 215));
+	descripcion.setBounds(92, 379, 253, 108);
+	descripcion.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
+	descripcion.setLineWrap(true); 
+	panel.add(descripcion);
+	na = new RegistroMascotasAdmin();	
+	JButton btnsiguiente = new JButton("Finalizar");
 	btnsiguiente.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			Seguridad segu = new Seguridad();
+			segu.getCon();
+			Administrador organizacion = new Administrador(segu.getUsuarioText(), segu.getCon(),nombre.getText(),nacimiento,direccion.getText(),telefono.getText(),descripcion.getText(),urlFoto, 1,urlPagina,na.getMascotas());  
+			System.out.println(organizacion.toString());
+			PerfilAdministrador af = new PerfilAdministrador();
+			af.setVisible(true);
+			//// Insercion de los Datos
+			Conexion conec = new Conexion();
+			Connection con = conec.Conectar();
+			try {
+				//// Preparamos la insercion de un registro
+				PreparedStatement insertar = con.prepareStatement("insert into USUARIOS (USER, NAME, BIRTHDATE, ADDRESS, PHONE, DESCRIPTION, PHOTO, PASSWORD, ADMIN) values ( ? , ?,?,?,?,?,?,?,?,?)");
+				insertar.setString(1, segu.getUsuarioText());
+				insertar.setString(2, nombre.getText());
+				insertar.setString(3, nacimiento);
+				insertar.setString(5, direccion.getText());
+				insertar.setString(6, telefono.getText());
+				insertar.setString(7, descripcion.getText());
+				insertar.setString(8, urlFoto);
+				insertar.setString(9, segu.getCon());
+				insertar.setInt(10, 1);
+				int retorn = insertar.executeUpdate();
+				System.out.println(retorn + " insertado");
+			} catch (SQLException ex) {
+				System.out.println("Imposible realizar insercion ... FAIL");
+			}
+			dispose();
 			
 		}
 	});
@@ -159,7 +196,7 @@ public class RegistroAdmin extends JFrame {
 	btnsiguiente.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnsiguiente.setBackground(new Color(253, 245, 230));
 	btnsiguiente.setFont(new Font("Monospac821 BT", Font.PLAIN, 12));
-	na = new RegistroMascotasNatural();
+	
 	JButton btnAadirMascotas = new JButton("A\u00F1adir mascotas");
 	btnAadirMascotas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -170,7 +207,7 @@ public class RegistroAdmin extends JFrame {
 	btnAadirMascotas.setFont(new Font("Monospaced", Font.PLAIN, 14));
 	btnAadirMascotas.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	btnAadirMascotas.setBackground(new Color(253, 245, 230));
-	btnAadirMascotas.setBounds(104, 563, 123, 23);
+	btnAadirMascotas.setBounds(104, 563, 123, 20);
 	panel.add(btnAadirMascotas);
 	panel.add(btnsiguiente);
 	lbldesea = new JLabel("Si lo desea adjunte:");
@@ -178,7 +215,7 @@ public class RegistroAdmin extends JFrame {
 	lbldesea.setBounds(152, 486, 146, 21);
 	panel.add(lbldesea);
 	JLabel lblfoto = new JLabel("foto");
-	lblfoto.setBounds(114, 522, 52, 43);
+	lblfoto.setBounds(151, 518, 45, 40);
 	ImageIcon ima = scaleImage("/imagenes/Basic_Ui_(74).jpg",lblfoto.getWidth(),lblfoto.getHeight());
 	lblfoto.setIcon(ima);
 	lblfoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -192,7 +229,7 @@ public class RegistroAdmin extends JFrame {
 	panel.add(lblfoto);
 	
 	JLabel lblPaginaweb = new JLabel("paginaweb");
-	lblPaginaweb.setBounds(237, 522, 61, 43);
+	lblPaginaweb.setBounds(256, 523, 55, 35);
 	ImageIcon imag = scaleImage("/imagenes/pag.jpg",lblPaginaweb.getWidth(),lblPaginaweb.getHeight());
 	lblPaginaweb.setIcon(imag);
 	lblPaginaweb.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -200,8 +237,8 @@ public class RegistroAdmin extends JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			BusquedaArchivos b = new BusquedaArchivos() ;
-			urlPagina = b.busqueda(e,panel);
+			urlPagina = JOptionPane.showInputDialog("Escribe el link de su pagina web");
+			JOptionPane.showMessageDialog(null, "Direccion url ingresada :  " + urlPagina);
 		}
 	});
 	
@@ -214,7 +251,7 @@ public class RegistroAdmin extends JFrame {
 	
 	JLabel lblUrlDeSu = new JLabel("Pagina web");
 	lblUrlDeSu.setFont(new Font("Monospaced", Font.PLAIN, 11));
-	lblUrlDeSu.setBounds(230, 506, 115, 21);
+	lblUrlDeSu.setBounds(249, 506, 92, 19);
 	panel.add(lblUrlDeSu);
 	crearFondo();
 }

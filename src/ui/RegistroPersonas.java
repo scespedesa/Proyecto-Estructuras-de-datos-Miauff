@@ -17,6 +17,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import dataStructures.HashTable;
 import dataStructures.MyArrayList;
+import datosMascotas.Mascotas;
 import datosUsuarios.Natural;
 import logicaNegocio.BusquedaArchivos;
 import logicaNegocio.Conexion;
@@ -257,12 +258,12 @@ public class RegistroPersonas extends JFrame {
 			
 			if (!ver) {
 				if(na.getMascotas()==null) {
-					aficionado = new Natural(usuario,contrasenia, "Natural", nombre, genero, nacimiento, direccion,
-							telefono, descripcion,urlFoto, null);
+					aficionado = new Natural(usuario, nombre,nacimiento, genero,direccion,telefono,descripcion,urlFoto, contrasenia, 0,  
+							 null);
 
 				}else {
-					aficionado = new Natural(usuario,contrasenia, "Natural", nombre, genero, nacimiento, direccion,
-							telefono, descripcion,urlFoto, na.getMascotas());
+					aficionado = new Natural(usuario, nombre,nacimiento, genero,direccion,telefono,descripcion,urlFoto, contrasenia, 0,  
+							 null);
 					System.out.println(aficionado.toString());
 				}
 				PerfilNatural afi = new PerfilNatural(aficionado, "propio");

@@ -15,8 +15,8 @@ public class Natural extends Usuario{
 	private String genero;
    
 	
-	public Natural(String idUsuario, String contrasenia, String rol, String nombre, String genero, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, MyArrayList<Mascotas> mascotas ) {
+	public Natural(String idUsuario, String nombre, String nacimiento,String genero,String direccion,String telefono,String descripcion, 
+			String urlFoto,	String contrasenia, int rol,   MyArrayList<Mascotas> mascotas ) {
 		super(idUsuario, contrasenia, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
 		this.mascotas = mascotas;
 		this.genero=genero;

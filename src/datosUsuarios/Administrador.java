@@ -10,7 +10,7 @@ public class Administrador<T>  extends Usuario{
 	private MyArrayList<Mascotas> mascotas ;
 	
 	public Administrador(String idUsuario, String contrasenia, String nombre, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, String rol, String urlPagina, MyArrayList<Mascotas> mascotas) {
+			String telefono, String descripcion, String urlFoto, int rol, String urlPagina, MyArrayList<Mascotas> mascotas) {
 		super(idUsuario, contrasenia, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
 		this.urlPagina = urlPagina;
 		this.mascotas = mascotas;

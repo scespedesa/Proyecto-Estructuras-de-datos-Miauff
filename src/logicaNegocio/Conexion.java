@@ -1,6 +1,7 @@
 package logicaNegocio;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Conexion { 
 	public Connection con = null; 
@@ -16,4 +17,15 @@ public class Conexion {
 		 }
 		 return con;
 	 }
+	public void finalizarConexion(Connection conexion) {
+	    if (conexion != null) {
+	        try {
+	            conexion.close();
+	            conexion = null;
+	        } catch (SQLException ex) {
+	            System.out.println(ex.getMessage() + 
+	                    ". >>> Error de Desconexion!!");
+	        }
+	    }
+	}
 }

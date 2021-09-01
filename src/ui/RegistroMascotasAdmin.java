@@ -49,6 +49,10 @@ import datosMascotas.Mascotas;
 import logicaNegocio.BusquedaArchivos;
 import logicaNegocio.Lector;
 import java.awt.SystemColor;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class RegistroMascotasAdmin extends JFrame{
 	private int alturaPantalla;
@@ -61,6 +65,7 @@ public class RegistroMascotasAdmin extends JFrame{
 	private JTextField nombre;
 	private JTextField edad;
 	private MyArrayList<Mascotas> mascotas;
+	private JComboBox raza;
 	
 
 	public RegistroMascotasAdmin() {
@@ -108,22 +113,47 @@ public class RegistroMascotasAdmin extends JFrame{
 		lblTipo.setBounds(180, 164, 58, 14);
 		panel.add(lblTipo);
 		
-
-		JComboBox tipo = new JComboBox();
-		String [] eleccion = new String[] {"perro", "gato", "conejo","pez"} ;
-		creacionCombo( tipo, eleccion);
-		tipo.setBounds(76,176,277,23);
-		panel.add(tipo);
-		
-		Lector lee = new Lector("listadoCaninos");
-		lee.LecturaLineas();
-		JComboBox raza = new JComboBox();
+		raza = new JComboBox();
 		raza.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
 		raza.setEditable(true);
 		raza.setBackground(Color.WHITE);
-		creacionCombo(raza,lee.getListadoPerros());
-		raza.setBounds(76, 219, 277, 23);
+		raza.setBounds(76, 220, 277, 25);
 		panel.add(raza);	
+
+		JComboBox tipo = new JComboBox();
+		String [] eleccion = new String[] {"perro", "gato", "conejo","pez"} ;
+		tipo.setModel(new DefaultComboBoxModel(eleccion));
+		tipo.setBounds(76,176,277,23);
+		
+		tipo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				String tipo1 = (String) tipo.getSelectedItem();
+				Lector lee; 
+				if(tipo1.equals("perro")) {
+					lee= new Lector("listadoCaninos");
+					lee.LecturaLineas();
+					creacionCombo(raza,lee.getListadoCaninos());
+				}else if (tipo1.equals("gato")) {
+					lee= new Lector("listadoGatos");
+					lee.LecturaLineas();
+					creacionCombo(raza,lee.getListadoGatos());
+				}else if (tipo1.equals("conejo")) {
+					lee= new Lector("listadoConejos");
+					lee.LecturaLineas();
+					creacionCombo(raza,lee.getListadoConejos());
+				}else if (tipo1.equals("pez")) {
+					lee= new Lector("listadoPeces");
+					lee.LecturaLineas();
+					creacionCombo(raza,lee.getListadoPeces());
+				}
+			
+			}
+		});
+		panel.add(tipo);
+		
+		
+		
 		
 		JLabel lblRaza = new JLabel("Raza");
 		lblRaza.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
@@ -171,8 +201,8 @@ public class RegistroMascotasAdmin extends JFrame{
 		panel.add(lblInserteUnaFoto);
 		JLabel lblbotonconfirmacion = new JLabel();
 		lblbotonconfirmacion.setBounds(198, 531, 54, 54);
-		//ImageIcon huella= scaleImage("/imagenes/garritaboton.png",lblbotonconfirmacion.getWidth(), lblbotonconfirmacion.getHeight());
-		//lblbotonconfirmacion.setIcon(huella);	
+		ImageIcon huella= scaleImage("/imagenes/garritaboton.png",lblbotonconfirmacion.getWidth(), lblbotonconfirmacion.getHeight());
+		lblbotonconfirmacion.setIcon(huella);	
 		lblbotonconfirmacion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblbotonconfirmacion.addMouseListener(new MouseAdapter() {
 			@Override
@@ -183,7 +213,7 @@ public class RegistroMascotasAdmin extends JFrame{
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());
-				Mascotas mascota = new Mascotas("1234ID",nombre.getText(),tipo1,raza1,edad1,urlFoto,descripcionfisica.getText());
+				Mascotas mascota = new Mascotas(nombre.getText(),tipo1,raza1,urlFoto,edad1,descripcionfisica.getText());
 				mascotas.pushFront(mascota);
 				String now = Instant.now().atZone(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ISO_LOCAL_DATE);
 				System.out.println(now);
@@ -198,18 +228,39 @@ public class RegistroMascotasAdmin extends JFrame{
 			}
 		});
 		panel.add(lblbotonconfirmacion);
+		JLabel lblDescripcionCondicion = new JLabel("Descripcion condicion");
+		lblDescripcionCondicion.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
+		lblDescripcionCondicion.setBounds(136, 372, 155, 14);
+		panel.add(lblDescripcionCondicion);		
+		JTextArea descripcioncondicion = new JTextArea();
+		descripcioncondicion.setSelectionColor(SystemColor.textHighlight);
+		descripcioncondicion.setLineWrap(true);
+		descripcioncondicion.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
+		descripcioncondicion.setCaretColor(Color.BLACK);
+		descripcioncondicion.setBorder(new LineBorder(new Color(119, 136, 153)));
+		descripcioncondicion.setBounds(76, 386, 277, 64);
+		panel.add(descripcioncondicion);
 		crearFondo();
+	}private void ItemStateChanged(java.awt.event.ItemEvent evt) {
+		//if(evt.getItemSelectable())
 	}
 	
+	public MyArrayList<Mascotas> getMascotas() {
+		return mascotas;
+	}
+
+	public void setMascotas(MyArrayList<Mascotas> mascotas) {
+		this.mascotas = mascotas;
+	}
+
 	public void crearFondo() {
 		fondoImage = new JLabel();
 		fondoImage.setBounds(0, 0, 439, 678);
 		ImageIcon fondo1= scaleImage("/imagenes/perfil persona natural (4).png",fondoImage.getWidth(), fondoImage.getHeight());
 		fondoImage.setIcon(fondo1);	
 		panel.add(fondoImage);
-		
-	
 	}
+	
 	public void creacionCombo(JComboBox caja, String[] lista) {
 		caja.setBackground(Color.WHITE);
 		caja.setModel(new DefaultComboBoxModel(lista));

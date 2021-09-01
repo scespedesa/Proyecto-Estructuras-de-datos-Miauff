@@ -9,9 +9,8 @@ public class Mascotas {
 	protected String nombre;
 	protected String descripcionFisica;
 
-	public Mascotas(String idAnimal,String nombre, String tipo, String raza, int edad, String foto, 
+	public Mascotas(String nombre, String tipo, String raza, String foto ,int edad,  
 			String descripcionFisica) {
-		this.idAnimal = idAnimal;
 		this.tipo = tipo;
 		this.raza = raza;
 		this.edad = edad;

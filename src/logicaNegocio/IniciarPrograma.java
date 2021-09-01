@@ -26,9 +26,7 @@ public class IniciarPrograma {
 		//usu.setVisible(true);	
 		Conexion cn = new Conexion();
 		cn.Conectar();
-		PerfilAdministrador as = new PerfilAdministrador();
-		as.setVisible(true);
-		
+	
 		
 		}
 	

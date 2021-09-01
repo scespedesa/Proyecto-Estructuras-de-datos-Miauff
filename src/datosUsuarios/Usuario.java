@@ -16,10 +16,10 @@ public abstract class Usuario {
 	protected String telefono;
 	protected String descripcion;
 	protected String urlFoto;
-	protected String rol;
+	protected int rol;
 
 	public Usuario(String idUsuario, String contrasenia, String nombre, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, String rol) {
+			String telefono, String descripcion, String urlFoto, int rol) {
 		this.idUsuario = idUsuario;
 		this.contrasenia = contrasenia;
 		this.nombre = nombre;
@@ -71,12 +71,12 @@ public String getNacimiento() {
 	}
 
 
-	public String getRol() {
+	
+	public int getRol() {
 		return rol;
 	}
 
-
-	public void setRol(String rol) {
+	public void setRol(int rol) {
 		this.rol = rol;
 	}
 

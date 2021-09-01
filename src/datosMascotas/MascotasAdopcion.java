@@ -1,31 +1,22 @@
 package datosMascotas;
 
 public class MascotasAdopcion extends Mascotas {
-	private String estado;
-	private String idFundacion;
+	private int estado;
 	private String fechaIngreso;
 	private String descripcionCondicion;
 	
-	public MascotasAdopcion(String idAnimal, String tipo, String raza, int edad, String foto, String nombre,
-			String descripcionFisica, String estado, String idFundacion, String fechaIngreso,
-			String descripcionCondicion, String urlInfo) {
-		super(idAnimal, nombre,tipo, raza, edad, foto,  descripcionFisica);
+	public MascotasAdopcion( String nombre,String tipo, String raza, String foto,int estado, 
+			String fechaIngreso,int edad, String descripcionFisica, String descripcionCondicion) {
+		super(nombre,tipo, raza,  foto,edad,  descripcionFisica);
 		this.estado = estado;
-		this.idFundacion = idFundacion;
 		this.fechaIngreso = fechaIngreso;
 		this.descripcionCondicion = descripcionCondicion;
 	}
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
-	}
-	public String getIdFundacion() {
-		return idFundacion;
-	}
-	public void setIdFundacion(String idFundacion) {
-		this.idFundacion = idFundacion;
 	}
 	public String getFechaIngreso() {
 		return fechaIngreso;
@@ -42,7 +33,7 @@ public class MascotasAdopcion extends Mascotas {
 
 	@Override
 	public String toString() {
-		return "MascotasAdopcion [estado=" + estado + ", idFundacion=" + idFundacion + ", fechaIngreso=" + fechaIngreso
+		return "MascotasAdopcion [estado=" + estado +  ", fechaIngreso=" + fechaIngreso
 				+ ", descripcionCondicion=" + descripcionCondicion +", idAnimal=" + idAnimal
 				+ ", tipo=" + tipo + ", raza=" + raza + ", edad=" + edad + ", foto=" + foto + ", nombre=" + nombre
 				+ ", descripcionFisica=" + descripcionFisica + "]";

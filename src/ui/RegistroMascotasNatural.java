@@ -107,13 +107,29 @@ public class RegistroMascotasNatural extends JFrame{
 		creacionCombo( tipo, eleccion);
 		tipo.setBounds(76,189,277,25);
 		panel.add(tipo);
-		Lector lee = new Lector("listadoCaninos");
-		lee.LecturaLineas();
+		Lector lee; 
 		JComboBox raza = new JComboBox();
 		raza.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
 		raza.setEditable(true);
 		raza.setBackground(Color.WHITE);
-		creacionCombo(raza,lee.getListadoPerros());
+		if(eleccion.equals("perro")) {
+			lee= new Lector("listadoCaninos");
+			lee.LecturaLineas();
+			creacionCombo(raza,lee.getListadoCaninos());
+		}else if (eleccion.equals("gato")) {
+			lee= new Lector("listadoGatos");
+			lee.LecturaLineas();
+			creacionCombo(raza,lee.getListadoGatos());
+		}else if (eleccion.equals("conejo")) {
+			lee= new Lector("listadoConejos");
+			lee.LecturaLineas();
+			creacionCombo(raza,lee.getListadoConejos());
+		}else if (eleccion.equals("pez")) {
+			lee= new Lector("listadoPeces");
+			lee.LecturaLineas();
+			creacionCombo(raza,lee.getListadoPeces());
+		}
+		
 		raza.setBounds(76, 241, 277, 25);
 		panel.add(raza);	
 		
@@ -175,7 +191,7 @@ public class RegistroMascotasNatural extends JFrame{
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());
-				Mascotas mascota = new Mascotas("1234ID",nombre.getText(),tipo1,raza1,edad1,urlFoto,descripcionfisica.getText());
+				Mascotas mascota = new Mascotas(nombre.getText(),tipo1,raza1,urlFoto,edad1,descripcionfisica.getText());
 				mascotas.pushBack(mascota);
 				if(variable==0) {
 					nombre.setText(null);
