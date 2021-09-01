@@ -45,6 +45,7 @@ import dataStructures.MyArrayList;
 import datosMascotas.Mascotas;
 import logicaNegocio.BusquedaArchivos;
 import logicaNegocio.Lector;
+import java.awt.SystemColor;
 
 public class RegistroMascotasAdmin extends JFrame{
 	private int alturaPantalla;
@@ -66,14 +67,16 @@ public class RegistroMascotasAdmin extends JFrame{
 		this.alturaPantalla= dimension.height;
 		this.anchoPantalla = dimension.width;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(anchoPantalla/3, 10 , anchoPantalla/3, alturaPantalla - alturaPantalla/15);
+		
+		
+		setBounds(anchoPantalla/3, 10 ,450, 706);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		setTitle("Registro Mascotas");
 		setResizable(false);
-
+		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setForeground(Color.DARK_GRAY);
@@ -87,11 +90,11 @@ public class RegistroMascotasAdmin extends JFrame{
 		crearMenu();		
 
 		JTextField nombre = new JTextField();
-		nombre.setBounds(76, 136, 277, 25);
+		nombre.setBounds(76, 136, 277, 23);
 		panel.add(nombre);
 		
 		JTextField edad = new JTextField();
-		edad.setBounds(76, 295, 277, 26);
+		edad.setBounds(76, 262, 277, 23);
 		panel.add(edad);
 		
 		JLabel lbln = new JLabel("Nombre");
@@ -107,7 +110,7 @@ public class RegistroMascotasAdmin extends JFrame{
 		JComboBox tipo = new JComboBox();
 		String [] eleccion = new String[] {"perro", "gato", "conejo","pez"} ;
 		creacionCombo( tipo, eleccion);
-		tipo.setBounds(76,189,277,25);
+		tipo.setBounds(76,176,277,23);
 		panel.add(tipo);
 		
 		Lector lee = new Lector("listadoCaninos");
@@ -117,36 +120,36 @@ public class RegistroMascotasAdmin extends JFrame{
 		raza.setEditable(true);
 		raza.setBackground(Color.WHITE);
 		creacionCombo(raza,lee.getListadoPerros());
-		raza.setBounds(76, 241, 277, 25);
+		raza.setBounds(76, 219, 277, 23);
 		panel.add(raza);	
 		
 		JLabel lblRaza = new JLabel("Raza");
 		lblRaza.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblRaza.setBounds(188, 225, 68, 14);
+		lblRaza.setBounds(180, 204, 68, 14);
 		panel.add(lblRaza);
 		
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblEdad.setBounds(188, 277, 68, 14);
+		lblEdad.setBounds(180, 248, 68, 14);
 		panel.add(lblEdad);
 		JLabel lblDescripcionFisica = new JLabel("Descripcion fisica");
 		lblDescripcionFisica.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblDescripcionFisica.setBounds(165, 332, 125, 14);
+		lblDescripcionFisica.setBounds(147, 290, 125, 14);
 		panel.add(lblDescripcionFisica);
 		
 		JTextArea descripcionfisica = new JTextArea();
 		descripcionfisica.setBorder(new LineBorder(new Color(119, 136, 153)));
 		descripcionfisica.setCaretColor(Color.BLACK);
 		descripcionfisica.setSelectionColor(new Color(0, 120, 215));
-		descripcionfisica.setBounds(76, 348, 277, 90);
+		descripcionfisica.setBounds(76, 304, 277, 64);
 		descripcionfisica.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
 		descripcionfisica.setLineWrap(true); 
 		panel.add(descripcionfisica);
 		
 		JLabel lblfotoanimalito = new JLabel("");
 		lblfotoanimalito.setBounds(299, 459, 54, 52);
-		//ImageIcon foto= scaleImage("/imagenes/fotomasc.png",lblfotoanimalito.getWidth(), lblfotoanimalito.getHeight());
-		//lblfotoanimalito.setIcon(foto);	
+		ImageIcon foto= scaleImage("/imagenes/fotomasc.png",lblfotoanimalito.getWidth(), lblfotoanimalito.getHeight());
+		lblfotoanimalito.setIcon(foto);	
 		lblfotoanimalito.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblfotoanimalito.addMouseListener(new MouseAdapter() {
 			@Override
@@ -187,8 +190,7 @@ public class RegistroMascotasAdmin extends JFrame{
 					
 				}else {
 					setVisible(false);
-					RegistroUsuario usu = new RegistroUsuario();
-					usu.setVisible(true);	
+						
 					//Natural nuevoUsu = Natural(nombre.getText());		
 				}
 			}
@@ -224,15 +226,31 @@ public class RegistroMascotasAdmin extends JFrame{
 			}
 		});
 		menuItem_3.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
-		menu_1.add(menuItem_3);
+		menu_1.add(menuItem_3);	
+		
+		JLabel lblDescripcionCondicion = new JLabel("Descripcion condicion");
+		lblDescripcionCondicion.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
+		lblDescripcionCondicion.setBounds(136, 377, 165, 14);
+		panel.add(lblDescripcionCondicion);
+		JTextArea descripcionfisica_1 = new JTextArea();
+		descripcionfisica_1.setSelectionColor(SystemColor.textHighlight);
+		descripcionfisica_1.setLineWrap(true);
+		descripcionfisica_1.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
+		descripcionfisica_1.setCaretColor(Color.BLACK);
+		descripcionfisica_1.setBorder(new LineBorder(new Color(119, 136, 153)));
+		descripcionfisica_1.setBounds(76, 391, 277, 64);
+		panel.add(descripcionfisica_1);
+		
+		
 	}
 	public void crearFondo() {
 		fondoImage = new JLabel();
 		fondoImage.setBounds(0, 0, 439, 678);
 		ImageIcon fondo1= scaleImage("/imagenes/perfil persona natural (4).png",fondoImage.getWidth(), fondoImage.getHeight());
 		fondoImage.setIcon(fondo1);	
-		panel.add(fondoImage);	
+		panel.add(fondoImage);
 		
+	
 	}
 	public void creacionCombo(JComboBox caja, String[] lista) {
 		caja.setBackground(Color.WHITE);

@@ -20,6 +20,7 @@ import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import logicaNegocio.BusquedaArchivos;
 import logicaNegocio.Conexion;
+import logicaNegocio.VerificacionClave;
 import rojeru_san.componentes.RSDateChooser;
 
 import java.text.SimpleDateFormat;
@@ -48,6 +49,7 @@ public class RegistroPersonas extends JFrame {
 	private JTextField telefono;
 	private JTextField direccion;
 	private RegistroMascotasNatural na;
+	private Natural aficionado;
 	
 	public RegistroPersonas() {
 
@@ -250,41 +252,48 @@ public class RegistroPersonas extends JFrame {
 						//usui.put("prueba", "micontraseña");
 			String usuario = usuario1.getText();
 			String contraseña = new String(passwordField.getPassword());
-			Natural aficionado;
-			if(na.getMascotas()==null) {
-				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
-						telefono, descripcion,urlFoto, null);
-	
-			}else {
-				aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
-						telefono, descripcion,urlFoto, na.getMascotas());
-				System.out.println(aficionado.toString());
-			}
-			//// Insercion de los Datos
-			Conexion conec = new Conexion();
-			Connection con = conec.Conectar();
-			try {
-	//// Preparamos la insercion de un registro
-	            PreparedStatement insertar = con.prepareStatement("insert into USUARIOS (USER, NAME, BIRTHDATE, GENDER, ADDRESS, PHONE, DESCRIPTION, PHOTO, PASSWORD, ADMIN) values ( ? , ?,?,?,?,?,?,?,?,?)");
-	            insertar.setString(1, usuario);
-	            insertar.setString(2, nombre);
-	            insertar.setString(3, nacimiento);
-	            insertar.setString(4, genero);
-	            insertar.setString(5, direccion);
-	            insertar.setString(6, telefono);
-	            insertar.setString(7, descripcion);
-	            insertar.setString(8, urlFoto);
-	            insertar.setString(9, contraseña);
-	            insertar.setInt(10, 0);
-	            int retorn = insertar.executeUpdate();
-	            System.out.println(retorn + " insertado");
-	        } catch (SQLException ex) {
-	            System.out.println("Imposible realizar insercion ... FAIL");
-	        }
-					System.out.println(aficionado.toString());
-			//PerfilNatural afi = new PerfilNatural(aficionado, "propio");
-			//afi.setVisible(true);
+			VerificacionClave o = new VerificacionClave();
+			boolean ver = o.esDebil(contraseña);
 			
+			if (!ver) {
+				if(na.getMascotas()==null) {
+					aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+							telefono, descripcion,urlFoto, null);
+
+				}else {
+					aficionado = new Natural(usuario,contraseña, "Natural", nombre, genero, nacimiento, direccion,
+							telefono, descripcion,urlFoto, na.getMascotas());
+					System.out.println(aficionado.toString());
+				}
+				PerfilNatural afi = new PerfilNatural(aficionado, "propio");
+				afi.setVisible(true);
+				//// Insercion de los Datos
+				Conexion conec = new Conexion();
+				Connection con = conec.Conectar();
+				try {
+		//// Preparamos la insercion de un registro
+		            PreparedStatement insertar = con.prepareStatement("insert into USUARIOS (USER, NAME, BIRTHDATE, GENDER, ADDRESS, PHONE, DESCRIPTION, PHOTO, PASSWORD, ADMIN) values ( ? , ?,?,?,?,?,?,?,?,?)");
+		            insertar.setString(1, usuario);
+		            insertar.setString(2, nombre);
+		            insertar.setString(3, nacimiento);
+		            insertar.setString(4, genero);
+		            insertar.setString(5, direccion);
+		            insertar.setString(6, telefono);
+		            insertar.setString(7, descripcion);
+		            insertar.setString(8, urlFoto);
+		            insertar.setString(9, contraseña);
+		            insertar.setInt(10, 0);
+		            int retorn = insertar.executeUpdate();
+		            System.out.println(retorn + " insertado");
+		        } catch (SQLException ex) {
+		            System.out.println("Imposible realizar insercion ... FAIL");
+		        }
+				
+				
+			}else {
+				JOptionPane.showMessageDialog(null,"Contraseña invalida"+ "\n"+ "Debe tener como minimo 8 caracteres con :" +"\n"+" Mayusculas , minusculas , numeros y simbolos", "Error contraseña invalida", JOptionPane.INFORMATION_MESSAGE);
+			}	
+	
 			dispose();
 		}
 	});

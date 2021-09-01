@@ -6,7 +6,6 @@ import dataStructures.HashTable;
 import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import ui.Ingreso;
-import ui.RegistroUsuario;
 
 public class IniciarPrograma {
 	

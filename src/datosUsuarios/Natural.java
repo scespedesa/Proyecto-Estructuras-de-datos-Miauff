@@ -21,24 +21,6 @@ public class Natural extends Usuario{
 		this.mascotas = mascotas;
 		this.genero=genero;
 	}
-
-	public void adoptarMascota(int numeroPosicion){
-		
-		
-		LectorMascotas lm= new LectorMascotas("mascotas.txt");
-		lm.LecturaLineas();
-		
-		Lector l= new Lector("usuarios.txt");
-		l.LecturaLineas();
-		
-		
-		Manipular m= new Manipular(lm.getDatosMascotas());
-		
-	//-----	lm.getDatosMascotas().get(numeroPosicion).getTipo();
-
-		m.eliminarRegistro(numeroPosicion);
-		
-	}
 	
 public String getTelefono() {
 		return telefono;

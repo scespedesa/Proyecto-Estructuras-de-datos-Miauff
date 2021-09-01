@@ -26,7 +26,6 @@ import com.mysql.cj.xdevapi.Statement;
 
 import dataStructures.HashTable;
 import logicaNegocio.Conexion;
-import logicaNegocio.Manipular;
 import java.sql.*;
 
 import javax.swing.UIManager;
@@ -148,15 +147,13 @@ public class Ingreso extends JFrame {
 	        } catch (SQLException ex) {
 	            System.out.println(ex);
 	        }
-			String contra = new String( passwordField.getPassword());
-			Manipular av = new Manipular(usuario.getText(),contra);
-			String tipo = av.esta();
+			
+			String tipo =null;
 			if(tipo!=null) {
 				if(tipo.equals("natural")) {
 					
-					av.getEs();
 				}else {
-					av.getEst();
+					
 				}
 			}else {
 				JOptionPane.showMessageDialog(null,"Verifique el usuario y contraseña escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
