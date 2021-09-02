@@ -136,8 +136,7 @@ public class Ingreso extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Conexion conec = new Conexion();
 			Connection conexion = conec.Conectar();
-			Connection conexion2 = conec.Conectar();
-			Connection conexion3 = conec.Conectar();
+
 			//realizar consulta
 			 
 	        try {
@@ -154,17 +153,33 @@ public class Ingreso extends JFrame {
 	            String contrasenia = new String(passwordField.getPassword());
 	            if(usu.find(usuario.getText(),contrasenia)) {
 	            	System.out.println("paso por aqui cate que no lo vi");
-	            	java.sql.Statement sa = conexion2.createStatement();
-	            	java.sql.Statement sar = conexion3.createStatement();
-		            ResultSet r = sar.executeQuery("select * from USUARIOS WHERE  USER='"+ usuario.getText() + "'" );
-		            ResultSet re = sa.executeQuery("select * from ANIMALES WHERE  USER='"+ usuario.getText() +"'" );
+
+
+	            	PreparedStatement ps =  conexion.prepareStatement("select * from USUARIOS WHERE USER = ?");
+	            	
+	            	ps.setString(1, usuario.getText());
+
+		            ResultSet r = ps.executeQuery();
+
+
+		            PreparedStatement pst =  conexion.prepareStatement("select * from ANIMALES WHERE  USER = ?");
+
+		            pst.setString(1, usuario.getText());
+		            
+
+		            ResultSet re = pst.executeQuery();
+
+
 		            MyArrayList<Mascotas> masco = new MyArrayList<Mascotas>(1);
+
+		            r.next(); 
+		            re.next();
 		            if(r.getInt(10)==0) {
-		            	 while (re.next()) {
+		          
 		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5), re.getInt(9),
 		            		re.getString(10));
 		            		masco.pushBack(ma);
-		            		}
+		            		
 		            	 
 		            	 Natural aficionado = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9), r.getInt(10),masco);
