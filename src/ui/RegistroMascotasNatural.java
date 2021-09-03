@@ -165,7 +165,7 @@ public class RegistroMascotasNatural extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				BusquedaArchivos b = new BusquedaArchivos() ;
-				urlFoto = b.busqueda(e,panel);
+				urlFoto = b.busqueda(e);
 			}
 		});
 		panel.add(lblfotoanimalito);
@@ -187,7 +187,7 @@ public class RegistroMascotasNatural extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				String [] botones = { "Si", " No" };
 				ImageIcon img = scaleImage("/imagenes/pawprint.png", 30 ,30) ;
-				int variable = JOptionPane.showOptionDialog (null, " ¿Desea aniadir mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
+				int variable = JOptionPane.showOptionDialog (null, " ¿Desea agregar mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());

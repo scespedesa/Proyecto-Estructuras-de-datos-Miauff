@@ -8,19 +8,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.SystemColor;
 
 import com.mysql.cj.xdevapi.Statement;
 
@@ -32,11 +22,6 @@ import datosUsuarios.Natural;
 import logicaNegocio.Conexion;
 import java.sql.*;
 
-import javax.swing.UIManager;
-import javax.swing.JButton;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
 
 public class Ingreso extends JFrame {
 	private JPanel contentPane;
@@ -130,6 +115,7 @@ public class Ingreso extends JFrame {
 	passwordField.setBounds(105, 401, 222, 30);
 	panel.add(passwordField);
 	
+/// *******************ingreso de usuario************************
 	JButton btningresar = new JButton("Ingresar");
 	btningresar.addActionListener(new ActionListener() {
 
@@ -153,7 +139,7 @@ public class Ingreso extends JFrame {
 	            String contrasenia = new String(passwordField.getPassword());
 	            if(usu.find(usuario.getText(),contrasenia)) {
 	            	System.out.println("paso por aqui cate que no lo vi");
-
+                   ///lo que pasa si la contraseña es correcta.********************************
 
 	            	PreparedStatement ps =  conexion.prepareStatement("select * from USUARIOS WHERE USER = ?");
 	            	
@@ -193,6 +179,7 @@ public class Ingreso extends JFrame {
 		            }  
 		            
 	            }else {
+	            	//*************lo que pasa cuando la contaseña es incorrecta en el ingreso**********
 					JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
 				}
 	        } catch (SQLException ex) {
@@ -232,6 +219,7 @@ public class Ingreso extends JFrame {
 	label.setLocation(161, 148);
 }
 public void crearMenu(){
+	/////// **********el display del menu de la esquina superior******************
 	JMenuBar menuBar = new JMenuBar();
 	menuBar.setBackground(new Color(255, 255, 255));
 	menuBar.setBounds(0, 0, 35, 35);
@@ -242,6 +230,7 @@ public void crearMenu(){
 	menu = new ImageIcon(RegistroPersonas.class.getResource("/imagenes/menu.png")).getImage().getScaledInstance(26, 26, Image.SCALE_DEFAULT);
 	menu_1.setIcon(new ImageIcon(menu));
 	menuBar.add(menu_1);
+	//*************Registro Aficionado*******************
 	JMenuItem menuItem_2 = new JMenuItem("Ir a Registro Aficionado");
 	menuItem_2.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent a) {
@@ -259,7 +248,7 @@ public void crearMenu(){
 			dispose();
 		}
 	});
-	
+	//*************Registro Organizacion*******************
 	JMenuItem menuItem_2_1 = new JMenuItem("Ir a Registro Organizacion");
 	menuItem_2_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent a) {

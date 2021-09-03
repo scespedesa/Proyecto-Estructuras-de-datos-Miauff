@@ -175,7 +175,9 @@ public class RegistroPersonas extends JFrame {
 	btnsiguiente.setFont(new Font("Monospaced", Font.PLAIN, 14));
 	panel.add(btnsiguiente);	
 	crearFondo();
-}public void ventana2(String nombre,String genero,String direccion,String telefono, String descripcion) {
+}
+/// ******************segunda VEntana de REgistro***********
+public void ventana2(String nombre,String genero,String direccion,String telefono, String descripcion) {
 	crearMenu();
 	
 	JLabel registro = new JLabel("Registro");
@@ -203,7 +205,8 @@ public class RegistroPersonas extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			BusquedaArchivos b = new BusquedaArchivos() ;
-			urlFoto = b.busqueda(e,panel1);
+			urlFoto = b.busqueda(e);
+
 		}
 	});
 	panel1.add(lblfo);
@@ -246,6 +249,7 @@ public class RegistroPersonas extends JFrame {
 	finalizar.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
 	finalizar.setBackground(new Color(253, 245, 230));
 	finalizar.setFont(new Font("Monospaced", Font.PLAIN, 14));
+	
 	finalizar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			// verificar si el usuario ya se encuentra en la base de datos
@@ -308,7 +312,7 @@ public class RegistroPersonas extends JFrame {
 	panel1.add(fondoImage);
 	}
 
-
+//*********funciones multiproposito****************
 public void crearFondo() {
 	fondoImage = new JLabel();
 	fondoImage.setBounds(0, 0, 450, 706);

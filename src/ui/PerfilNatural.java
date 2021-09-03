@@ -120,6 +120,7 @@ public class PerfilNatural  extends JFrame {
 		panel_1.setBounds(0, 0, 572, 36);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		//**********lista clickeable*********
 		if(tipo.equals("propio")) {
 			JComboBox comboBox = new JComboBox();
 			av = new Averiguar ();

@@ -223,7 +223,7 @@ public class RegistroAdmin extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			BusquedaArchivos b = new BusquedaArchivos() ;
-			urlFoto = b.busqueda(e,panel);
+			urlFoto = b.busqueda(e);
 		}
 	});
 	panel.add(lblfoto);
