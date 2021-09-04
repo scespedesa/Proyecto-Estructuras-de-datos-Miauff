@@ -162,8 +162,7 @@ public class Ingreso extends JFrame {
 		            re.next();
 		            if(r.getInt(10)==0) {
 		          
-		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5), re.getInt(9),
-		            		re.getString(10));
+		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5),rs.getString(1), re.getInt(9));
 		            		masco.pushBack(ma);
 		            		
 		            	 
@@ -172,9 +171,9 @@ public class Ingreso extends JFrame {
 		            	 System.out.println(aficionado.toString());
 		            }else {
 		            	 while (re.next()) {
-				            	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6)
-				            			,re.getString(8),re.getInt(9), re.getString(10),re.getString(11));
-				            	masco.pushBack(madop);
+				            //	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), 
+				            //	re.getString(5), re.getInt(6),rs.getString(1),re.getString(8),re.getInt(9),re.getString(10),re.getInt(11));
+				            //	masco.pushBack(madop);
 				            }
 		            }  
 		            
