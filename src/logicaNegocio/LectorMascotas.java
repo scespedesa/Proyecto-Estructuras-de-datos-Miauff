@@ -2,6 +2,7 @@ package logicaNegocio;
 import datosMascotas.Mascotas;
 import dataStructures.PriorityQueueQueue;
 import dataStructures.PriorityNode;
+import dataStructures.MyArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,13 +12,11 @@ import logicaNegocio.Conexion;
 import java.sql.*;
 
 public class LectorMascotas {
-    
-	private PriorityQueueQueue<Mascotas> datosMascotas ;
+	private PriorityQueueQueue<Integer> datosMascotas = new PriorityQueueQueue<Integer>() ;
 	private Conexion conec = new Conexion();
 	private Connection conexion = conec.Conectar();
 
 	public LectorMascotas(String nombreArchivo) { 
-		datosMascotas = new PriorityQueueQueue<Mascotas>();
 	}
 
 //	private void procesar(String line) {
@@ -43,26 +42,24 @@ public class LectorMascotas {
 //		sc.close();
 //	}
 
-	public PriorityQueueQueue<Mascotas> getDatosMascotas() {
+	public PriorityQueueQueue<Integer> getDatosMascotas() {
 		return datosMascotas;
 	}
-	public void setDatosMascotas(PriorityQueueQueue<Mascotas> datosMascotas) {
+	public void setDatosMascotas( PriorityQueueQueue<Integer> datosMascotas) {
 		this.datosMascotas = datosMascotas;
 	}
 	
- private void ConsultarMascotasDB() {
+ private void ConsultarMascotasDB(int n) {
 	try {
 		// Preparamos la consulta
 		 java.sql.Statement s = conexion.createStatement();
-		            ResultSet rs = s.executeQuery("select * from mascota");
+		            ResultSet rs = s.executeQuery("select * from ANIMALES where ESTADO >= 2");
 		// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-
-		            while (rs.next()) {
-		                System.out.println(
-		                        "ID: " + rs.getInt(1)
-		                        + "\tNombre: " + rs.getString(2)
-		                        + "\tSexo: " + rs.getString("sexo")
-		                );
+                   int i =0;
+		            while (rs.next() && i <= n) {
+		            	double prior = rs.getInt(9)*0.7 + rs.getInt(6) ;// edad*0.7+factor prioridad
+		            	datosMascotas.add(rs.getInt(1), prior);
+		                i++;
 		            }
 		        } catch (SQLException ex) {
 		            System.out.println("Imposible realizar consulta ... FAIL");
