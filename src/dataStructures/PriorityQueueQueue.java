@@ -8,7 +8,7 @@ public class PriorityQueueQueue<E> {
 	public PriorityQueueQueue() {
     }
 	
-	public void add(E e,int prior) {
+	public void add(E e,double prior) {
 		PriorityNode<E> nodo1 = new PriorityNode<E>(e,prior,null,null);
 		if(this.head == null) {
 			this.head = this.tail = nodo1;
