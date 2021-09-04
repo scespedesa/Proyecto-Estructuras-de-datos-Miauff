@@ -156,7 +156,7 @@ public class RegistroAdmin extends JFrame {
 	descripcion.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
 	descripcion.setLineWrap(true); 
 	panel.add(descripcion);
-	na = new RegistroMascotasAdmin();	
+	na = new RegistroMascotasAdmin("");	
 	JButton btnsiguiente = new JButton("Finalizar");
 	btnsiguiente.addMouseListener(new MouseAdapter() {
 		@Override
@@ -304,6 +304,7 @@ public void crearMenu(){
 		public void actionPerformed(ActionEvent a) {
 			Ingreso persona = new Ingreso();
 			persona.setVisible(true);
+			dispose();
 		}
 	});
 	menuItem_2.setFont(new Font("Monospac821 BT", Font.PLAIN, 14));
