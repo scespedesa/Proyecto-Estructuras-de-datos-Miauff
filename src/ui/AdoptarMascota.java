@@ -93,7 +93,7 @@ public class AdoptarMascota extends JFrame implements Runnable {
 		
 		JButton button = new JButton("New button");
 		getContentPane().add(button, BorderLayout.CENTER);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(3, 10 , 450, 706);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -381,10 +381,10 @@ public class AdoptarMascota extends JFrame implements Runnable {
 					MascotasAdopcion madop= new MascotasAdopcion(0, "", "", "", "", 0, "", 0, 0, "", "");
 					hp.insert(hp.globarr, 0, madop);
 					System.out.println("Adoptar Mascota Insert: "+ (stopTime - startTime));
-					hp.deleteNode(hp.globarr, 0, madop);
 					
 					
-					/*for(int ji=0; ji< conteo; ji++) {
+					/*
+					for(int ji=0; ji< conteo; ji++) {
 						MascotasAdopcion madop1= new MascotasAdopcion(0, "", "", "", "", 0, "", 0, 0, "", "");
 						hp.insert(hp.globarr, 0, madop1);
 					}
@@ -498,6 +498,7 @@ public class AdoptarMascota extends JFrame implements Runnable {
 				
 				//for(int i=0; i<conteo;i++){
 
+				
 				//}
 				
 				listad.popBack();

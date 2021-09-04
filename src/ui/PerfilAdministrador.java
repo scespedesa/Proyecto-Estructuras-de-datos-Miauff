@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -17,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import datosUsuarios.Administrador;
 import datosUsuarios.Natural;
+import logicaNegocio.Conexion;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -147,21 +150,22 @@ public void Inicio(boolean esAdmin) {
 				LabelTitulo.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 17));
 			 
 			
-			JButton Contactos = new JButton("Contactos");
-		
-			Contactos.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					try {
-						Usuario frame = new Usuario();
-						frame.setVisible(true);
-					} catch (Exception e1) {
-						e1.printStackTrace();
+				JButton Contactos = new JButton("Contactos");
+				Contactos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						try {
+							Usuario frame = new Usuario(esAdmin);
+							frame.setVisible(true);
+							Conexion conec = new Conexion();
+							Connection conexion = conec.Conectar();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
-				}
-			});
-
-			
+				});
+				
+		
 			
 			JButton Mascotas = new JButton("Mascotas");
 			Mascotas.setIcon(scaleImage("/imagenes/gato-birmano.png",31,31));
@@ -174,7 +178,8 @@ public void Inicio(boolean esAdmin) {
 			contentPane.add(Mascotas);
 			Mascotas.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent e) {	
+				public void mouseClicked(MouseEvent e) {
+					dispose();
                if(esAdmin) {
             	   EdicionMascotas perf = new EdicionMascotas(organizacion,true);
             	   perf.setVisible(true);
@@ -198,7 +203,7 @@ public void Inicio(boolean esAdmin) {
 			contentPane.add(btnPerfill);
 			btnPerfill.setIcon(new ImageIcon(PerfilNatural2.class.getResource("/imagenes/usuario (5).png")));
 			btnPerfill.setRolloverIcon(scaleImage("/imagenes/usuario (5).png",35,35));
-			
+		
 			JButton Inicio = new JButton("Inicio");
 			Inicio.setVerticalTextPosition(SwingConstants.BOTTOM);
 			Inicio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -207,6 +212,7 @@ public void Inicio(boolean esAdmin) {
 			Inicio.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {	
+					dispose();
 					if(esAdmin) {
                 PerfilNatural2 frame = new PerfilNatural2(organizacion, 1);
 					frame.setVisible(true);}
@@ -215,12 +221,18 @@ public void Inicio(boolean esAdmin) {
 					}
 
 			});
-					Inicio.setBounds(353, 652, 81, 54);
-					Inicio.setIcon(scaleImage("imagenes/hogar.png",31,31));
-					Inicio.setRolloverIcon(scaleImage("imagenes/hogar.png",35,35));
-					contentPane.add(Inicio);
+			Inicio.setBounds(353, 652, 81, 54);
+			Inicio.setIcon(scaleImage("/Imagenes/hogar.png",31,31));
+			Inicio.setRolloverIcon(scaleImage("/Imagenes/hogar.png",35,35));
+			contentPane.add(Inicio);
 			
-			JButton Publicar = new JButton("Publicar");
+			JButton Publicar = new JButton("Adoptar");
+			Publicar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					AdoptarMascota a= new AdoptarMascota();
+					a.correr();
+				}
+			});
 			Publicar.setVerticalTextPosition(SwingConstants.BOTTOM);
 			Publicar.setHorizontalTextPosition(SwingConstants.CENTER);
 			Publicar.setContentAreaFilled(false);
@@ -231,7 +243,7 @@ public void Inicio(boolean esAdmin) {
 			Publicar.setRolloverIcon(scaleImage("/imagenes/mas (1).png",34,34));
 			contentPane.add(Publicar);
 			
-			Contactos.setIcon(new ImageIcon(PerfilNatural2.class.getResource("/imagenes/telefono.png")));
+			Contactos.setIcon(new ImageIcon(Usuario.class.getResource("/imagenes/telefono.png")));
 			Contactos.setVerticalTextPosition(SwingConstants.BOTTOM);
 			Contactos.setHorizontalTextPosition(SwingConstants.CENTER);
 			Contactos.setContentAreaFilled(false);

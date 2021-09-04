@@ -25,7 +25,9 @@ public class Natural extends Usuario{
 public String getTelefono() {
 		return telefono;
 	}
-
+public MyArrayList<Mascotas> getMascotas(){
+	return this.mascotas;
+}
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;

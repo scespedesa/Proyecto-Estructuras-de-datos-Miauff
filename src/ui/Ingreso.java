@@ -39,6 +39,9 @@ public class Ingreso extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField ;
 	public static String usuarioEnviar;
+	public static Administrador organizacion;
+	public static Natural aficionado;
+
 
 	public Ingreso() {
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
@@ -188,10 +191,11 @@ public class Ingreso extends JFrame {
 		            		masco.pushBack(ma);
 		            	}
 		            	 
-		            	 Natural aficionado = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
+		            	 Natural aficionado1 = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9), r.getInt(10),masco);
-		            	 System.out.println(aficionado.toString());
-		            	 PerfilNatural2 afi = new PerfilNatural2(aficionado,0);
+		            	 System.out.println(aficionado1.toString());
+		            	 aficionado = aficionado1;
+		            	 PerfilNatural2 afi = new PerfilNatural2(aficionado1,0);
 			 				afi.setVisible(true);
 		            }else {
 		                MyArrayList<MascotasAdopcion> masco = new MyArrayList<MascotasAdopcion>(1);
@@ -199,13 +203,14 @@ public class Ingreso extends JFrame {
 				           	MascotasAdopcion madop= new MascotasAdopcion(re.getInt(1),re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6),r.getString(1),re.getInt(8),re.getInt(9),re.getString(10),re.getString(11));
 				            masco.pushBack(madop);
 				            }
-		            	 Administrador organizacion = new Administrador(r.getString(1),r.getString(2),r.getString(3),r.getString(5),r.getString(6), 
+		            	 Administrador organizacion1 = new Administrador(r.getString(1),r.getString(2),r.getString(3),r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9),r.getInt(10),r.getString(11),masco);
-		            	 System.out.println(organizacion.toString());
-		            	 PerfilNatural2 afi = new PerfilNatural2(organizacion,1);
+		            	 System.out.println(organizacion1.toString());
+		            	 PerfilNatural2 afi = new PerfilNatural2(organizacion1,1);
+		            	 organizacion = organizacion1;
 		 				afi.setVisible(true);
 		            }  
-		            
+		            dispose();
 	            }else {
 	            	//*************lo que pasa cuando la contaseña es incorrecta en el ingreso**********
 					JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -279,7 +284,9 @@ public void crearMenu(){
 	JMenuItem menuItem_3 = new JMenuItem("Salir");
 	menuItem_3.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			dispose();
+			
 		}
 	});
 	//*************Registro Organizacion*******************

@@ -46,7 +46,7 @@ public class PerfilNatural2 extends JFrame {
         private Natural aficionado;
     	private int x;
     	private String toContact;
-    	private String usuario="pepe";
+    	private String usuario;
         
 
 
@@ -150,6 +150,20 @@ public class PerfilNatural2 extends JFrame {
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 5));
 			lblNewLabel_7.setBounds(288, 106, 116, 29);
 			contentPane.add(lblNewLabel_7);
+			
+			JButton btnNewButton = new JButton("Salir");
+			btnNewButton.setBounds(183, 604, 65, 14);
+			contentPane.add(btnNewButton);
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					 Ingreso i= new Ingreso();
+						i.usuarioEnviar = null;
+						i.aficionado = null;
+						i.organizacion = null;
+						i.setVisible(true);
+				}
+			});
         createFondo();
 		}
 
@@ -168,6 +182,8 @@ public class PerfilNatural2 extends JFrame {
 				Fondo.setBounds(0,0,450,706);
 				Fondo.setIcon( scaleImage("/imagenes/FondoInterfazChat.jpg",450,760));
 				contentPane.add(Fondo);		
+				
+				
 		}
 		
 	
@@ -184,13 +200,14 @@ public class PerfilNatural2 extends JFrame {
 			 
 			
 			JButton Contactos = new JButton("Contactos");
-		
-				Contactos.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			Contactos.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
 					try {
-						Usuario frame = new Usuario();
+						Usuario frame = new Usuario(esAdmin);
 						frame.setVisible(true);
+						Conexion conec = new Conexion();
+						Connection conexion = conec.Conectar();
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -210,6 +227,7 @@ public class PerfilNatural2 extends JFrame {
 			Mascotas.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {	
+					
                if(esAdmin) {
             	   EdicionMascotas perf = new EdicionMascotas(organizacion,true);
             	   perf.setVisible(true);
@@ -217,8 +235,8 @@ public class PerfilNatural2 extends JFrame {
             	   EdicionMascotas perf = new EdicionMascotas(aficionado,false);
             	   perf.setVisible(true);
                }
+               dispose();
 					}
-
 			});
 			
 			JButton btnPerfill = new JButton("Perfil");
@@ -236,6 +254,7 @@ public class PerfilNatural2 extends JFrame {
 			btnPerfill.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {	
+					dispose();
                if(esAdmin) {
             	   PerfilAdministrador perf = new PerfilAdministrador(organizacion,true);
             	   perf.setVisible(true);

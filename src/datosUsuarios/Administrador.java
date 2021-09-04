@@ -22,6 +22,9 @@ public class Administrador  extends Usuario{
 	public void setUrlPagina(String urlPagina) {
 		this.urlPagina = urlPagina;
 	}
+	public MyArrayList<MascotasAdopcion> getMascotas(){
+		return this.mascotas;
+	}
 	@Override
 	public String toString() {
 		return "Administrador % idUsuario=" + idUsuario  + "% contrasenia=" + contrasenia + "% nombre=" + nombre + "% descripcion=" + descripcion ;

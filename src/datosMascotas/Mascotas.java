@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.stream.Stream;
 
+import dataStructures.MyArrayList;
 import logicaNegocio.Conexion;
 
 public class Mascotas {

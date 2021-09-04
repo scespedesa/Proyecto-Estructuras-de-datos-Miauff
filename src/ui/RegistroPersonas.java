@@ -262,7 +262,7 @@ public void ventana2(String nombre,String genero,String direccion,String telefon
 						System.out.println(mascotas.getObject(j).toString());
 					}
 				}
-				PerfilNatural afi = new PerfilNatural(aficionado, "propio");
+				PerfilAdministrador afi = new PerfilAdministrador(aficionado,false);
 				afi.setVisible(true);
 				//// Insercion de los Datos
 				Conexion conec = new Conexion();
