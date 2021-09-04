@@ -1,92 +1,71 @@
 package ui;
-/**
- * @author Samara Gabriela Cespedes Afanador
- *
- */
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.sql.Connection;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import datosUsuarios.Natural;
-import logicaNegocio.AbrirSitioWeb;
-import logicaNegocio.BusquedaArchivos;
 
-import javax.swing.JMenuBar;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
+public class PerfilNatural extends JFrame{
 
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JMenu;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
-import javax.swing.UIManager;
-import javax.swing.JButton;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import rojeru_san.componentes.RSCalendar;
-import rojeru_san.componentes.RSDateChooser;
-
-public class PerfilNatural  extends JFrame {
-
-	private JPanel contentPane;
-	private JPanel panel ;
-	private JPanel panel_1;
-	private JPanel panel_3;
-	private JPanel panel_2;
-	private MouseAdapter wa;
-	private MouseAdapter ho;
-	private MouseAdapter vi;
-	private Natural persona;
-	private boolean mouseListenerIsActive;
 	private int alturaPantalla;
 	private int anchoPantalla;
+	private JPanel panel;
 
-	public PerfilNatural(Natural persona, String tipo) {
-		
-		this.persona = persona ;
+	public PerfilNatural(Natural e, String nose) {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Dimension dimension= pantalla.getScreenSize();
 		this.alturaPantalla= dimension.height;
 		this.anchoPantalla = dimension.width;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(anchoPantalla/3, 10 , 450, 706);
-		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaption);
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setTitle("Perfil Admin");
+		setResizable(false);
+
 		panel = new JPanel();
-		panel.setBackground(UIManager.getColor("window"));
-		panel.setBounds(0, 35, 572, 160);
+		panel.setBackground(Color.WHITE);
+		panel.setForeground(Color.DARK_GRAY);
+		panel.setBounds(0, 0,450, 706);
 		contentPane.add(panel);
 		panel.setLayout(null);
+			
+		JLabel jijo = new JLabel("<html>" +"estoe es un intent " + "\n"+ "lo otroo jajajajajajajajajagrt"+ "\n"+ "ggtrfgggggggggggggggggggggggggggggggggggg"
+				+ "+ \"\\n\"+ ggggggggggggggggggggggggggggggggggggg"
+				+ "gggggggggggggggggggggggggggggggggggggggggggggggggj"+"<html>");
+		jijo.setBounds(0, 11, 434, 284);
+		panel.add(jijo);
 		
 		JLabel lblfondo = new JLabel("New label");	
-		lblfondo.setBounds(0, 36, 434, 667);
+		lblfondo.setBounds(0, 0, 434, 667);
 		ImageIcon ji = scaleImage("/imagenes/fondi (1).png", lblfondo.getWidth(),lblfondo.getHeight()) ;
 		lblfondo.setIcon(ji);
 		panel.add(lblfondo);
+	
+
+	}
+	public ImageIcon scaleImage(String url, int ancho , int altura) {
+		ImageIcon icon = new ImageIcon(RegistroPersonas.class.getResource(url));
+		Image img = icon.getImage();
+		Image imgScale = img.getScaledInstance(ancho, altura, Image.SCALE_SMOOTH);
+		return new ImageIcon(imgScale);
+
+	}
+}
+
 		
 		/*
 		if(tipo!="propio") {
@@ -467,7 +446,7 @@ public class PerfilNatural  extends JFrame {
 			}
 		});
 		*/	
-	}public void visualizarPerfil(JLabel j) {
+	public void visualizarPerfil(JLabel j) {
 		j.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		mouseListenerIsActive = false;
 	}
