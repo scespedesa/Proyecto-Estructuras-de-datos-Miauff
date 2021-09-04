@@ -1,5 +1,11 @@
 package datosMascotas;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import logicaNegocio.Conexion;
+
 public class Mascotas {
 	protected String idAnimal;
 	protected String tipo;
@@ -7,16 +13,17 @@ public class Mascotas {
 	protected int edad;
 	protected String foto;
 	protected String nombre;
-	protected String descripcionFisica;
 
-	public Mascotas(String nombre, String tipo, String raza, String foto ,int edad,  
-			String descripcionFisica) {
+	protected String user;
+
+	public Mascotas(String nombre, String tipo, String raza, String foto ,String user ,int edad) {
 		this.tipo = tipo;
 		this.raza = raza;
 		this.edad = edad;
 		this.foto = foto;
 		this.nombre = nombre;
-		this.descripcionFisica = descripcionFisica;
+		this.user = user;
+
 	}
 	
 	public String getIdAnimal() {
@@ -27,13 +34,7 @@ public class Mascotas {
 		this.idAnimal = idAnimal;
 	}
 
-	public String getDescripcionFisica() {
-		return descripcionFisica;
-	}
 
-	public void setDescripcionFisica(String descripcionFisica) {
-		this.descripcionFisica = descripcionFisica;
-	}
 
 	public String getTipo() {
 		return tipo;
@@ -68,8 +69,25 @@ public class Mascotas {
 	@Override
 	public String toString() {
 		return "Mascotas [idAnimal=" + idAnimal + ", nombre=" + nombre +", tipo=" + tipo + ", raza=" + raza + ", edad=" + edad + ", foto="
-				+ foto +  ", descripcionFisica=" + descripcionFisica + "]";
+				+ foto + "]";
 	}
-
+    public void insertarDB() {
+    	try {
+    	Conexion conec = new Conexion();
+		Connection con = conec.Conectar();
+   //// Preparamos la insercion de un registro
+        PreparedStatement insertar = con.prepareStatement("insert into ANIMALES (NOMBRE, TIPO, RAZA, FOTO, USER, EDAD) values (?,?,?,?,?,?)");
+        insertar.setString(2, this.nombre);
+        insertar.setString(3, this.tipo);
+        insertar.setString(4, this.raza);
+        insertar.setString(5, this.foto);
+        insertar.setString(7, this.user);
+        insertar.setInt(9, this.edad);
+        int retorn = insertar.executeUpdate();
+        System.out.println(retorn + " insertado");
+    } catch (SQLException ex) {
+        System.out.println("Imposible realizar insercion ... FAIL");
+    }
+    }
 	
 }

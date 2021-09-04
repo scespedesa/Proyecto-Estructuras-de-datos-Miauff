@@ -82,7 +82,7 @@ public class RegistroMascotasNatural extends JFrame{
 		panel.setLayout(null);
 		ventana();
 	}
-
+	//*************display de la ventana principal********
 	public void ventana() {
 		JTextField nombre = new JTextField();
 		nombre.setBounds(76, 140, 277, 25);
@@ -191,7 +191,7 @@ public class RegistroMascotasNatural extends JFrame{
 				String tipo1 = (String) tipo.getSelectedItem();
 				String raza1= (String) raza.getSelectedItem();
 				int edad1 = Integer.parseInt(edad.getText());
-				Mascotas mascota = new Mascotas(nombre.getText(),tipo1,raza1,urlFoto,edad1,descripcionfisica.getText());
+				Mascotas mascota = new Mascotas(nombre.getText(),tipo1,raza1,"",urlFoto,edad1);
 				mascotas.pushBack(mascota);
 				if(variable==0) {
 					nombre.setText(null);
