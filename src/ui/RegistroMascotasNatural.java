@@ -32,11 +32,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -52,15 +55,16 @@ public class RegistroMascotasNatural extends JFrame{
 	private JPanel panel ;
 	private JLabel fondoImage;
 	private Image menu;
-	private JPasswordField passwordField;
 	private String urlFoto;
+	private JComboBox raza;
+	private JSpinner edadnum;
 	private JTextField nombre;
-	private JTextField edad;
+	private JComboBox tipo;
+	private JTextArea descripcionfisica;
 	private MyArrayList<Mascotas> mascotas = new MyArrayList<Mascotas>();
 	
 
 	public RegistroMascotasNatural() {
-		mascotas = new MyArrayList();
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Dimension dimension= pantalla.getScreenSize();
 		this.alturaPantalla= dimension.height;
@@ -84,13 +88,15 @@ public class RegistroMascotasNatural extends JFrame{
 	}
 	//*************display de la ventana principal********
 	public void ventana() {
-		JTextField nombre = new JTextField();
+		nombre = new JTextField();
 		nombre.setBounds(76, 140, 277, 25);
 		panel.add(nombre);
 		
-		JTextField edad = new JTextField();
-		edad.setBounds(76, 295, 277, 26);
-		panel.add(edad);
+		edadnum = new JSpinner();
+		edadnum.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		edadnum.setModel(new SpinnerNumberModel(0, 0, 25, 1));
+		edadnum.setBounds(167, 296, 81, 25);
+		panel.add(edadnum);
 		
 		JLabel lbln = new JLabel("Nombre");
 		lbln.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
@@ -102,13 +108,13 @@ public class RegistroMascotasNatural extends JFrame{
 		panel.add(lblTipo);
 		
 
-		JComboBox tipo = new JComboBox();
+		tipo = new JComboBox();
 		String [] eleccion = new String[] {"perro", "gato", "conejo","pez"} ;
 		creacionCombo( tipo, eleccion);
 		tipo.setBounds(76,189,277,25);
 		panel.add(tipo);
 		Lector lee; 
-		JComboBox raza = new JComboBox();
+		raza = new JComboBox();
 		raza.setFont(new Font("Monospac821 BT", Font.PLAIN, 13));
 		raza.setEditable(true);
 		raza.setBackground(Color.WHITE);
@@ -142,12 +148,13 @@ public class RegistroMascotasNatural extends JFrame{
 		lblEdad.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
 		lblEdad.setBounds(188, 277, 68, 14);
 		panel.add(lblEdad);
-		JLabel lblDescripcionFisica = new JLabel("Descripcion fisica");
+		JLabel lblDescripcionFisica = new JLabel("Descripcion fisica y de personalidad");
+		lblDescripcionFisica.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescripcionFisica.setFont(new Font("Swis721 Ex BT", Font.PLAIN, 12));
-		lblDescripcionFisica.setBounds(165, 332, 125, 14);
+		lblDescripcionFisica.setBounds(76, 332, 277, 14);
 		panel.add(lblDescripcionFisica);
 		
-		JTextArea descripcionfisica = new JTextArea();
+		descripcionfisica = new JTextArea();
 		descripcionfisica.setBorder(new LineBorder(new Color(119, 136, 153)));
 		descripcionfisica.setCaretColor(Color.BLACK);
 		descripcionfisica.setSelectionColor(new Color(0, 120, 215));
@@ -185,29 +192,38 @@ public class RegistroMascotasNatural extends JFrame{
 		lblbotonconfirmacion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String tipo1 = (String) tipo.getSelectedItem();
+				String raza1= (String) raza.getSelectedItem();
+				String  nombre1 = (String) nombre.getText();
+				String  descripcionfisica1 = (String) descripcionfisica.getText();
+				int edad1 = (int) edadnum.getValue();
+				if( nombre1==null || tipo1=="" || raza1==null || descripcionfisica1==null) {
+					JOptionPane.showMessageDialog(null,"Por favor llene todos los campos", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					Mascotas mascota = new Mascotas(nombre1,tipo1,raza1,urlFoto,"",edad1,descripcionfisica1);
+					mascotas.pushBack(mascota);
+					System.out.println(mascota.toString());
 				String [] botones = { "Si", " No" };
 				ImageIcon img = scaleImage("/imagenes/pawprint.png", 30 ,30) ;
 				int variable = JOptionPane.showOptionDialog (null, " ¿Desea agregar mas mascotas a su perfil?", "Mascotas", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,img, botones, botones[0]);
-				String tipo1 = (String) tipo.getSelectedItem();
-				String raza1= (String) raza.getSelectedItem();
-				int edad1 = Integer.parseInt(edad.getText());
-				Mascotas mascota = new Mascotas(nombre.getText(),tipo1,raza1,"",urlFoto,edad1);
-				mascotas.pushBack(mascota);
 				if(variable==0) {
-					nombre.setText(null);
-					tipo.setSelectedItem(null);
-					raza.setSelectedItem(null);
-					edad.setText(null);
-					descripcionfisica.setText(null);
+				allNull();
 				}else {
 					dispose();
 				}
-			}
+			}}
 		});
 		panel.add(lblbotonconfirmacion);
 		crearFondo();
 	}
 	
+	public void allNull() {
+		nombre.setText(null);
+		tipo.setSelectedItem(null);
+		raza.setSelectedItem(null);
+		edadnum.setValue(0);
+		descripcionfisica.setText(null);
+	}
 
 	public void crearFondo() {
 		fondoImage = new JLabel();
@@ -235,11 +251,11 @@ public class RegistroMascotasNatural extends JFrame{
 		return new ImageIcon(imgScale);
 	}
 
-	public MyArrayList getMascotas() {
+	public MyArrayList<Mascotas> getMascotas() {
 		return mascotas;
 	}
 
-	public void setMascotas(MyArrayList mascotas) {
+	public void setMascotas(MyArrayList<Mascotas> mascotas) {
 		this.mascotas = mascotas;
 	}
 	

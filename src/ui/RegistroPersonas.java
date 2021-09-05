@@ -38,17 +38,12 @@ public class RegistroPersonas extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel ;
 	private JPanel panel1 ;
-	private Image fondo;
 	private Image menu ;
 	private int alturaPantalla;
 	private int anchoPantalla;
 	private String urlFoto;
-	private String urlHoja;
-	private String urlVideo;
 	private String nacimiento = "";
 	private JLabel fondoImage;
-	private JTextField telefono;
-	private JTextField direccion;
 	private RegistroMascotasNatural na;
 	private Natural aficionado;
 	
@@ -244,12 +239,7 @@ public void ventana2(String nombre,String genero,String direccion,String telefon
 	passwordField.setBounds(94, 443, 251, 25);
 	panel1.add(passwordField);
 	
-	JButton finalizar = new JButton("Registrar");
-	finalizar.setForeground(Color.BLACK);
-	finalizar.setBorder(new LineBorder(new Color(119, 136, 153), 1, true));
-	finalizar.setBackground(new Color(253, 245, 230));
-	finalizar.setFont(new Font("Monospaced", Font.PLAIN, 14));
-	
+	JButton finalizar = new JButton("Registrar");	
 	finalizar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			// verificar si el usuario ya se encuentra en la base de datos
@@ -261,14 +251,16 @@ public void ventana2(String nombre,String genero,String direccion,String telefon
 			boolean ver = o.esDebil(contrasenia);
 			
 			if (!ver) {
-				if(na.getMascotas()==null) {
-					aficionado = new Natural(usuario, nombre,nacimiento, genero,direccion,telefono,descripcion,urlFoto, contrasenia, 0,  
-							 null);
-
-				}else {
-					aficionado = new Natural(usuario, nombre,nacimiento, genero,direccion,telefono,descripcion,urlFoto, contrasenia, 0,  
-							 null);
-					System.out.println(aficionado.toString());
+				MyArrayList<Mascotas> mascotas = na.getMascotas();
+				aficionado = new Natural(usuario, nombre,nacimiento, genero,direccion,telefono,descripcion,urlFoto, contrasenia, 0,mascotas);
+				System.out.println(aficionado.toString());
+				if(!na.getMascotas().isEmpty()) {
+					
+				   int i = mascotas.size;
+					for(int j = 0;j<i;j++) {
+						mascotas.getObject(j).setInDB(usuario);
+						System.out.println(mascotas.getObject(j).toString());
+					}
 				}
 				PerfilNatural afi = new PerfilNatural(aficionado, "propio");
 				afi.setVisible(true);
@@ -294,12 +286,12 @@ public void ventana2(String nombre,String genero,String direccion,String telefon
 		            System.out.println("Imposible realizar insercion ... FAIL");
 		        }
 				
-				
+				dispose();
 			}else {
 				JOptionPane.showMessageDialog(null,"Contrasenia invalida"+ "\n"+ "Debe tener como minimo 8 caracteres con :" +"\n"+" Mayusculas , minusculas , numeros y simbolos", "Error contrasenia invalida", JOptionPane.INFORMATION_MESSAGE);
+			   passwordField.setText("");
 			}	
-	
-			dispose();
+
 		}
 	});
 	finalizar.setBounds(253, 495, 89, 23);
