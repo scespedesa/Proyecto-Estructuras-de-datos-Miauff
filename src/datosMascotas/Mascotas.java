@@ -1,40 +1,48 @@
 package datosMascotas;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.stream.Stream;
 
 import logicaNegocio.Conexion;
 
 public class Mascotas {
-	protected String idAnimal;
 	protected String tipo;
 	protected String raza;
 	protected int edad;
 	protected String foto;
 	protected String nombre;
-
+    protected String descripcionfisica;
 	protected String user;
 
-	public Mascotas(String nombre, String tipo, String raza, String foto ,String user ,int edad) {
+	public Mascotas(String nombre, String tipo, String raza, String foto ,String user ,int edad ,String descripcionfisica) {
 		this.tipo = tipo;
 		this.raza = raza;
 		this.edad = edad;
 		this.foto = foto;
 		this.nombre = nombre;
 		this.user = user;
+		this.descripcionfisica = descripcionfisica;
 
 	}
-	
-	public String getIdAnimal() {
-		return idAnimal;
+
+	public String getDescripcionfisica() {
+		return descripcionfisica;
 	}
 
-	public void setIdAnimal(String idAnimal) {
-		this.idAnimal = idAnimal;
+	public void setDescripcionfisica(String descripcionfisica) {
+		this.descripcionfisica = descripcionfisica;
 	}
 
+	public String getUser() {
+		return user;
+	}
 
+	public void setUser(String user) {
+		this.user = user;
+	}
 
 	public String getTipo() {
 		return tipo;
@@ -68,25 +76,32 @@ public class Mascotas {
 
 	@Override
 	public String toString() {
-		return "Mascotas [idAnimal=" + idAnimal + ", nombre=" + nombre +", tipo=" + tipo + ", raza=" + raza + ", edad=" + edad + ", foto="
+		return "Mascotas [ nombre=" + nombre +", tipo=" + tipo + ", raza=" + raza + ", edad=" + edad + ", foto="
 				+ foto + "]";
 	}
-    public void insertarDB() {
+	
+	public boolean checkNull() {
+	     return  nombre==null || tipo=="" || raza==null ;
+	}
+	
+    public void setInDB(String user) {
+    	this.user=user;
     	try {
     	Conexion conec = new Conexion();
 		Connection con = conec.Conectar();
    //// Preparamos la insercion de un registro
-        PreparedStatement insertar = con.prepareStatement("insert into ANIMALES (NOMBRE, TIPO, RAZA, FOTO, USER, EDAD) values (?,?,?,?,?,?)");
-        insertar.setString(2, this.nombre);
-        insertar.setString(3, this.tipo);
-        insertar.setString(4, this.raza);
-        insertar.setString(5, this.foto);
-        insertar.setString(7, this.user);
-        insertar.setInt(9, this.edad);
+        PreparedStatement insertar = con.prepareStatement("insert into ANIMALES (NOMBRE, TIPO, RAZA, FOTO, USER, EDAD,DES_FISICA) values (?,?,?,?,?,?,?)");
+        insertar.setString(1, this.nombre);
+        insertar.setString(2, this.tipo);
+        insertar.setString(3, this.raza);
+        insertar.setString(4, this.foto);
+        insertar.setString(5, user);
+        insertar.setInt(6, this.edad);
+        insertar.setString(7, this.descripcionfisica);
         int retorn = insertar.executeUpdate();
-        System.out.println(retorn + " insertado");
+        System.out.println(retorn + " insertado mascota");
     } catch (SQLException ex) {
-        System.out.println("Imposible realizar insercion ... FAIL");
+        System.out.println("Imposible realizar insercion mascota... FAIL"+ ex);
     }
     }
 	
