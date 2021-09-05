@@ -3,8 +3,6 @@ package dataStructures;
 import java.util.Arrays;
 //Clase implementacion de un arreglo dinamico
 public class MyArrayList<O>  { 
-
-	@SuppressWarnings("unchecked")
 	public O[] array ;
 	public int size;
 	public int capacity ;
