@@ -1,16 +1,16 @@
 package datosUsuarios;
-import java.util.ArrayList;
+
 
 import dataStructures.MyArrayList;
-import datosMascotas.Mascotas;
+import datosMascotas.MascotasAdopcion;
 import logicaNegocio.LectorMascotas;
 
-public class Administrador<T>  extends Usuario{
+public class Administrador  extends Usuario{
 	private String urlPagina;
-	private MyArrayList<Mascotas> mascotas ;
-	
-	public Administrador(String idUsuario, String contrasenia, String nombre, String nacimiento, String direccion,
-			String telefono, String descripcion, String urlFoto, int rol, String urlPagina, MyArrayList<Mascotas> mascotas) {
+	private MyArrayList<MascotasAdopcion> mascotas = new MyArrayList<MascotasAdopcion>();
+	 
+	public Administrador(String idUsuario, String nombre,  String nacimiento, String direccion,
+			String telefono, String descripcion, String urlFoto, String contrasenia,int rol, String urlPagina,MyArrayList<MascotasAdopcion> mascotas) {
 		super(idUsuario, contrasenia, nombre, nacimiento, direccion, telefono, descripcion, urlFoto, rol);
 		this.urlPagina = urlPagina;
 		this.mascotas = mascotas;
