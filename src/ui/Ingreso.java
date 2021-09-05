@@ -18,6 +18,7 @@ import dataStructures.HashTable;
 import dataStructures.MyArrayList;
 import datosMascotas.Mascotas;
 import datosMascotas.MascotasAdopcion;
+import datosUsuarios.Administrador;
 import datosUsuarios.Natural;
 import logicaNegocio.Conexion;
 import java.sql.*;
@@ -152,29 +153,33 @@ public class Ingreso extends JFrame {
 
 		            pst.setString(1, usuario.getText());
 		            
-
 		            ResultSet re = pst.executeQuery();
-
-
-		            MyArrayList<Mascotas> masco = new MyArrayList<Mascotas>(1);
 
 		            r.next(); 
 		            re.next();
 		            if(r.getInt(10)==0) {
-		          
-		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5),rs.getString(1), re.getInt(9));
+		                MyArrayList<Mascotas> masco = new MyArrayList<Mascotas>(1);
+		            	while (re.next()) {
+		            		 Mascotas ma = new Mascotas(re.getString(2), re.getString(3), re.getString(4), re.getString(5),r.getString(1), re.getInt(9),re.getString(10));
 		            		masco.pushBack(ma);
-		            		
+		            	}
 		            	 
 		            	 Natural aficionado = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9), r.getInt(10),masco);
 		            	 System.out.println(aficionado.toString());
+		            	 PerfilNatural afi = new PerfilNatural(aficionado, "propio");
+		 				afi.setVisible(true);
 		            }else {
+		                MyArrayList<MascotasAdopcion> masco = new MyArrayList<MascotasAdopcion>(1);
 		            	 while (re.next()) {
-				            //	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), 
-				            //	re.getString(5), re.getInt(6),rs.getString(1),re.getString(8),re.getInt(9),re.getString(10),re.getInt(11));
-				            //	masco.pushBack(madop);
+				           	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6),r.getString(1),re.getInt(8),re.getInt(9),re.getString(10),re.getString(11));
+				            masco.pushBack(madop);
 				            }
+		            	 Administrador organizacion = new Administrador(r.getString(1),r.getString(2),r.getString(3),r.getString(5),r.getString(6), 
+				            		r.getString(7),r.getString(8),r.getString(9),r.getInt(10),r.getString(11),masco);
+		            	 System.out.println(organizacion.toString());
+		            	 PerfilAdministrador afi = new PerfilAdministrador(organizacion);
+		 				afi.setVisible(true);
 		            }  
 		            
 	            }else {
