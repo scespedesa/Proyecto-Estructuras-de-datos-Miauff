@@ -232,16 +232,6 @@ public class RegistroMascotasAdmin extends JFrame{
 				if( nombre1==null || tipo1=="" || raza1==null || descripcionfisica1==null) {
 					JOptionPane.showMessageDialog(null,"Por favor llene todos los campos", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
 					System.out.println(nombre1+ "  " +tipo1+"  " + raza1+ "  " +descripcionfisica1);
-					if(nombre1==null) {
-						System.out.println("perra1");
-					}if(tipo1=="") {
-						System.out.println("perra2");
-					}
-					if(raza1==null) {
-						System.out.println("perra3");
-					}if(descripcionfisica1==null) {
-						System.out.println("perra4");
-					}
 				}else {
 				ventana2(nombre1,tipo1,raza1,edad1,descripcionfisica1);
 				panel.setVisible(false);
@@ -335,7 +325,7 @@ public class RegistroMascotasAdmin extends JFrame{
                 int sub1 = chckbxNewCheckBox.isSelected()? 1:0;
                 int sub2 = chckbxTieneAlgunaCondicion.isSelected()? 1:0;
                 int estado = (int)Math.floor(edad1*0.7)+sub1*6+sub2*4+2; 
-					MascotasAdopcion mascota = new MascotasAdopcion(nombre1,tipo1,raza1,urlFoto,estado,"",fecha,edad1,descripcionfisica1,descripcioncondicion.getText());
+					MascotasAdopcion mascota = new MascotasAdopcion(1, nombre1,tipo1,raza1,urlFoto,estado,"",fecha,edad1,descripcionfisica1,descripcioncondicion.getText());
 					mascotas.pushFront(mascota);
 					String now = Instant.now().atZone(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ISO_LOCAL_DATE);
 					System.out.println(now);

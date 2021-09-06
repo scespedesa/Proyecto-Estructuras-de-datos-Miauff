@@ -291,7 +291,7 @@ public void ventana2(String nombre,String direccion,String telefono, String desc
 						System.out.println(mascotas.getObject(j).toString());
 					}
 				}
-				PerfilAdministrador afi = new PerfilAdministrador(organizacion);
+				PerfilAdministrador afi = new PerfilAdministrador(organizacion,true);
 				afi.setVisible(true);
 				//// Insercion de los Datos
 				Conexion conec = new Conexion();

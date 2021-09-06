@@ -64,7 +64,7 @@ public class PerfilNatural extends JFrame{
 		return new ImageIcon(imgScale);
 
 	}
-}
+
 
 		
 		/*
@@ -446,18 +446,13 @@ public class PerfilNatural extends JFrame{
 			}
 		});
 		*/	
+
+		/*
 	public void visualizarPerfil(JLabel j) {
 		j.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		mouseListenerIsActive = false;
 	}
-	public ImageIcon scaleImage(String url, int ancho , int altura) {
-		ImageIcon icon = new ImageIcon(RegistroPersonas.class.getResource(url));
-		Image img = icon.getImage();
-		Image imgScale = img.getScaledInstance(ancho, altura, Image.SCALE_SMOOTH);
-		return new ImageIcon(imgScale);
-
-	}
-
+*/
 	
 
 }

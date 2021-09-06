@@ -1,6 +1,6 @@
 package dataStructures;
 
-class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
+public class ListaDoblementeEnlazada <E> implements DoubleLinkedList<E>{
     Nodo <E> head;
     Nodo <E> tail;
 

@@ -7,6 +7,7 @@ import dataStructures.MyArrayList;
 import datosUsuarios.Natural;
 import ui.Ingreso;
 import ui.PerfilAdministrador;
+import ui.PerfilNatural2;
 
 public class IniciarPrograma {
 	
@@ -26,8 +27,9 @@ public class IniciarPrograma {
 		//usu.setVisible(true);	
 		Conexion cn = new Conexion();
 		cn.Conectar();
-	
-		
+// Natural u = new Natural(null, null, null, null, null, null, null, null, null, 0, null);
+//		PerfilNatural2 k = new PerfilNatural2(u, 0);
+//		k.setVisible(true);
 		}
 	
 }

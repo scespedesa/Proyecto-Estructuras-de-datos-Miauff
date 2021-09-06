@@ -44,7 +44,7 @@ import javax.swing.border.LineBorder;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import dataStructures.MyArrayList;
+import dataStructures.*;
 import datosMascotas.Mascotas;
 import logicaNegocio.BusquedaArchivos;
 import logicaNegocio.Lector;
@@ -62,6 +62,7 @@ public class RegistroMascotasNatural extends JFrame{
 	private JComboBox tipo;
 	private JTextArea descripcionfisica;
 	private MyArrayList<Mascotas> mascotas = new MyArrayList<Mascotas>();
+	
 	
 
 	public RegistroMascotasNatural() {
@@ -201,7 +202,22 @@ public class RegistroMascotasNatural extends JFrame{
 					JOptionPane.showMessageDialog(null,"Por favor llene todos los campos", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					Mascotas mascota = new Mascotas(nombre1,tipo1,raza1,urlFoto,"",edad1,descripcionfisica1);
+					
+					/////////////////////
+					long startTime = System.nanoTime();
+					long stopTime = System.nanoTime();
+	            	
+					
 					mascotas.pushBack(mascota);
+					System.out.println("Registro Mascota Natural pushback: "+ (stopTime - startTime));
+					///////////////////////
+					
+					
+	
+
+					//////////////////////
+
+
 					System.out.println(mascota.toString());
 				String [] botones = { "Si", " No" };
 				ImageIcon img = scaleImage("/imagenes/pawprint.png", 30 ,30) ;
@@ -215,6 +231,8 @@ public class RegistroMascotasNatural extends JFrame{
 		});
 		panel.add(lblbotonconfirmacion);
 		crearFondo();
+
+		
 	}
 	
 	public void allNull() {

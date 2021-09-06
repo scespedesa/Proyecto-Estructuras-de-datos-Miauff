@@ -38,7 +38,8 @@ public class Ingreso extends JFrame {
 	private JLabel fondoImage;
 	private JTextField textField;
 	private JPasswordField passwordField ;
-	
+	public static String usuarioEnviar;
+
 	public Ingreso() {
 	Toolkit pantalla = Toolkit.getDefaultToolkit();
 	Dimension dimension= pantalla.getScreenSize();
@@ -132,13 +133,36 @@ public class Ingreso extends JFrame {
 	            ResultSet rs = s.executeQuery("select USER , PASSWORD from USUARIOS");
 	// Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
 	           HashTable usu = new HashTable(10);
+
 	            while (rs.next()) {
+
+
 	            	String key = rs.getString(1);
 	            	String value = rs.getString(2);
+
+////////////////////////////////////////////////////////////////////////
+				long startTime = System.nanoTime();
+				long stopTime = System.nanoTime();
+				//for(int ji=0; ji< conteo; ji++) {
+				//}
 	            	usu.put(key,value);
+				System.out.println("Ingreso Put: "+ (stopTime - startTime));
+////////////////////////////////////////////////////////////////////////
 	            }
 	            String contrasenia = new String(passwordField.getPassword());
+
+
+
+///////////////////////////////////////////////////////////////////
+				long startTime = System.nanoTime();
+				long stopTime = System.nanoTime();
+				
 	            if(usu.find(usuario.getText(),contrasenia)) {
+				System.out.println("Ingreso Find: "+ (stopTime - startTime));
+//////////////////////////////////////////////////////////////////////
+
+					 usuarioEnviar= usuario.getText();
+
 	            	System.out.println("paso por aqui cate que no lo vi");
                    ///lo que pasa si la contraseña es correcta.********************************
 
@@ -167,18 +191,18 @@ public class Ingreso extends JFrame {
 		            	 Natural aficionado = new Natural(r.getString(1),r.getString(2),r.getString(3), r.getString(4), r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9), r.getInt(10),masco);
 		            	 System.out.println(aficionado.toString());
-		            	 PerfilNatural afi = new PerfilNatural(aficionado, "propio");
-		 				afi.setVisible(true);
+		            	 PerfilNatural2 afi = new PerfilNatural2(aficionado,0);
+			 				afi.setVisible(true);
 		            }else {
 		                MyArrayList<MascotasAdopcion> masco = new MyArrayList<MascotasAdopcion>(1);
 		            	 while (re.next()) {
-				           	MascotasAdopcion madop= new MascotasAdopcion(re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6),r.getString(1),re.getInt(8),re.getInt(9),re.getString(10),re.getString(11));
+				           	MascotasAdopcion madop= new MascotasAdopcion(re.getInt(1),re.getString(2),re.getString(3), re.getString(4), re.getString(5), re.getInt(6),r.getString(1),re.getInt(8),re.getInt(9),re.getString(10),re.getString(11));
 				            masco.pushBack(madop);
 				            }
 		            	 Administrador organizacion = new Administrador(r.getString(1),r.getString(2),r.getString(3),r.getString(5),r.getString(6), 
 				            		r.getString(7),r.getString(8),r.getString(9),r.getInt(10),r.getString(11),masco);
 		            	 System.out.println(organizacion.toString());
-		            	 PerfilAdministrador afi = new PerfilAdministrador(organizacion);
+		            	 PerfilNatural2 afi = new PerfilNatural2(organizacion,1);
 		 				afi.setVisible(true);
 		            }  
 		            
@@ -186,6 +210,9 @@ public class Ingreso extends JFrame {
 	            	//*************lo que pasa cuando la contaseña es incorrecta en el ingreso**********
 					JOptionPane.showMessageDialog(null,"Verifique el usuario y contrasenia escritos","Error usuario no encontrado", JOptionPane.INFORMATION_MESSAGE);
 				}
+
+				//PerfilNatural2 p= new PerfilNatural2();
+
 	        } catch (SQLException ex) {
 	            System.out.println(ex);
 	        }
@@ -222,7 +249,10 @@ public class Ingreso extends JFrame {
 	label.setSize(ancho,largo);
 	label.setLocation(161, 148);
 }
+
+	
 public void crearMenu(){
+	
 	/////// **********el display del menu de la esquina superior******************
 	JMenuBar menuBar = new JMenuBar();
 	menuBar.setBackground(new Color(255, 255, 255));

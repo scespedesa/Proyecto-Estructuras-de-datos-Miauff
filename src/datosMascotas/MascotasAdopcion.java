@@ -11,18 +11,20 @@ public class MascotasAdopcion extends Mascotas {
 	private int fechaIngreso;
 	private String descripcionFisica;
 	private String descripcionCondicion;
+	private int idAnimal;
 
-	public MascotasAdopcion( String nombre,String tipo, String raza, String foto,int estado, String user,
+	public MascotasAdopcion( int idAnimal,String nombre,String tipo, String raza, String foto,int estado, String user,
 			int fechaIngreso, int edad, String descripcionFisica, String descripcionCondicion) {
 		super(nombre,tipo, raza,foto,user,edad,descripcionFisica);
 		this.estado = estado;
 		this.fechaIngreso = fechaIngreso;
 		this.descripcionCondicion = descripcionCondicion;
-		
+		this.idAnimal = idAnimal;
 	}
 	public int getEstado() {
 		return estado;
 	}
+
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
@@ -37,6 +39,12 @@ public class MascotasAdopcion extends Mascotas {
 	}
 	public void setDescripcionCondicion(String descripcionCondicion) {
 		this.descripcionCondicion = descripcionCondicion;
+	}
+	public int getId() {
+		return idAnimal;
+	}
+	public void setId(int idAnimal) {
+		this.idAnimal = idAnimal;
 	}
 
 	@Override
@@ -69,7 +77,7 @@ public class MascotasAdopcion extends Mascotas {
     } catch (SQLException ex) {
         System.out.println("Imposible realizar insercion ... FAIL mascota"+ ex);
     }
-    }
+        }
 	
 	
 }
